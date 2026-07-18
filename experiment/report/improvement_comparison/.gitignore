@@ -1,0 +1,11 @@
+__pycache__/
+qa/pages/
+qa/*.png
+!qa/table5_recdy_crop.png
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+improvement_comparison.pdf

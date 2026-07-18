@@ -1,0 +1,514 @@
+\documentclass[UTF8,zihao=-4,a4paper]{ctexart}
+
+\usepackage[left=1.85cm,right=1.85cm,top=2.05cm,bottom=2.10cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{makecell}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[section]{placeins}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{microtype}
+\usepackage{xurl}
+\usepackage{hyperref}
+\usepackage[most]{tcolorbox}
+\usepackage{threeparttable}
+\usepackage{pdflscape}
+
+\graphicspath{{../../figures/}{qa/}}
+\input{../results_macros.tex}
+\input{../improvement_macros.tex}
+\input{../paper_comparison_macros.tex}
+\input{../gate_macros.tex}
+
+\definecolor{Navy}{HTML}{17324D}
+\definecolor{Teal}{HTML}{237C82}
+\definecolor{Gold}{HTML}{B07A16}
+\definecolor{Rose}{HTML}{A84A59}
+\definecolor{Green}{HTML}{2D7C55}
+\definecolor{LightBlue}{HTML}{E9F0F7}
+\definecolor{LightTeal}{HTML}{DCEEEF}
+\definecolor{LightGold}{HTML}{F8EED7}
+\definecolor{LightRose}{HTML}{F7E5E8}
+\definecolor{LightGreen}{HTML}{E3F1EA}
+\definecolor{Ink}{HTML}{27313B}
+\definecolor{Muted}{HTML}{5F6872}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=Navy,
+  urlcolor=Teal,
+  pdftitle={提升数据与原论文逐项对比},
+  pdfsubject={RecDY 推荐意图识别的 RTX 4060 本地改进与原论文位置映射},
+  pdfkeywords={RecDY, SPT-RII, RoBERTa, Qwen, TF-IDF, recommendation intent}
+}
+
+\ctexset{
+  section={format=\Large\bfseries\color{Navy},beforeskip=1.2ex,afterskip=0.75ex},
+  subsection={format=\large\bfseries\color{Teal},beforeskip=1.0ex,afterskip=0.55ex},
+  subsubsection={format=\normalsize\bfseries\color{Navy}}
+}
+
+\captionsetup{font=small,labelfont=bf,labelsep=quad,justification=centering}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.18em}
+\setlength{\emergencystretch}{2em}
+\setlength{\headheight}{15pt}
+\renewcommand{\arraystretch}{1.22}
+\setcounter{tocdepth}{2}
+\urlstyle{same}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\color{Teal}\small 提升数据与原论文逐项对比}
+\fancyhead[R]{\color{Muted}\small RecDY / RTX 4060}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\newtcolorbox{keybox}[1][]{
+  enhanced,breakable,colback=LightGreen,colframe=Green,boxrule=0.6pt,
+  arc=1mm,left=2.4mm,right=2.4mm,top=1.7mm,bottom=1.7mm,
+  title=#1,fonttitle=\bfseries
+}
+\newtcolorbox{infobox}[1][]{
+  enhanced,breakable,colback=LightTeal,colframe=Teal,boxrule=0.6pt,
+  arc=1mm,left=2.4mm,right=2.4mm,top=1.7mm,bottom=1.7mm,
+  title=#1,fonttitle=\bfseries
+}
+\newtcolorbox{warningbox}[1][]{
+  enhanced,breakable,colback=LightGold,colframe=Gold,boxrule=0.6pt,
+  arc=1mm,left=2.4mm,right=2.4mm,top=1.7mm,bottom=1.7mm,
+  title=#1,fonttitle=\bfseries
+}
+\newtcolorbox{riskbox}[1][]{
+  enhanced,breakable,colback=LightRose,colframe=Rose,boxrule=0.6pt,
+  arc=1mm,left=2.4mm,right=2.4mm,top=1.7mm,bottom=1.7mm,
+  title=#1,fonttitle=\bfseries
+}
+
+\newcommand{\pp}{\,pp}
+\newcommand{\direct}{\textcolor{Green}{\textbf{协议对齐}}}
+\newcommand{\concept}{\textcolor{Teal}{\textbf{概念对应}}}
+\newcommand{\descriptive}{\textcolor{Gold}{\textbf{描述性对照}}}
+\newcommand{\notreproduced}{\textcolor{Rose}{\textbf{未复现}}}
+
+\begin{document}
+
+\begin{titlepage}
+  \raggedright
+  \vspace*{1.3cm}
+  {\zihao{1}\bfseries\color{Navy} 提升数据与原论文\par}
+  \vspace{0.15cm}
+  {\zihao{1}\bfseries\color{Navy} 逐项对比\par}
+  \vspace{0.55cm}
+  {\zihao{3}\bfseries\color{Teal} RTX 4060 本地实验：性能提升、可比性边界与原文位置索引\par}
+  \vspace{0.9cm}
+  \rule{\textwidth}{0.7pt}
+  \vspace{0.85cm}
+
+  \renewcommand{\arraystretch}{1.35}
+  \begin{tabularx}{\textwidth}{>{\bfseries\color{Navy}}p{2.8cm}X}
+    对照论文 & Zhu et al., \textit{Analyzing bullet chats for recommendation intent identification: Dataset and method}, \textit{Artificial Intelligence} 355 (2026) 104528 \\
+    核心数据集 & RecDY；论文固定测试集，本地协议对齐测试 $n=9{,}069$ \\
+    本地环境 & NVIDIA GeForce RTX 4060 Laptop GPU，8 GB 显存 \\
+    主交付格式 & XeLaTeX 源文件与编译 PDF \\
+    报告日期 & 2026 年 7 月 18 日 \\
+  \end{tabularx}
+  \renewcommand{\arraystretch}{1.22}
+
+  \vspace{1.0cm}
+  \begin{keybox}[一句话结论]
+  本地低成本方案在内部实验上取得可重复的局部提升。与论文 Table~5 最接近的 70-shot/类独立运行结果为
+  $\PaperMatchedContentMeanSeventy\pm\PaperMatchedContentMeanSDSeventy\%$，比论文
+  $\PaperSPTRIISeventy\pm\PaperSPTRIISDSeventy\%$ 低 $1.23$\pp；三模型工程集成达到
+  $\PaperMatchedContentEnsembleSeventy\%$，描述性高 $2.42$\pp，但三个成员重新抽样，训练并集为 420 条，不能表述为同预算单模型超过 SPT-RII。
+  \end{keybox}
+
+  \vfill
+  {\small\color{Muted} 文档性质：独立实验对比附件。所有数字均对应本地 CSV/JSON 证据与原论文精确位置。}
+\end{titlepage}
+
+\pagenumbering{Roman}
+\tableofcontents
+\clearpage
+\pagenumbering{arabic}
+
+\section{结论先行}
+
+本项目没有完整复现 SPT-RII 的 soft prompt、BiLSTM prompt interaction、动态 verbalizer 和词性/语义锚更新，而是在 RTX 4060 8 GB 条件下建立了一条低成本替代路线：扩大训练规模、压缩解释、验证集/OOF 融合、三种子概率集成，以及只在低置信样本上调用 Qwen 的不确定性门控。
+
+\begin{table}[H]
+\centering
+\footnotesize
+\caption{结果层级与主要判断。只有第一行属于最接近原论文协议的独立运行对照。}
+\label{tab:summary}
+\begin{tabularx}{\textwidth}{p{2.15cm}p{3.15cm}p{4.25cm}p{1.65cm}X}
+\toprule
+比较层级 & 实验 & 本地结果 & 变化 & 判断 \\
+\midrule
+协议对齐 & 70-shot 独立运行 & $78.00\pm0.14\%$ & $-1.23$\pp & 最接近论文 Table~5 \\
+工程集成 & 70-shot 三种子概率集成 & $81.65\%$ & $+2.42$\pp & 累计标注覆盖更大 \\
+内部改进 & TF--IDF，1,000 训练 & $82.29\to83.82\%$ & $+1.53$\pp & CI 跨 0 \\
+内部改进 & RoBERTa，1,000 训练 & $87.19\pm0.53\to87.63\pm0.29\%$ & $+0.43$\pp & 三个种子均为正 \\
+探索性改进 & 不确定性门控 & $82.29\to83.71\%$ & $+1.42$\pp & 95\% CI $[-2.61,+5.37]$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{warningbox}[指标口径]
+原论文只写 F1/Prec./Rec.，没有说明 macro、micro 或 weighted averaging；本地使用 scikit-learn Macro-F1/Macro-Precision/Macro-Recall。因此跨论文差值属于近似口径对照，不声称指标定义完全等价。论文正文也未明说 50/60/70-shot 是“每类”还是“总数”；本地依据公开实现按每类 shot 执行。
+\end{warningbox}
+
+改进主要来自四点：训练规模从 400 扩到 1,000；内容与解释分通道建模；使用 OOF/验证集选择融合权重和阈值；仅让 Qwen 处理低置信样本。三种子概率集成降低了抽样波动，但由于各成员重新抽样，它同时扩大了累计标注覆盖，必须与独立运行均值分开报告。
+
+\clearpage
+\section{原论文位置索引与本地对应}
+
+PDF 页码与论文印刷页码一致。表~\ref{tab:location-map} 按“原论文位置 $\rightarrow$ 原文作用 $\rightarrow$ 本地对应 $\rightarrow$ 可比性”组织，读者可直接回到原文核验。
+
+\small
+\begin{longtable}{p{1.7cm}p{3.35cm}p{5.2cm}p{5.25cm}}
+\caption{原论文与本地实验的位置级映射。S/T 编号来自 \texttt{paper\_reader/source\_map.json}。}\label{tab:location-map}\\
+\toprule
+主题 & 原论文精确位置 & 原文内容 & 本地对应与关系 \\
+\midrule
+\endfirsthead
+\toprule
+主题 & 原论文精确位置 & 原文内容 & 本地对应与关系 \\
+\midrule
+\endhead
+问题动机 & \S5.1，p.8，S0064 & 短弹幕依赖上下文；流式语义锚会被稀释 & 上下文重构与解释增强；\concept \\
+解释生成 & \S5.2--5.3，pp.9--10，Fig.5，S0066--S0073 & LLM 在前 20 条滑窗内做语境语义重构 & Qwen 背景与 compact explanation；\concept \\
+提示学习 & \S5.4，p.10，S0073/S0077 & Soft prompt + BiLSTM 交互 & 用 RoBERTa/TF--IDF 替代；\notreproduced \\
+动态标签词 & \S5.5--5.6，pp.10--12，S0080--S0101 & POS 候选、语义距离、half-life=10、Top-$k$ 更新 & 验证集融合/门控替代；\notreproduced \\
+数据协议 & \S6.1，p.12，S0109 & 各平台 70\% train / 30\% test；测试集只作最终评估 & RecDY 固定 test $n=9{,}069$；\direct \\
+训练设置 & \S6.3--6.4，p.13，S0113 & 50/60/70-shot；验证集等大；3 次重复；RTX 4090 & 每类 shot；种子 100/101/102；RTX 4060；近似对齐 \\
+主结果 & \S6.5，Table~5，p.14，T001 & RecDY SPT-RII F1 为 77.84/78.92/79.23 & 独立均值与工程集成；\direct \\
+消融 & \S6.6，Fig.6，p.15，S0116/S0117 & 去解释 $-4.3$\pp；去更新 $-2.8$\pp & 解释通道与 late fusion；\concept \\
+大模型 & \S6.7，Table~6，p.16，S0117/S0118 & LLM/PEFT 与 SPT-RII 对照 & Qwen 直接分类/不确定性门控；协议不同 \\
+效率 & \S6.10，Table~9，p.17，S0186/S0210 & 更换解释模型后的 F1 与时间 & Qwen3-8B Q4 生成时间/显存；\descriptive \\
+参数敏感性 & \S6.12，Fig.9，pp.19--20，S0264/S0266 & 窗口 $0\to20$ 提升，过大引入过时噪声 & 压缩上下文、验证集融合；设计依据 \\
+错误分析 & \S6.13，pp.20--21，S0266 & 隐式语义、上下文不足等错误 & 门控净纠正 5 条；\concept \\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\begin{infobox}[未覆盖内容]
+本地没有复现 Table~7 的 BTD 外部数据、Table~8 的跨平台迁移、Table~10 的蒸馏、Table~11/Fig.8 的模板实验，以及 Fig.9 的完整参数扫描。它们只列入索引，不参与提升结论。
+\end{infobox}
+
+\clearpage
+\section{主对比：原论文 \S6.5 / Table 5 / p.14}
+
+\begin{infobox}[可比性等级：A-]
+同为 RecDY 固定测试集 $n=9{,}069$，训练/验证按 50、60、70-shot 抽样，并报告 3 次独立运行。差异是模型结构、硬件和指标定义不完全相同；因此称“协议对齐的描述性比较”，不称 SPT-RII 完整复现。
+\end{infobox}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.98\textwidth]{table5_recdy_crop.png}
+  \caption{原论文 Table~5 的标题、表头与 RecDY 区域，来源：原论文 p.14。}
+  \label{fig:paper-table5}
+\end{figure}
+
+\subsection{F1 主结果}
+
+\begin{table}[H]
+\centering
+\scriptsize
+\caption{Table~5 核心 F1 对照。独立运行均值是主结果；集成列均为单个工程点，没有 SD。}
+\label{tab:strict-f1}
+\begin{tabular}{c c c r c r c r}
+\toprule
+\makecell{shot/类} & \makecell{论文 SPT-RII\\F1$\pm$SD} & \makecell{本地独立均值\\Macro-F1$\pm$SD} & \makecell{独立\\差值} & \makecell{内容集成\\单点} & \makecell{集成\\差值} & \makecell{内容+字符\\集成单点} & \makecell{融合\\差值} \\
+\midrule
+50 & $77.84\pm0.32$ & $75.52\pm1.67$ & $-2.32$ & 77.29 & $-0.55$ & 77.29 & $-0.55$ \\
+60 & $78.92\pm0.56$ & $77.00\pm0.89$ & $-1.92$ & 78.86 & $-0.06$ & 78.86 & $-0.06$ \\
+\rowcolor{LightGold}70 & $79.23\pm0.31$ & $78.00\pm0.14$ & $-1.23$ & 81.65 & $+2.42$ & 81.85 & $+2.62$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+保持每次独立运行的 70-shot/类预算时，本地内容模型为 $78.00\pm0.14\%$，仍比论文 $79.23\pm0.31\%$ 低 $1.23$\pp。三模型内容概率集成达到 $81.65\%$，相对论文报告点高 $2.42$\pp；再加入字符 TF--IDF 后为 $81.85\%$，额外仅 $+0.20$\pp。
+
+\begin{table}[H]
+\centering
+\small
+\caption{工程集成的累计标注覆盖。70-shot 集成整体看到 420 条训练样本，约 210/类。}
+\label{tab:budget}
+\begin{tabular}{ccccc}
+\toprule
+每成员 shot/类 & 每成员训练总数 & 三成员训练并集 & 训练+验证总并集 & 内容集成点 \\
+\midrule
+50 & 100 & 299 & 592 & 77.29\% \\
+60 & 120 & 360 & 713 & 78.86\% \\
+\rowcolor{LightGold}70 & 140 & 420 & 824 & 81.65\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{riskbox}[表述红线]
+可以说“工程集成点在固定测试集上达到 81.65\%，描述性高于论文 Table~5 的 79.23\%”；不可以说“我们以同等 70-shot 预算复现并超过 SPT-RII”。
+\end{riskbox}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{fig6_paper_comparison.png}
+  \caption{固定 RecDY 测试集上的论文对齐比较。误差线为独立运行 SD；空心标记为单个集成点。}
+  \label{fig:strict-comparison}
+\end{figure}
+
+\clearpage
+\subsection{Table 5 四指标复核}
+
+\begin{table}[H]
+\centering
+\small
+\caption{原论文 Table~5 与本地结果的 Accuracy/Precision/Recall/F1 复核，单位为百分比。集成行是单点。}
+\label{tab:four-metrics}
+\begin{tabular}{clcccc}
+\toprule
+shot/类 & 方法 & Accuracy & Precision & Recall & F1 \\
+\midrule
+50 & 论文 SPT-RII & $78.41\pm0.39$ & $77.63\pm0.31$ & $78.96\pm0.20$ & $77.84\pm0.32$ \\
+50 & 本地独立均值 & $76.59\pm2.37$ & $76.11\pm2.80$ & $75.74\pm1.03$ & $75.52\pm1.67$ \\
+50 & 本地内容集成 & 78.21 & 77.17 & 77.44 & 77.29 \\
+\addlinespace
+60 & 论文 SPT-RII & $79.50\pm0.75$ & $78.65\pm0.49$ & $79.48\pm0.39$ & $78.92\pm0.56$ \\
+60 & 本地独立均值 & $78.09\pm0.42$ & $77.21\pm0.31$ & $77.06\pm1.44$ & $77.00\pm0.89$ \\
+60 & 本地内容集成 & 79.94 & 79.06 & 78.69 & 78.86 \\
+\addlinespace
+\rowcolor{LightBlue}70 & 论文 SPT-RII & $80.62\pm0.37$ & $79.96\pm0.32$ & $80.30\pm0.23$ & $79.23\pm0.31$ \\
+70 & 本地独立均值 & $79.26\pm0.52$ & $78.63\pm0.92$ & $77.76\pm0.58$ & $78.00\pm0.14$ \\
+\rowcolor{LightGold}70 & 本地内容集成 & 82.70 & 82.13 & 81.29 & 81.65 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{warningbox}[指标与论文内部不一致]
+论文表头为 Prec./Rec./F1，但 \S6.4 未说明 averaging；本地三项采用宏平均。另有一处论文内部不一致：Table~5 的 RecDY 50-shot SPT-RII F1 为 $77.84\pm0.32\%$，Table~6 同一标签写 78.32\%。本文始终使用 Table~5 作为主参照。
+\end{warningbox}
+
+\clearpage
+\section{内部提升：对应 \S5.3、\S6.6 Fig.6，但协议不同}
+
+\begin{infobox}[可比性等级：C]
+以下实验使用 400 条固定本地测试子集，训练规模为 400 或 1,000。它们用于判断本地改进是否有效，不能把绝对 F1 直接减去论文 Table~5。
+\end{infobox}
+
+\subsection{字符 TF--IDF：解释分通道与 OOF 晚期融合}
+
+\begin{table}[H]
+\centering
+\small
+\caption{TF--IDF 改进实验。置信区间为测试样本配对 bootstrap；跨 0 表示证据尚不足。}
+\label{tab:tfidf-improvement}
+\begin{tabularx}{\textwidth}{c X c c X}
+\toprule
+训练量 & 方法 & Macro-F1 & 相对基线 & 不确定性/备注 \\
+\midrule
+400 & 内容基线 & 78.88\% & 基准 & -- \\
+400 & 旧 Qwen 解释直接拼接 & 80.75\% & $+1.87$\pp & 95\% CI $[-2.80,+6.69]$ \\
+400 & 结构化解释直接拼接 & 80.84\% & $+1.96$\pp & 相对旧提示仅 $+0.09$\pp \\
+\rowcolor{LightGreen}400 & 旧解释 + OOF 晚期融合 & 82.39\% & $+3.51$\pp & 95\% CI $[-0.32,+7.35]$ \\
+400 & 结构化解释 + OOF 晚期融合 & 80.03\% & $+1.14$\pp & 95\% CI $[-1.00,+3.41]$ \\
+\addlinespace
+1000 & 内容基线 & 82.29\% & 基准 & -- \\
+1000 & 结构化解释直接拼接 & 82.94\% & $+0.65$\pp & -- \\
+\rowcolor{LightGreen}1000 & 结构化解释 + OOF 晚期融合 & 83.82\% & $+1.53$\pp & 95\% CI $[-1.28,+4.34]$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+数据量和融合策略有价值，但“改成结构化提示”本身没有稳定胜过旧提示。400 条时旧解释 late fusion 最强；1,000 条时结构化 late fusion 相对内容基线提高 1.53\pp。
+
+\subsection{RoBERTa：compact explanation 与验证集融合}
+
+\begin{table}[H]
+\centering
+\small
+\caption{RoBERTa 三种子结果。1000 条 compact late fusion 的逐种子提升为 $+0.154/+0.746/+0.401$\pp。}
+\label{tab:roberta-improvement}
+\begin{tabularx}{\textwidth}{c X c c X}
+\toprule
+训练量 & 输入/融合 & Macro-F1 均值$\pm$SD & 相对内容基线 & 判断 \\
+\midrule
+400 & 内容基线 & $84.90\pm1.52\%$ & 基准 & -- \\
+400 & 旧 Qwen 直接拼接 & $82.57\pm0.67\%$ & $-2.34$\pp & 退化 \\
+400 & 结构化解释直接拼接 & $82.44\pm1.66\%$ & $-2.46$\pp & 退化 \\
+400 & compact 直接拼接 & $84.30\pm1.75\%$ & $-0.60$\pp & 基本追回 \\
+400 & compact late fusion & $84.88\pm0.61\%$ & $-0.03$\pp & 种子方向不一致 \\
+\addlinespace
+1000 & 内容基线 & $87.19\pm0.53\%$ & 基准 & -- \\
+1000 & 结构化解释直接拼接 & $86.73\pm1.12\%$ & $-0.46$\pp & 仍退化 \\
+1000 & compact 直接拼接 & $87.21\pm0.51\%$ & $+0.02$\pp & 接近持平 \\
+\rowcolor{LightGreen}1000 & compact late fusion & $87.63\pm0.29\%$ & $+0.43$\pp & 三个种子均为正 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+RoBERTa 对噪声解释敏感。长解释直接拼接会破坏内容信号；缩短解释并改为 late fusion 后，1,000 条训练下得到小幅且三个种子同方向的提升，但 $n=3$ 仍不足以声称统计显著。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.98\textwidth]{fig5_improvement_results.png}
+  \caption{内部改进总览：TF--IDF、RoBERTa 与额外计算开销。误差线定义见原实验记录。}
+  \label{fig:internal-improvement}
+\end{figure}
+
+\subsection{与原论文 Fig.6 的对应方式}
+
+\begin{table}[H]
+\centering
+\small
+\caption{原论文 Fig.6 与本地内部消融的概念映射。绝对值不作横向胜负比较。}
+\label{tab:fig6-map}
+\begin{tabularx}{\textwidth}{X c c X}
+\toprule
+实验 & F1/Macro-F1 & 组件变化 & 比较边界 \\
+\midrule
+原论文完整 SPT-RII & 78.3\% & -- & 同一 SPT-RII 框架 \\
+原论文 $-$explanations & 74.0\% & $-4.3$\pp & 证明解释模块重要 \\
+原论文 $-$update & 75.5\% & $-2.8$\pp & 证明动态更新重要 \\
+本地 TF--IDF 1000 late fusion & 83.82\% & $+1.53$\pp vs 本地内容 & 不同模型/测试子集 \\
+本地 RoBERTa 1000 compact late fusion & $87.63\pm0.29\%$ & $+0.43$\pp vs 本地内容 & 不同模型/测试子集 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\clearpage
+\section{不确定性门控：对应 \S6.7 / Table 6，仅概念对照}
+
+原论文 Table~6 比较了 10-shot LLM、1,000 样本 PEFT 与 SPT-RII。本地问题不同：不是让 Qwen 全量替代分类器，而是只处理基础模型置信度落在 $[0.28,0.72]$ 的样本。阈值只在 200 条验证集上选择，测试集只评估一次。
+
+\begin{table}[H]
+\centering
+\small
+\caption{不确定性门控结果。提升区间跨 0，因此属于探索性证据。}
+\label{tab:gate-comparison}
+\begin{tabular}{lcccc}
+\toprule
+方法 & Macro-F1 & 测试数 & Qwen 覆盖 & 相对基线 \\
+\midrule
+TF--IDF 基线 & 82.29\% & 400 & 0\% & 基准 \\
+Qwen 直接分类 & 74.70\% & 400 & 100\% & 单独使用更差 \\
+\rowcolor{LightGreen}不确定性门控 & 83.71\% & 400 & 38.5\% & $+1.42$\pp；95\% CI $[-2.61,+5.37]$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+154 条被路由样本上，Qwen 纠正 33 个基线错误，同时破坏 28 个原本正确样本，净增 5 条正确预测。混淆矩阵从 $[[120,37],[30,213]]$ 变为 $[[125,32],[30,213]]$，主要减少 5 个负类被误报为正类的错误。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{fig7_uncertainty_gate.png}
+  \caption{不确定性门控：验证集选阈值，固定测试集一次评估。}
+  \label{fig:gate}
+\end{figure}
+
+\begin{riskbox}[为什么不能与 Table 6 直接相减]
+论文 Table~6 的大模型行是另一套 few-shot/PEFT 条件；本地门控只在 400 条子集上评估，还把 TF--IDF 与 Qwen 组合。83.71\% 不能写成“比论文 SPT-RII 78.32\% 高 5.39\pp”。
+\end{riskbox}
+
+\section{效率：对应 \S6.10 / Table 9 / p.17}
+
+\begin{table}[H]
+\centering
+\small
+\caption{原论文 Table~9 与本地生成开销。硬件、量化、计时范围和任务均不同。}
+\label{tab:efficiency}
+\begin{tabularx}{\textwidth}{c l c c c X}
+\toprule
+来源 & 模型 & 报告 F1 & 时间 & 硬件 & 任务含义 \\
+\midrule
+论文 & Llama3.1-8B & 75.79\% & 257 ms/条 & RTX 4090 & 作为 SPT-RII 解释器 \\
+论文 & Qwen2.5-7B & 76.74\% & 283 ms/条 & RTX 4090 & 作为 SPT-RII 解释器 \\
+论文 & Deepseek-V3 & 78.32\% & 985 ms/条 & 未单列 & 远程/大模型设置 \\
+论文 & ChatGPT-3.5 & 79.09\% & 1072 ms/条 & 服务端 & 远程 API \\
+论文 & ChatGPT-4o & 78.60\% & 1062 ms/条 & 服务端 & 远程 API \\
+\rowcolor{LightGold}本地 & Qwen3-8B Q4 & 非同一 F1 & 562 ms/条 & RTX 4060 8 GB & 800 条墙钟 450.2 s；峰值 6.40 GiB \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+原论文 Table~9 测的是“更换 SPT-RII 解释生成模型后的整体 F1 和单条时间”；本地 0.562 s/条只统计 Qwen3-8B Q4 的解释生成。原论文 Fig.7 还明确排除了 LLM 解释开销。因此这里只能证明 RTX 4060 可以跑通该组件并量化成本，不能得出速度优越性结论。
+
+\clearpage
+\section{可信度、限制与下一步}
+
+\subsection{目前可以成立的结论}
+\begin{itemize}[leftmargin=2em,itemsep=0.3em]
+  \item 低成本系统已跑通，主结果均有固定测试集、验证集选参或 OOF 选参记录。
+  \item 70-shot 独立运行均值距离原论文 1.23\pp；工程集成点达到 81.65\%，但预算边界已单独披露。
+  \item 1,000 条训练时，TF--IDF late fusion 提高 1.53\pp；RoBERTa compact late fusion 提高 0.43\pp，三个种子方向一致。
+  \item 门控证明“只让大模型处理难例”比全量直接分类更合理，但 400 条测试上的置信区间跨 0。
+\end{itemize}
+
+\subsection{不能忽略的限制}
+\begin{table}[H]
+\centering
+\small
+\caption{结果解释所需的边界条件。}
+\label{tab:limitations}
+\begin{tabularx}{\textwidth}{p{2.5cm}X X}
+\toprule
+风险 & 事实 & 文档处理 \\
+\midrule
+指标定义 & 论文未明确 F1 averaging；本地用 Macro-F1 & 所有跨论文差值标为近似口径 \\
+方法完整性 & 未实现 soft prompt、BiLSTM、动态 verbalizer & 称为低成本替代，不称完整复现 \\
+集成预算 & 不同种子重新抽样；70-shot 三模型训练并集 420 & 集成点与独立均值分列 \\
+同直播间相关性 & 12 个 \texttt{live\_id} 同时出现在训练/测试 & 尚未证明跨直播间泛化 \\
+上下文 split & 解释实验中 81\% 训练、99.5\% 测试含跨 split 上下文 & 无金标泄漏，但含转导式同流信息 \\
+统计功效 & 内部测试 $n=400$；RoBERTa 仅 3 个种子 & 不把小幅变化写成显著提升 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{下一轮优先实验}
+\begin{enumerate}[leftmargin=2.2em,itemsep=0.35em]
+  \item 将门控扩展到 9,069 条完整固定测试集，报告调用率、时间和 paired bootstrap CI。
+  \item 固定同一 70-shot/类训练集做 5--10 次初始化集成，把纯模型集成收益与扩大样本并集收益分开。
+  \item 按 \texttt{live\_id} 分组划分并只用 split 内上下文，测试真正的跨直播间泛化。
+  \item 系统扫描窗口 $k\in\{0,5,10,20\}$ 与解释长度，直接对应原论文 Fig.9。
+\end{enumerate}
+
+\begin{keybox}[最终判断]
+这次提升是成功的工程进展，但不是已完成的 SPT-RII 同预算复现。稳妥表述是：本地替代路线进一步缩小了与论文结果的距离，并给出一个更高的工程集成点；下一步需要控制累计标注预算和直播间划分，才能形成更强的研究结论。
+\end{keybox}
+
+\section{证据文件索引}
+
+以下路径对应本文全部数字和原文位置。\texttt{source\_map.json} 提供 S/T 锚点，CSV/JSON 文件提供本地逐种子、融合和门控证据。
+
+\small
+\begin{description}[leftmargin=3.0cm,labelwidth=2.6cm,style=nextline,itemsep=0.30em,topsep=0.25em]
+  \item[原论文 PDF] \path{E:\zotero\storage\7DATFQRR\Zhu }等\path{ - 2026 - Analyzing bullet chats for recommendation intent identification Dataset and method.pdf}
+  \item[原文位置映射] \path{E:\Lab\experiment\paper_reader\source_map.json}
+  \item[Table 5 原图] \path{E:\Lab\experiment\paper_reader\assets\table5_recdy.png}
+  \item[协议清单] \path{E:\Lab\experiment\results\paper_comparison\paper_matched_manifest.json}
+  \item[Table 5 对比] \path{E:\Lab\experiment\results\paper_comparison\paper_vs_local_comparison.csv}
+  \item[逐种子来源] \path{E:\Lab\experiment\results\paper_comparison\paper_matched_per_seed_source.csv}
+  \item[TF--IDF 改进] \path{E:\Lab\experiment\results\improvement\classical_improvement_summary.csv}
+  \item[配对区间] \path{E:\Lab\experiment\results\improvement\improvement_comparisons.csv}
+  \item[RoBERTa 改进] \path{E:\Lab\experiment\results\improvement\roberta_improvement_summary.csv}
+  \item[RoBERTa 配对] \path{E:\Lab\experiment\results\improvement\roberta_improvement_paired.csv}
+  \item[不确定性门控] \path{E:\Lab\experiment\results\improvement\uncertainty_gate.json}
+  \item[门控逐行预测] \path{E:\Lab\experiment\results\improvement\uncertainty_gate_test_predictions.csv}
+  \item[完整实验报告] \path{E:\Lab\experiment\report\report.pdf}
+\end{description}
+\normalsize
+
+\vfill
+\begin{center}
+\small\color{Muted}文档版本：2026-07-18。主源文件：\texttt{improvement\_comparison.tex}。
+\end{center}
+
+\end{document}
