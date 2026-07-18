@@ -1,0 +1,7 @@
+Core conclusion: independent-run means are the apples-to-apples comparison with Table 5; a predeclared three-seed probability ensemble is shown separately and exceeds the reported point at 70-shot. This is a protocol-matched descriptive comparison, not an exact SPT-RII reproduction.
+Archetype: quantitative grid. Backend: Python/matplotlib.
+Primary evidence: paper vs local independent-run means and separately marked probability ensembles on the unchanged 9,069-row test.
+Supporting evidence: per-seed SD and oracle-only marker.
+Statistics: paper and local independent-run SD are repeat/sample SD (n=3); ensemble markers are single predeclared points with no SD; no test-label tuning.
+Source data: paper_vs_local_comparison.csv and paper_matched_per_seed_source.csv.
+Review risk: local model is RoBERTa/TF-IDF fusion, not SPT-RII soft prompt + dynamic verbalizer; oracle marker uses official explanations and is excluded from the clean claim.

@@ -1,0 +1,4 @@
+Core conclusion: validation-only uncertainty gating improves the fixed 1000/400 TF-IDF system by +1.42 pp on the untouched test point estimate, but the paired bootstrap CI crosses zero.
+Archetype: quantitative grid. Backend: Python/matplotlib.
+Source data: source_data_fig7.csv; result source: results/improvement/uncertainty_gate.json.
+Review risk: Qwen direct labels are an auxiliary second opinion; the validation-selected rule is exploratory and not a replacement for full SPT-RII.

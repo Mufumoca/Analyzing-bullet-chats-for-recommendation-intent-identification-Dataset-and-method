@@ -1,0 +1,19 @@
+﻿shot_per_class,source,method,macro_f1,sd,delta_vs_paper_pp,role
+50,paper,SPT-RII (reported Table 5),0.7784,0.0032,0.0,reported_reference
+50,local,"RoBERTa content, independent-run mean",0.7552340604206744,0.01665897362970567,-2.3165939579325556,clean_primary_mean
+50,local,"RoBERTa content, 3-seed probability ensemble",0.7728981212141119,,-0.5501878785888037,clean_primary_ensemble
+50,local,Content + char-TF-IDF validation-fusion mean,0.7556246954275251,0.018101394036886462,-2.2775304572474897,clean_secondary_mean
+50,local,Content + char-TF-IDF validation-fusion ensemble,0.7728981212141119,,-0.5501878785888037,clean_secondary_ensemble
+50,local,Official-background fusion (oracle only),0.7950007490991098,0.017493077434484215,1.6600749099109802,oracle_only
+60,paper,SPT-RII (reported Table 5),0.7892,0.0056,0.0,reported_reference
+60,local,"RoBERTa content, independent-run mean",0.7700232484594851,0.008924779226293682,-1.9176751540514902,clean_primary_mean
+60,local,"RoBERTa content, 3-seed probability ensemble",0.7885594682107226,,-0.06405317892773654,clean_primary_ensemble
+60,local,Content + char-TF-IDF validation-fusion mean,0.7688850885774127,0.0087795325201695,-2.0314911422587345,clean_secondary_mean
+60,local,Content + char-TF-IDF validation-fusion ensemble,0.7885594682107226,,-0.06405317892773654,clean_secondary_ensemble
+60,local,Official-background fusion (oracle only),0.7820718319323243,0.018548639125907897,-0.7128168067675689,oracle_only
+70,paper,SPT-RII (reported Table 5),0.7923,0.0031,0.0,reported_reference
+70,local,"RoBERTa content, independent-run mean",0.7799677639667134,0.0013755286326407685,-1.2332236033286592,clean_primary_mean
+70,local,"RoBERTa content, 3-seed probability ensemble",0.8164862840361304,,2.4186284036130434,clean_primary_ensemble
+70,local,Content + char-TF-IDF validation-fusion mean,0.7696903924861719,0.017852381715895545,-2.2609607513828123,clean_secondary_mean
+70,local,Content + char-TF-IDF validation-fusion ensemble,0.8184515458884682,,2.615154588846824,clean_secondary_ensemble
+70,local,Official-background fusion (oracle only),0.8302299849348793,0.011496688368540113,3.7929984934879313,oracle_only

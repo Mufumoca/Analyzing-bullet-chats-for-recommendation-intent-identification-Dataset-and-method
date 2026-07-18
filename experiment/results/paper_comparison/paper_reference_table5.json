@@ -1,0 +1,23 @@
+{
+  "paper": "Zhu et al., Artificial Intelligence 355 (2026) 104528",
+  "doi": "10.1016/j.artint.2026.104528",
+  "table": "Table 5",
+  "pdf_page": 14,
+  "platform": "RecDY",
+  "metric": "Macro-F1",
+  "shot_definition": "examples per class in train and validation",
+  "values": {
+    "50": {
+      "macro_f1": 0.7784,
+      "sd": 0.0032
+    },
+    "60": {
+      "macro_f1": 0.7892,
+      "sd": 0.0056
+    },
+    "70": {
+      "macro_f1": 0.7923,
+      "sd": 0.0031
+    }
+  }
+}

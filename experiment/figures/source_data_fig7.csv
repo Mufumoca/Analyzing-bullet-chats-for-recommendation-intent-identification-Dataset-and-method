@@ -1,0 +1,7 @@
+﻿split,method,macro_f1,replacement_fraction
+validation,TF-IDF base,0.7359633454997282,0.0
+validation,Qwen direct,0.7442521986481901,1.0
+validation,Uncertainty gate,0.7898276586801177,0.45
+test,TF-IDF base,0.8229281603689438,0.0
+test,Qwen direct,0.7470023102683774,1.0
+test,Uncertainty gate,0.8371164354770912,0.385

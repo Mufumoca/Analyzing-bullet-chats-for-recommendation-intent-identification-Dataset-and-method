@@ -34,6 +34,22 @@ def row_id_sha256(frame: pd.DataFrame) -> str:
     ).hexdigest()
 
 
+def resolve_artifact_path(raw_path: str | Path) -> Path:
+    """Resolve recorded E:\\Lab paths while keeping verification portable."""
+
+    path = Path(raw_path)
+    if path.exists():
+        return path
+    parts = list(path.parts)
+    lowered = [part.lower() for part in parts]
+    if "experiment" in lowered:
+        index = lowered.index("experiment")
+        candidate = EXPERIMENT_ROOT.joinpath(*parts[index + 1 :])
+        if candidate.exists():
+            return candidate
+    return EXPERIMENT_ROOT / path.name
+
+
 def main() -> None:
     checks: dict[str, object] = {}
 
@@ -304,6 +320,130 @@ def main() -> None:
             }
     checks["improvement_roberta"] = roberta_improvement_checks
 
+    # Paper-matched full-test comparison: every shot has three independent
+    # seed runs plus a predeclared probability ensemble, with no test tuning.
+    paper_results_dir = RESULTS_DIR / "paper_comparison"
+    paper_summary_path = paper_results_dir / "paper_matched_summary.csv"
+    paper_summary = pd.read_csv(paper_summary_path, encoding="utf-8-sig")
+    assert set(paper_summary["shot"].astype(int)) == {50, 60, 70}
+    assert set(paper_summary["seed"].astype(str)) == {"100", "101", "102", "ensemble"}
+    assert len(paper_summary) == 12
+    for shot in (50, 60, 70):
+        ensemble_path = paper_results_dir / f"shot{shot}_seed_ensemble.json"
+        ensemble = json.loads(ensemble_path.read_text(encoding="utf-8"))
+        assert ensemble["shot_per_class"] == shot
+        assert ensemble["seeds"] == [100, 101, 102]
+        assert ensemble["test_rows"] == 9069
+        assert ensemble["test_tuning_evaluations"] == 0
+        assert ensemble["official_background_role"] == "oracle_only_not_main_result"
+        for seed in (100, 101, 102):
+            run = json.loads(
+                (paper_results_dir / f"shot{shot}_seed{seed}.json").read_text(encoding="utf-8")
+            )
+            assert run["shot_per_class_train"] == shot
+            assert run["shot_per_class_validation"] == shot
+            assert run["test_rows"] == 9069
+            assert run["test_tuning_evaluations"] == 0
+            prediction_path = resolve_artifact_path(run["prediction_file"])
+            assert prediction_path.exists()
+            assert len(pd.read_csv(prediction_path, encoding="utf-8-sig")) == 9069
+    comparison_path = paper_results_dir / "paper_vs_local_comparison.csv"
+    comparison = pd.read_csv(comparison_path, encoding="utf-8-sig")
+    assert len(comparison) == 18
+    assert set(comparison["role"]) == {
+        "reported_reference",
+        "clean_primary_mean",
+        "clean_primary_ensemble",
+        "clean_secondary_mean",
+        "clean_secondary_ensemble",
+        "oracle_only",
+    }
+    for role in {
+        "reported_reference",
+        "clean_primary_mean",
+        "clean_primary_ensemble",
+        "clean_secondary_mean",
+        "clean_secondary_ensemble",
+        "oracle_only",
+    }:
+        assert len(comparison[comparison["role"] == role]) == 3
+    assert comparison[comparison["role"].str.endswith("_ensemble")]["sd"].isna().all()
+    assert comparison[comparison["role"].str.endswith("_mean")]["sd"].notna().all()
+    paper_reference = json.loads(
+        (paper_results_dir / "paper_reference_table5.json").read_text(encoding="utf-8")
+    )
+    assert paper_reference["table"] == "Table 5"
+    assert paper_reference["pdf_page"] == 14
+    assert paper_reference["values"]["70"]["macro_f1"] == 0.7923
+    checks["paper_matched_comparison"] = {
+        "test_rows": 9069,
+        "shots": [50, 60, 70],
+        "seeds": [100, 101, 102],
+        "summary_rows": len(paper_summary),
+        "oracle_excluded_from_main": True,
+    }
+
+    # Validation-only uncertainty gate and its fixed test predictions.
+    gate_path = improvement_results_dir / "uncertainty_gate.json"
+    gate = json.loads(gate_path.read_text(encoding="utf-8"))
+    assert gate["train_rows"] == 1000
+    assert gate["validation_rows"] == 200
+    assert gate["test_rows"] == 400
+    assert gate["selection_policy"] == "validation_only_macro_f1; test_evaluated_once"
+    assert gate["test_tuning_evaluations"] == 0
+    assert gate["qwen_cache"]["validation"]["valid_predictions"] == 200
+    assert gate["qwen_cache"]["test"]["valid_predictions"] == 400
+    for split, rows in (("validation", 200), ("test", 400)):
+        cache = gate["qwen_cache"][split]
+        cache_path = resolve_artifact_path(cache["cache_path"])
+        assert cache_path.exists()
+        records = read_jsonl(cache_path)
+        latest = {str(record["row_id"]): record for record in records}
+        assert len(records) == rows
+        assert len(latest) == rows
+        assert all(record.get("cache_version") == "direct_no_think_v2" for record in latest.values())
+        assert all(record.get("cache_source") == "ollama" for record in latest.values())
+        assert all(record.get("inference_options", {}).get("think") is False for record in latest.values())
+    assert gate["selection"]["margin"] == 0.22
+    assert gate["test"]["gate"]["macro_f1"] > gate["test"]["base"]["macro_f1"]
+    assert gate["test"]["gate_vs_base"]["macro_f1_ci95_low"] < 0 < gate["test"]["gate_vs_base"]["macro_f1_ci95_high"]
+    for filename, rows in (
+        ("uncertainty_gate_validation_predictions.csv", 200),
+        ("uncertainty_gate_test_predictions.csv", 400),
+    ):
+        path = improvement_results_dir / filename
+        frame = pd.read_csv(path, encoding="utf-8-sig")
+        assert len(frame) == rows
+        assert {"base_probability", "qwen_prediction", "replaced", "gate_prediction"} <= set(frame.columns)
+    checks["uncertainty_gate"] = {
+        "validation_rows": 200,
+        "test_rows": 400,
+        "selected_margin": gate["selection"]["margin"],
+        "test_macro_f1": gate["test"]["gate"]["macro_f1"],
+        "ci_crosses_zero": True,
+        "cache_protocol": "direct_no_think_v2; all primary rows from Ollama",
+    }
+
+    # Full-paper reader bundle: source-grounded anchors and existing assets.
+    reader_dir = EXPERIMENT_ROOT / "paper_reader"
+    reader_markdown = (reader_dir / "paper.md").read_text(encoding="utf-8")
+    reader_map = json.loads((reader_dir / "source_map.json").read_text(encoding="utf-8"))
+    assert "**Original:**" in reader_markdown and "**中文:**" in reader_markdown
+    assert reader_markdown.count("**Original:**") == reader_markdown.count("**中文:**")
+    assert reader_map["paper"]["draft_mode"] is True
+    assert len(reader_map["blocks"]) >= 200
+    for figure in reader_map["figures"]:
+        assert (reader_dir / figure["image_path"]).exists()
+        assert figure["id"] in reader_markdown
+    reader_notes = (reader_dir / "translation_notes.md").read_text(encoding="utf-8").lower()
+    assert "draft-mode" in reader_notes or "draft mode" in reader_notes
+    checks["paper_reader"] = {
+        "pages": len(reader_map["pages"]),
+        "source_blocks": len(reader_map["blocks"]),
+        "bilingual_pairs": reader_markdown.count("**Original:**"),
+        "draft_mode": True,
+    }
+
     figure_files = []
     for stem in (
         "fig1_workflow",
@@ -311,6 +451,8 @@ def main() -> None:
         "fig3_roberta_results",
         "fig4_efficiency",
         "fig5_improvement_results",
+        "fig6_paper_comparison",
+        "fig7_uncertainty_gate",
     ):
         for extension in ("svg", "pdf", "png", "tiff"):
             path = FIGURES_DIR / f"{stem}.{extension}"
@@ -318,7 +460,7 @@ def main() -> None:
             figure_files.append(str(path.relative_to(EXPERIMENT_ROOT)))
         svg_text = (FIGURES_DIR / f"{stem}.svg").read_text(encoding="utf-8")
         assert "<text" in svg_text
-    for index in range(1, 6):
+    for index in range(1, 8):
         source = FIGURES_DIR / f"source_data_fig{index}.csv"
         assert source.exists() and source.stat().st_size > 0
     fig5_source = pd.read_csv(FIGURES_DIR / "source_data_fig5.csv", encoding="utf-8-sig")
@@ -333,16 +475,19 @@ def main() -> None:
     assert len(fig5_source) == 19
     checks["figures"] = {
         "exports": len(figure_files),
-        "source_data_files": 5,
+        "source_data_files": 7,
         "editable_svg_text": True,
     }
 
     report_pdf = EXPERIMENT_ROOT / "report" / "report.pdf"
     report_tex = EXPERIMENT_ROOT / "report" / "report.tex"
     contact_sheet = EXPERIMENT_ROOT / "report" / "qa" / "report_contact_sheet.png"
+    rendered_pages = sorted((EXPERIMENT_ROOT / "report" / "qa" / "pages_final").glob("page-*.png"))
     assert report_pdf.exists() and report_pdf.stat().st_size > 100_000
     assert report_tex.exists() and report_tex.stat().st_size > 20_000
     assert contact_sheet.exists() and contact_sheet.stat().st_size > 100_000
+    assert len(rendered_pages) == 30
+    assert rendered_pages[-1].name == "page-30.png"
     assert contact_sheet.stat().st_mtime >= report_pdf.stat().st_mtime
     report_text = report_tex.read_text(encoding="utf-8")
     required_improvement_report_markers = [
@@ -351,6 +496,12 @@ def main() -> None:
         r"\label{tab:improvement-roberta}",
         r"\label{fig:improvement}",
         "fig5_improvement_results",
+        r"\label{tab:paper-comparison}",
+        r"\label{fig:paper-comparison}",
+        r"\label{tab:gate}",
+        r"\label{fig:gate}",
+        "fig6_paper_comparison",
+        "fig7_uncertainty_gate",
     ]
     assert all(marker in report_text for marker in required_improvement_report_markers)
     log_text = (EXPERIMENT_ROOT / "report" / "report.log").read_text(
@@ -368,6 +519,7 @@ def main() -> None:
         "pdf_bytes": report_pdf.stat().st_size,
         "latex_bytes": report_tex.stat().st_size,
         "contact_sheet_bytes": contact_sheet.stat().st_size,
+        "rendered_pages": len(rendered_pages),
         "improvement_section_markers": len(required_improvement_report_markers),
         "critical_latex_warnings": 0,
     }

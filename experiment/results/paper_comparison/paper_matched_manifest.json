@@ -1,0 +1,24 @@
+{
+  "model": "hfl/chinese-roberta-wwm-ext",
+  "train_file": "E:\\Lab\\experiment\\data\\processed\\douyin_train_full.csv",
+  "test_file": "E:\\Lab\\experiment\\data\\processed\\douyin_test_full.csv",
+  "shots": [
+    50,
+    60,
+    70
+  ],
+  "seeds": [
+    100,
+    101,
+    102
+  ],
+  "sampling": "shot examples per class for train and validation, disjoint; fixed published test",
+  "conditions": [
+    "content RoBERTa",
+    "character TF-IDF",
+    "validation-calibrated clean fusion",
+    "three-seed ensemble",
+    "official explanation oracle (not a main result)"
+  ],
+  "test_tuning_evaluations": 0
+}

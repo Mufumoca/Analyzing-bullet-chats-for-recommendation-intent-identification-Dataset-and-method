@@ -18,6 +18,9 @@ __pycache__/
 *.toc
 *.xdv
 
+# Temporary high-resolution report render staging directory
+experiment/report/qa/pages_final_new/
+
 # Operating-system metadata
 .DS_Store
 Thumbs.db

@@ -120,16 +120,46 @@
         "test_evaluations_per_branch": 1
       }
     },
+    "paper_matched_comparison": {
+      "test_rows": 9069,
+      "shots": [
+        50,
+        60,
+        70
+      ],
+      "seeds": [
+        100,
+        101,
+        102
+      ],
+      "summary_rows": 12,
+      "oracle_excluded_from_main": true
+    },
+    "uncertainty_gate": {
+      "validation_rows": 200,
+      "test_rows": 400,
+      "selected_margin": 0.22,
+      "test_macro_f1": 0.8371164354770912,
+      "ci_crosses_zero": true,
+      "cache_protocol": "direct_no_think_v2; all primary rows from Ollama"
+    },
+    "paper_reader": {
+      "pages": 23,
+      "source_blocks": 270,
+      "bilingual_pairs": 269,
+      "draft_mode": true
+    },
     "figures": {
-      "exports": 20,
-      "source_data_files": 5,
+      "exports": 28,
+      "source_data_files": 7,
       "editable_svg_text": true
     },
     "report": {
-      "pdf_bytes": 559012,
-      "latex_bytes": 49086,
-      "contact_sheet_bytes": 1718038,
-      "improvement_section_markers": 5,
+      "pdf_bytes": 665291,
+      "latex_bytes": 61342,
+      "contact_sheet_bytes": 2161305,
+      "rendered_pages": 30,
+      "improvement_section_markers": 11,
       "critical_latex_warnings": 0
     },
     "analysis_artifacts": [
