@@ -1,0 +1,35 @@
+{
+  "collected_at": "2026-07-18T03:05:29.346480+08:00",
+  "operating_system": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel(R) Core(TM) i7-14650HX",
+  "logical_processors": 24,
+  "system_memory_gb": 31.741111755371094,
+  "gpu": {
+    "name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "memory_mb": 8188.0,
+    "driver_version": "591.86"
+  },
+  "roberta_runtime": {
+    "python": "3.13.9",
+    "torch": "2.12.0+cu126",
+    "torch_cuda": "12.6",
+    "transformers": "5.0.0",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.8.0",
+    "cuda_available": true
+  },
+  "ollama_version": "ollama version is 0.7.1",
+  "qwen_model": {
+    "ollama_tag": "qwen3:8b",
+    "parameters": "8.2B",
+    "quantization": "Q4_K_M",
+    "configured_num_ctx": 1024,
+    "generation_num_predict": 96,
+    "classification_num_predict": 24
+  },
+  "latex": "XeTeX 3.141592653-2.6-0.999997 (TeX Live 2025)",
+  "official_repository": {
+    "url": "https://github.com/zhuyiYZU/BC4RII",
+    "audited_commit": "35076870d110d49a1a7dbe2335d3fdb28ba3b6a1"
+  }
+}

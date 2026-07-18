@@ -1,0 +1,22 @@
+{
+  "model": "qwen3:8b",
+  "test_rows": 400,
+  "valid_predictions": 400,
+  "failed_predictions": 0,
+  "coverage": 1.0,
+  "wall_seconds": 83.76444650000485,
+  "mean_inference_seconds": 0.20908120975014755,
+  "total_generated_tokens": 2400,
+  "peak_gpu_memory_mb": 6532.375,
+  "mean_gpu_utilization": 82.36585365853658,
+  "accuracy": 0.7725,
+  "precision": 0.796875,
+  "recall": 0.8395061728395061,
+  "f1": 0.8176352705410822,
+  "precision_pos": 0.796875,
+  "recall_pos": 0.8395061728395061,
+  "f1_pos": 0.8176352705410822,
+  "macro_precision": 0.7630208333333333,
+  "macro_recall": 0.7541479908783517,
+  "macro_f1": 0.7576548445728667
+}

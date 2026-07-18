@@ -1,0 +1,21 @@
+{
+  "rows": 800,
+  "content": {
+    "mean_chars": 8.42625,
+    "median_chars": 7.0,
+    "p10_chars": 3.0,
+    "p90_chars": 14.0
+  },
+  "official_background": {
+    "mean_chars": 37.5425,
+    "median_chars": 33.0,
+    "p10_chars": 24.0,
+    "p90_chars": 50.0
+  },
+  "qwen_background": {
+    "mean_chars": 21.7175,
+    "median_chars": 20.0,
+    "p10_chars": 14.0,
+    "p90_chars": 33.0
+  }
+}

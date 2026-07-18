@@ -1,0 +1,4 @@
+﻿stage,peak_memory_gib,measurement
+Qwen explanation,6.396148681640625,NVML total
+Qwen direct,6.3792724609375,NVML total
+RoBERTa training,2.17520268758138,PyTorch allocated

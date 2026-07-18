@@ -1,0 +1,140 @@
+{
+  "source": "E:\\Lab\\bc4rii_source\\SPT-RII\\BC4RII_with_generation",
+  "seed": 20260718,
+  "platforms": {
+    "douyin": {
+      "train": {
+        "rows": 21159,
+        "positive": 12835,
+        "negative": 8324,
+        "positive_rate": 0.6065976652960915,
+        "unique_live_ids": 12,
+        "median_content_chars": 7.0,
+        "median_background_chars": 34.0
+      },
+      "test": {
+        "rows": 9069,
+        "positive": 5501,
+        "negative": 3568,
+        "positive_rate": 0.606571838129893,
+        "unique_live_ids": 12,
+        "median_content_chars": 7.0,
+        "median_background_chars": 34.0
+      }
+    },
+    "kuaishou": {
+      "train": {
+        "rows": 22159,
+        "positive": 8470,
+        "negative": 13689,
+        "positive_rate": 0.3822374655896024,
+        "unique_live_ids": 11,
+        "median_content_chars": 7.0,
+        "median_background_chars": 36.0
+      },
+      "test": {
+        "rows": 9498,
+        "positive": 3630,
+        "negative": 5868,
+        "positive_rate": 0.3821857233101706,
+        "unique_live_ids": 11,
+        "median_content_chars": 7.0,
+        "median_background_chars": 36.0
+      }
+    },
+    "xiaohongshu": {
+      "train": {
+        "rows": 13379,
+        "positive": 8335,
+        "negative": 5044,
+        "positive_rate": 0.6229912549517901,
+        "unique_live_ids": 15,
+        "median_content_chars": 8.0,
+        "median_background_chars": 34.0
+      },
+      "test": {
+        "rows": 5736,
+        "positive": 3573,
+        "negative": 2163,
+        "positive_rate": 0.622907949790795,
+        "unique_live_ids": 15,
+        "median_content_chars": 8.0,
+        "median_background_chars": 34.0
+      }
+    },
+    "tiktok": {
+      "train": {
+        "rows": 10669,
+        "positive": 2753,
+        "negative": 7916,
+        "positive_rate": 0.2580373043396757,
+        "unique_live_ids": 23,
+        "median_content_chars": 18.0,
+        "median_background_chars": 139.0
+      },
+      "test": {
+        "rows": 4574,
+        "positive": 1180,
+        "negative": 3394,
+        "positive_rate": 0.2579798863139484,
+        "unique_live_ids": 23,
+        "median_content_chars": 18.0,
+        "median_background_chars": 140.0
+      }
+    }
+  },
+  "context_construction": {
+    "source": "E:\\Lab\\bc4rii_source\\SPT-RII\\BC4RII_with_generation\\douyin\\dy_bg_all.csv",
+    "source_encoding": "gbk",
+    "window": 5,
+    "all_rows": 30228,
+    "globally_unique_rows": 30024,
+    "duplicate_row_instances_aligned_by_anchors": 204,
+    "exact_partition_verified": true,
+    "strict_subsequence_verified": true
+  },
+  "douyin_train_main": {
+    "rows": 2000,
+    "positive": 1213,
+    "negative": 787,
+    "positive_rate": 0.6065,
+    "unique_live_ids": 12,
+    "median_content_chars": 7.0,
+    "median_background_chars": 34.0,
+    "mean_context_items": 4.9945,
+    "rows_with_full_context_window": 1996
+  },
+  "douyin_train_qwen": {
+    "rows": 400,
+    "positive": 243,
+    "negative": 157,
+    "positive_rate": 0.6075,
+    "unique_live_ids": 12,
+    "median_content_chars": 7.0,
+    "median_background_chars": 33.5,
+    "mean_context_items": 5.0,
+    "rows_with_full_context_window": 400
+  },
+  "douyin_test_main": {
+    "rows": 2000,
+    "positive": 1213,
+    "negative": 787,
+    "positive_rate": 0.6065,
+    "unique_live_ids": 12,
+    "median_content_chars": 7.0,
+    "median_background_chars": 33.0,
+    "mean_context_items": 4.9895,
+    "rows_with_full_context_window": 1995
+  },
+  "douyin_test_qwen": {
+    "rows": 400,
+    "positive": 243,
+    "negative": 157,
+    "positive_rate": 0.6075,
+    "unique_live_ids": 12,
+    "median_content_chars": 7.0,
+    "median_background_chars": 33.0,
+    "mean_context_items": 4.975,
+    "rows_with_full_context_window": 398
+  }
+}

@@ -1,0 +1,852 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{zhu2026bc4rii}{article}{}{}
+      \name{author}{6}{}{%
+        {{hash=017c8fdccfa4d7fe6b3cf42ea7acad7a}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={Yi},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=e3088e901acb945972f04e3926182547}{%
+           family={Han},
+           familyi={H\bibinitperiod},
+           given={Qinqin},
+           giveni={Q\bibinitperiod}}}%
+        {{hash=5704ebd97c38b8948fdeb761289c2c8e}{%
+           family={Yuan},
+           familyi={Y\bibinitperiod},
+           given={Yunhao},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=a3fd59d7b7693e01fa4d7e201e828382}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Chaowei},
+           giveni={C\bibinitperiod}}}%
+        {{hash=1a36094296105b79708eb6db402172c4}{%
+           family={Qiang},
+           familyi={Q\bibinitperiod},
+           given={Jipeng},
+           giveni={J\bibinitperiod}}}%
+        {{hash=a425d40644d310de2ce5bb61aee8b039}{%
+           family={Wu},
+           familyi={W\bibinitperiod},
+           given={Xindong},
+           giveni={X\bibinitperiod}}}%
+      }
+      \strng{namehash}{3108a83d16830deadfaa48fcad64cb77}
+      \strng{fullhash}{90b2749b5e6705a782920a28905cbef4}
+      \strng{fullhashraw}{90b2749b5e6705a782920a28905cbef4}
+      \strng{bibnamehash}{90b2749b5e6705a782920a28905cbef4}
+      \strng{authorbibnamehash}{90b2749b5e6705a782920a28905cbef4}
+      \strng{authornamehash}{3108a83d16830deadfaa48fcad64cb77}
+      \strng{authorfullhash}{90b2749b5e6705a782920a28905cbef4}
+      \strng{authorfullhashraw}{90b2749b5e6705a782920a28905cbef4}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Artificial Intelligence}
+      \field{title}{Analyzing bullet chats for recommendation intent identification: Dataset and method}
+      \field{volume}{355}
+      \field{year}{2026}
+      \field{pages}{104528}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1016/j.artint.2026.104528
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1016/j.artint.2026.104528
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1016/j.artint.2026.104528
+      \endverb
+    \endentry
+    \entry{devlin2019bert}{inproceedings}{}{}
+      \name{author}{4}{}{%
+        {{hash=13202969e372bc82318f9629cbdd199b}{%
+           family={Devlin},
+           familyi={D\bibinitperiod},
+           given={Jacob},
+           giveni={J\bibinitperiod}}}%
+        {{hash=a45784fe7163b45f11d166564f5d24b6}{%
+           family={Chang},
+           familyi={C\bibinitperiod},
+           given={Ming-Wei},
+           giveni={M\bibinithyphendelim W\bibinitperiod}}}%
+        {{hash=8dde73b4194f5bc4230c4808f3fc1534}{%
+           family={Lee},
+           familyi={L\bibinitperiod},
+           given={Kenton},
+           giveni={K\bibinitperiod}}}%
+        {{hash=b92aa283415413bb8d2a1548716d0c7d}{%
+           family={Toutanova},
+           familyi={T\bibinitperiod},
+           given={Kristina},
+           giveni={K\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Minneapolis, Minnesota}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computational Linguistics}%
+      }
+      \strng{namehash}{ad8e2e2a80d28ade21e86852b804fc9b}
+      \strng{fullhash}{e8bccd48302a14eeba57d9dce2f49ef4}
+      \strng{fullhashraw}{e8bccd48302a14eeba57d9dce2f49ef4}
+      \strng{bibnamehash}{e8bccd48302a14eeba57d9dce2f49ef4}
+      \strng{authorbibnamehash}{e8bccd48302a14eeba57d9dce2f49ef4}
+      \strng{authornamehash}{ad8e2e2a80d28ade21e86852b804fc9b}
+      \strng{authorfullhash}{e8bccd48302a14eeba57d9dce2f49ef4}
+      \strng{authorfullhashraw}{e8bccd48302a14eeba57d9dce2f49ef4}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers)}
+      \field{month}{6}
+      \field{title}{{BERT}: Pre-training of Deep Bidirectional Transformers for Language Understanding}
+      \field{year}{2019}
+      \field{pages}{4171\bibrangedash 4186}
+      \range{pages}{16}
+      \verb{doi}
+      \verb 10.18653/v1/N19-1423
+      \endverb
+      \verb{urlraw}
+      \verb https://aclanthology.org/N19-1423/
+      \endverb
+      \verb{url}
+      \verb https://aclanthology.org/N19-1423/
+      \endverb
+    \endentry
+    \entry{cui2020revisiting}{inproceedings}{}{}
+      \name{author}{6}{}{%
+        {{hash=bd5f28106f9c802314f709cbf76b35f3}{%
+           family={Cui},
+           familyi={C\bibinitperiod},
+           given={Yiming},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=cb0803882fba28a6c7ecb519069a89de}{%
+           family={Che},
+           familyi={C\bibinitperiod},
+           given={Wanxiang},
+           giveni={W\bibinitperiod}}}%
+        {{hash=df4100f4c9320162410d3ddcc9257d55}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Ting},
+           giveni={T\bibinitperiod}}}%
+        {{hash=1b651c40ade9404b1c43c1786d1a7466}{%
+           family={Qin},
+           familyi={Q\bibinitperiod},
+           given={Bing},
+           giveni={B\bibinitperiod}}}%
+        {{hash=9539f8ac7aea1165c72ac3da53ebccc7}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Shijin},
+           giveni={S\bibinitperiod}}}%
+        {{hash=34c2a3aa646cc4a68a6c1651c444a130}{%
+           family={Hu},
+           familyi={H\bibinitperiod},
+           given={Guoping},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Online}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computational Linguistics}%
+      }
+      \strng{namehash}{8cf9e200a7584a5364f4e791555b88ea}
+      \strng{fullhash}{fd131140a93e3413118ca0001e673e33}
+      \strng{fullhashraw}{fd131140a93e3413118ca0001e673e33}
+      \strng{bibnamehash}{fd131140a93e3413118ca0001e673e33}
+      \strng{authorbibnamehash}{fd131140a93e3413118ca0001e673e33}
+      \strng{authornamehash}{8cf9e200a7584a5364f4e791555b88ea}
+      \strng{authorfullhash}{fd131140a93e3413118ca0001e673e33}
+      \strng{authorfullhashraw}{fd131140a93e3413118ca0001e673e33}
+      \field{extraname}{1}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Findings of the Association for Computational Linguistics: EMNLP 2020}
+      \field{month}{11}
+      \field{title}{Revisiting Pre-Trained Models for {C}hinese Natural Language Processing}
+      \field{year}{2020}
+      \field{pages}{657\bibrangedash 668}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.18653/v1/2020.findings-emnlp.58
+      \endverb
+      \verb{urlraw}
+      \verb https://aclanthology.org/2020.findings-emnlp.58/
+      \endverb
+      \verb{url}
+      \verb https://aclanthology.org/2020.findings-emnlp.58/
+      \endverb
+    \endentry
+    \entry{cui2021wholeword}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=bd5f28106f9c802314f709cbf76b35f3}{%
+           family={Cui},
+           familyi={C\bibinitperiod},
+           given={Yiming},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=cb0803882fba28a6c7ecb519069a89de}{%
+           family={Che},
+           familyi={C\bibinitperiod},
+           given={Wanxiang},
+           giveni={W\bibinitperiod}}}%
+        {{hash=df4100f4c9320162410d3ddcc9257d55}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Ting},
+           giveni={T\bibinitperiod}}}%
+        {{hash=1b651c40ade9404b1c43c1786d1a7466}{%
+           family={Qin},
+           familyi={Q\bibinitperiod},
+           given={Bing},
+           giveni={B\bibinitperiod}}}%
+        {{hash=e4c8f237a7456305bbab539bac961243}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Ziqing},
+           giveni={Z\bibinitperiod}}}%
+      }
+      \strng{namehash}{8cf9e200a7584a5364f4e791555b88ea}
+      \strng{fullhash}{0140e0adcd659a0d77ebf1f19a9b7247}
+      \strng{fullhashraw}{0140e0adcd659a0d77ebf1f19a9b7247}
+      \strng{bibnamehash}{0140e0adcd659a0d77ebf1f19a9b7247}
+      \strng{authorbibnamehash}{0140e0adcd659a0d77ebf1f19a9b7247}
+      \strng{authornamehash}{8cf9e200a7584a5364f4e791555b88ea}
+      \strng{authorfullhash}{0140e0adcd659a0d77ebf1f19a9b7247}
+      \strng{authorfullhashraw}{0140e0adcd659a0d77ebf1f19a9b7247}
+      \field{extraname}{2}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.CL}
+      \field{eprinttype}{arXiv}
+      \field{journaltitle}{IEEE/ACM Transactions on Audio, Speech, and Language Processing}
+      \field{title}{Pre-Training With Whole Word Masking for {C}hinese {BERT}}
+      \field{volume}{29}
+      \field{year}{2021}
+      \field{pages}{3504\bibrangedash 3514}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1109/TASLP.2021.3124365
+      \endverb
+      \verb{eprint}
+      \verb 1906.08101
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1109/TASLP.2021.3124365
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1109/TASLP.2021.3124365
+      \endverb
+    \endentry
+    \entry{yang2025qwen3}{misc}{}{}
+      \name{author}{60}{}{%
+        {{hash=4a2d07c6b724d5792733910f2dc082f4}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={An},
+           giveni={A\bibinitperiod}}}%
+        {{hash=6dcebae69615a144b4b80e477df31b44}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Anfeng},
+           giveni={A\bibinitperiod}}}%
+        {{hash=14fe3a74b269c046f24127218f64ac02}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Baosong},
+           giveni={B\bibinitperiod}}}%
+        {{hash=66e96b863923db3bc1db16a09cac3390}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Beichen},
+           giveni={B\bibinitperiod}}}%
+        {{hash=f34c34e7bfee1c214b840e1406f93b43}{%
+           family={Hui},
+           familyi={H\bibinitperiod},
+           given={Binyuan},
+           giveni={B\bibinitperiod}}}%
+        {{hash=cd8f75ba6fb515ea6ee28d885bd92e4b}{%
+           family={Zheng},
+           familyi={Z\bibinitperiod},
+           given={Bo},
+           giveni={B\bibinitperiod}}}%
+        {{hash=fdf3e14cd1c158076088aab21aed2346}{%
+           family={Yu},
+           familyi={Y\bibinitperiod},
+           given={Bowen},
+           giveni={B\bibinitperiod}}}%
+        {{hash=d9ff6769f651d0b1e413bc79ca081334}{%
+           family={Gao},
+           familyi={G\bibinitperiod},
+           given={Chang},
+           giveni={C\bibinitperiod}}}%
+        {{hash=ca3bb85f18d5d64698b9c2233b85957b}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Chengen},
+           giveni={C\bibinitperiod}}}%
+        {{hash=d744f0bb13e138817fb0ac7a55172f26}{%
+           family={Lv},
+           familyi={L\bibinitperiod},
+           given={Chenxu},
+           giveni={C\bibinitperiod}}}%
+        {{hash=f0c83af368b7010fe8af296aa58e3470}{%
+           family={Zheng},
+           familyi={Z\bibinitperiod},
+           given={Chujie},
+           giveni={C\bibinitperiod}}}%
+        {{hash=5ecbe660fc9cca9c49cd48a15586d4d1}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Dayiheng},
+           giveni={D\bibinitperiod}}}%
+        {{hash=226939c93cb08aaf817cfa1f097f8fbb}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={Fan},
+           giveni={F\bibinitperiod}}}%
+        {{hash=10a0d3aa004649de7a7ab2ffecb35bce}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Fei},
+           giveni={F\bibinitperiod}}}%
+        {{hash=29b82022541c4383c1589c20039b0eba}{%
+           family={Hu},
+           familyi={H\bibinitperiod},
+           given={Feng},
+           giveni={F\bibinitperiod}}}%
+        {{hash=f3376597fd62555141642bdabd17bd49}{%
+           family={Ge},
+           familyi={G\bibinitperiod},
+           given={Hao},
+           giveni={H\bibinitperiod}}}%
+        {{hash=7b20c151460037344052b54087c05e1c}{%
+           family={Wei},
+           familyi={W\bibinitperiod},
+           given={Haoran},
+           giveni={H\bibinitperiod}}}%
+        {{hash=22902e87ac7fd9bcdb8eb89cfda465b4}{%
+           family={Lin},
+           familyi={L\bibinitperiod},
+           given={Huan},
+           giveni={H\bibinitperiod}}}%
+        {{hash=3ccb8893e6c2ec4a9f566041f191023e}{%
+           family={Tang},
+           familyi={T\bibinitperiod},
+           given={Jialong},
+           giveni={J\bibinitperiod}}}%
+        {{hash=5a1cb92dc789e714fb5aaf67809119a6}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Jian},
+           giveni={J\bibinitperiod}}}%
+        {{hash=fa265093916600a6b3c9f3f63c045ad4}{%
+           family={Tu},
+           familyi={T\bibinitperiod},
+           given={Jianhong},
+           giveni={J\bibinitperiod}}}%
+        {{hash=701b522e82b25750a7fbeaa90161cfa6}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Jianwei},
+           giveni={J\bibinitperiod}}}%
+        {{hash=0cf68a33814717cd5caa1eddd54adc97}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Jianxin},
+           giveni={J\bibinitperiod}}}%
+        {{hash=d7d530edc1b8222155e749f7a0fb77d7}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Jiaxi},
+           giveni={J\bibinitperiod}}}%
+        {{hash=ac696aa3d4b6ac91f76d77e438aadcbf}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={Jing},
+           giveni={J\bibinitperiod}}}%
+        {{hash=27f62ab767acbc6e1e278da7f9e3b7c1}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={Jingren},
+           giveni={J\bibinitperiod}}}%
+        {{hash=25808280f693f61155a803aef8f7ec83}{%
+           family={Lin},
+           familyi={L\bibinitperiod},
+           given={Junyang},
+           giveni={J\bibinitperiod}}}%
+        {{hash=1931ac25a20d7791fabefcfa7575fc9d}{%
+           family={Dang},
+           familyi={D\bibinitperiod},
+           given={Kai},
+           giveni={K\bibinitperiod}}}%
+        {{hash=5754190a8d69ebac1420d25666032a55}{%
+           family={Bao},
+           familyi={B\bibinitperiod},
+           given={Keqin},
+           giveni={K\bibinitperiod}}}%
+        {{hash=ba3d24f674954bd8e944ef10e8f40ef4}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Kexin},
+           giveni={K\bibinitperiod}}}%
+        {{hash=11010b36714cb955034d883500806aa9}{%
+           family={Yu},
+           familyi={Y\bibinitperiod},
+           given={Le},
+           giveni={L\bibinitperiod}}}%
+        {{hash=3749548b533b4221ff3fb50295ac20ae}{%
+           family={Deng},
+           familyi={D\bibinitperiod},
+           given={Lianghao},
+           giveni={L\bibinitperiod}}}%
+        {{hash=a5a6804cd5452f3bd2c49956f6d81ef4}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Mei},
+           giveni={M\bibinitperiod}}}%
+        {{hash=0ecd173a641d6aae1a177e81c9e76534}{%
+           family={Xue},
+           familyi={X\bibinitperiod},
+           given={Mingfeng},
+           giveni={M\bibinitperiod}}}%
+        {{hash=65440c6795814250d0e689a0a88a4d39}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Mingze},
+           giveni={M\bibinitperiod}}}%
+        {{hash=a26a61af8029e8ca2b52ccb5ba439fe8}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Pei},
+           giveni={P\bibinitperiod}}}%
+        {{hash=c26cc02bbb5db725a2c79cb200894d76}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Peng},
+           giveni={P\bibinitperiod}}}%
+        {{hash=08965dcf62eb05b187b0cffefb5c2b8d}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={Qin},
+           giveni={Q\bibinitperiod}}}%
+        {{hash=088fd84ad562814fece6fecb90347fa0}{%
+           family={Men},
+           familyi={M\bibinitperiod},
+           given={Rui},
+           giveni={R\bibinitperiod}}}%
+        {{hash=ab4d545acc96aaaa009a57aa7254e9ce}{%
+           family={Gao},
+           familyi={G\bibinitperiod},
+           given={Ruize},
+           giveni={R\bibinitperiod}}}%
+        {{hash=ae9384d5bd69fc989b1b6e04ecea3fb2}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Shixuan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=b729e38dbbd242b83b61d6cb56bd2298}{%
+           family={Luo},
+           familyi={L\bibinitperiod},
+           given={Shuang},
+           giveni={S\bibinitperiod}}}%
+        {{hash=513567bdb08289f5c01187294f3122c5}{%
+           family={Li},
+           familyi={L\bibinitperiod},
+           given={Tianhao},
+           giveni={T\bibinitperiod}}}%
+        {{hash=e2be20b0e2f21891a3e428cfe3aa7546}{%
+           family={Tang},
+           familyi={T\bibinitperiod},
+           given={Tianyi},
+           giveni={T\bibinitperiod}}}%
+        {{hash=5868b8b38eb4e745b4d868c0b557895b}{%
+           family={Yin},
+           familyi={Y\bibinitperiod},
+           given={Wenbiao},
+           giveni={W\bibinitperiod}}}%
+        {{hash=2855f16846c593dbcfca40185365b035}{%
+           family={Ren},
+           familyi={R\bibinitperiod},
+           given={Xingzhang},
+           giveni={X\bibinitperiod}}}%
+        {{hash=20e2c557d724dbd3fd16ca0bc0fca12c}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Xinyu},
+           giveni={X\bibinitperiod}}}%
+        {{hash=2796e06afbb201b2cf70dcd7d0d589b6}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Xinyu},
+           giveni={X\bibinitperiod}}}%
+        {{hash=09413319ab747847063d74e0deb502f1}{%
+           family={Ren},
+           familyi={R\bibinitperiod},
+           given={Xuancheng},
+           giveni={X\bibinitperiod}}}%
+        {{hash=93f53e78e05c09f34d4aa7056526b6f0}{%
+           family={Fan},
+           familyi={F\bibinitperiod},
+           given={Yang},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=6db7a403e4508501016143b4a76c29a1}{%
+           family={Su},
+           familyi={S\bibinitperiod},
+           given={Yang},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=2e9b89ed5bc1be6ba24a858b7c64c067}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Yichang},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=e323a9bd68c23ec439554d17ef3c96b7}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Yinger},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=dd4145400a917eb4b58620770e210fa1}{%
+           family={Wan},
+           familyi={W\bibinitperiod},
+           given={Yu},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=4b37d3fa9e3321d7b73b8c6d2ef6704d}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Yuqiong},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=f966d1eae1e4761bda6a95e97dbf27b0}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Zekun},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=40acf49e75ba635084a4907576b0748e}{%
+           family={Cui},
+           familyi={C\bibinitperiod},
+           given={Zeyu},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=3682104b37b2eab9baa7fa922001ab7c}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Zhenru},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=60dabe3d0bf5d9e313f866f3728505ab}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={Zhipeng},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=4a8796912e5a8cced3fd28e8c43c9741}{%
+           family={Qiu},
+           familyi={Q\bibinitperiod},
+           given={Zihan},
+           giveni={Z\bibinitperiod}}}%
+      }
+      \strng{namehash}{8684a651eacf02f8f8bba29db106559c}
+      \strng{fullhash}{ebb9ad47bb88854ea91e588577027281}
+      \strng{fullhashraw}{ebb9ad47bb88854ea91e588577027281}
+      \strng{bibnamehash}{8684a651eacf02f8f8bba29db106559c}
+      \strng{authorbibnamehash}{8684a651eacf02f8f8bba29db106559c}
+      \strng{authornamehash}{8684a651eacf02f8f8bba29db106559c}
+      \strng{authorfullhash}{ebb9ad47bb88854ea91e588577027281}
+      \strng{authorfullhashraw}{ebb9ad47bb88854ea91e588577027281}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.CL}
+      \field{eprinttype}{arXiv}
+      \field{title}{{Qwen3} Technical Report}
+      \field{year}{2025}
+      \verb{doi}
+      \verb 10.48550/arXiv.2505.09388
+      \endverb
+      \verb{eprint}
+      \verb 2505.09388
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2505.09388
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2505.09388
+      \endverb
+    \endentry
+    \entry{manning2008information}{book}{}{}
+      \name{author}{3}{}{%
+        {{hash=2214edb8305f7ccd7cdc310b3a8ae1b4}{%
+           family={Manning},
+           familyi={M\bibinitperiod},
+           given={Christopher\bibnamedelima D.},
+           giveni={C\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=68f523934985e2f967ab2b15f4ded07c}{%
+           family={Raghavan},
+           familyi={R\bibinitperiod},
+           given={Prabhakar},
+           giveni={P\bibinitperiod}}}%
+        {{hash=9a80de0e5ec6df57363aaf321a5d05be}{%
+           family={Schütze},
+           familyi={S\bibinitperiod},
+           given={Hinrich},
+           giveni={H\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cambridge}%
+      }
+      \list{publisher}{1}{%
+        {Cambridge University Press}%
+      }
+      \strng{namehash}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{fullhash}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{fullhashraw}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{bibnamehash}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{authorbibnamehash}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{authornamehash}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{authorfullhash}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \strng{authorfullhashraw}{56b44e50eec2e98e36ad6aa3a5e7af9b}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-0-521-86571-5}
+      \field{title}{Introduction to Information Retrieval}
+      \field{year}{2008}
+      \verb{doi}
+      \verb 10.1017/CBO9780511809071
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1017/CBO9780511809071
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1017/CBO9780511809071
+      \endverb
+    \endentry
+    \entry{cox1958binary}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=2d4d0b24655232a7821096d23c2354b5}{%
+           family={Cox},
+           familyi={C\bibinitperiod},
+           given={D.\bibnamedelimi R.},
+           giveni={D\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{2d4d0b24655232a7821096d23c2354b5}
+      \strng{fullhash}{2d4d0b24655232a7821096d23c2354b5}
+      \strng{fullhashraw}{2d4d0b24655232a7821096d23c2354b5}
+      \strng{bibnamehash}{2d4d0b24655232a7821096d23c2354b5}
+      \strng{authorbibnamehash}{2d4d0b24655232a7821096d23c2354b5}
+      \strng{authornamehash}{2d4d0b24655232a7821096d23c2354b5}
+      \strng{authorfullhash}{2d4d0b24655232a7821096d23c2354b5}
+      \strng{authorfullhashraw}{2d4d0b24655232a7821096d23c2354b5}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of the Royal Statistical Society: Series B (Methodological)}
+      \field{number}{2}
+      \field{title}{The Regression Analysis of Binary Sequences}
+      \field{volume}{20}
+      \field{year}{1958}
+      \field{pages}{215\bibrangedash 232}
+      \range{pages}{18}
+      \verb{doi}
+      \verb 10.1111/j.2517-6161.1958.tb00292.x
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1111/j.2517-6161.1958.tb00292.x
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1111/j.2517-6161.1958.tb00292.x
+      \endverb
+    \endentry
+    \entry{liu2019roberta}{misc}{}{}
+      \name{author}{10}{}{%
+        {{hash=94530daf7a9db4abe89cfb22935373eb}{%
+           family={Liu},
+           familyi={L\bibinitperiod},
+           given={Yinhan},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=b13aa2bad5258fa5ef7a733f2d305a49}{%
+           family={Ott},
+           familyi={O\bibinitperiod},
+           given={Myle},
+           giveni={M\bibinitperiod}}}%
+        {{hash=78a420900f50a8470ad085fb05231bf6}{%
+           family={Goyal},
+           familyi={G\bibinitperiod},
+           given={Naman},
+           giveni={N\bibinitperiod}}}%
+        {{hash=e483b52ce2cd3ba2fd08e7bf4fef4ff0}{%
+           family={Du},
+           familyi={D\bibinitperiod},
+           given={Jingfei},
+           giveni={J\bibinitperiod}}}%
+        {{hash=e5bfa941bcdbfecb5f3e42bb6ac9eb5f}{%
+           family={Joshi},
+           familyi={J\bibinitperiod},
+           given={Mandar},
+           giveni={M\bibinitperiod}}}%
+        {{hash=aed188db3fc6855ac5666aa14e04a3bb}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Danqi},
+           giveni={D\bibinitperiod}}}%
+        {{hash=038965e189161e03f6255a4278c280a1}{%
+           family={Levy},
+           familyi={L\bibinitperiod},
+           given={Omer},
+           giveni={O\bibinitperiod}}}%
+        {{hash=c97f53fdeeb04c28de19e3324cb4bc0a}{%
+           family={Lewis},
+           familyi={L\bibinitperiod},
+           given={Mike},
+           giveni={M\bibinitperiod}}}%
+        {{hash=1dbd3a5b42828fb2cebd7786488ba425}{%
+           family={Zettlemoyer},
+           familyi={Z\bibinitperiod},
+           given={Luke},
+           giveni={L\bibinitperiod}}}%
+        {{hash=9b97236dd2d1a104fc5cf9660dd5582e}{%
+           family={Stoyanov},
+           familyi={S\bibinitperiod},
+           given={Veselin},
+           giveni={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{bbac34a28b7aba5cd543f7c72e0d987d}
+      \strng{fullhash}{7579c765ce38b2c34c8f9768ec3bc342}
+      \strng{fullhashraw}{7579c765ce38b2c34c8f9768ec3bc342}
+      \strng{bibnamehash}{bbac34a28b7aba5cd543f7c72e0d987d}
+      \strng{authorbibnamehash}{bbac34a28b7aba5cd543f7c72e0d987d}
+      \strng{authornamehash}{bbac34a28b7aba5cd543f7c72e0d987d}
+      \strng{authorfullhash}{7579c765ce38b2c34c8f9768ec3bc342}
+      \strng{authorfullhashraw}{7579c765ce38b2c34c8f9768ec3bc342}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.CL}
+      \field{eprinttype}{arXiv}
+      \field{title}{{RoBERTa}: A Robustly Optimized {BERT} Pretraining Approach}
+      \field{year}{2019}
+      \verb{doi}
+      \verb 10.48550/arXiv.1907.11692
+      \endverb
+      \verb{eprint}
+      \verb 1907.11692
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/1907.11692
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/1907.11692
+      \endverb
+    \endentry
+    \entry{efron1979bootstrap}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=32a20599d34d0c1c6a39fab839c5ae95}{%
+           family={Efron},
+           familyi={E\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{32a20599d34d0c1c6a39fab839c5ae95}
+      \strng{fullhash}{32a20599d34d0c1c6a39fab839c5ae95}
+      \strng{fullhashraw}{32a20599d34d0c1c6a39fab839c5ae95}
+      \strng{bibnamehash}{32a20599d34d0c1c6a39fab839c5ae95}
+      \strng{authorbibnamehash}{32a20599d34d0c1c6a39fab839c5ae95}
+      \strng{authornamehash}{32a20599d34d0c1c6a39fab839c5ae95}
+      \strng{authorfullhash}{32a20599d34d0c1c6a39fab839c5ae95}
+      \strng{authorfullhashraw}{32a20599d34d0c1c6a39fab839c5ae95}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{The Annals of Statistics}
+      \field{number}{1}
+      \field{title}{Bootstrap Methods: Another Look at the Jackknife}
+      \field{volume}{7}
+      \field{year}{1979}
+      \field{pages}{1\bibrangedash 26}
+      \range{pages}{26}
+      \verb{doi}
+      \verb 10.1214/aos/1176344552
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1214/aos/1176344552
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1214/aos/1176344552
+      \endverb
+    \endentry
+    \entry{efron1986bootstrapci}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=32a20599d34d0c1c6a39fab839c5ae95}{%
+           family={Efron},
+           familyi={E\bibinitperiod},
+           given={B.},
+           giveni={B\bibinitperiod}}}%
+        {{hash=21780bd4ff9a4cecd018c6cfdbd80280}{%
+           family={Tibshirani},
+           familyi={T\bibinitperiod},
+           given={R.},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{7e3e75d74572f7595d328b5c62fcf9f3}
+      \strng{fullhash}{7e3e75d74572f7595d328b5c62fcf9f3}
+      \strng{fullhashraw}{7e3e75d74572f7595d328b5c62fcf9f3}
+      \strng{bibnamehash}{7e3e75d74572f7595d328b5c62fcf9f3}
+      \strng{authorbibnamehash}{7e3e75d74572f7595d328b5c62fcf9f3}
+      \strng{authornamehash}{7e3e75d74572f7595d328b5c62fcf9f3}
+      \strng{authorfullhash}{7e3e75d74572f7595d328b5c62fcf9f3}
+      \strng{authorfullhashraw}{7e3e75d74572f7595d328b5c62fcf9f3}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Statistical Science}
+      \field{number}{1}
+      \field{title}{Bootstrap Methods for Standard Errors, Confidence Intervals, and Other Measures of Statistical Accuracy}
+      \field{volume}{1}
+      \field{year}{1986}
+      \field{pages}{54\bibrangedash 75}
+      \range{pages}{22}
+      \verb{doi}
+      \verb 10.1214/ss/1177013815
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1214/ss/1177013815
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1214/ss/1177013815
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

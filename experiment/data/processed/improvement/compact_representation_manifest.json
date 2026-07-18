@@ -1,0 +1,26 @@
+{
+  "representation": "object+act without generated evidence",
+  "outputs": [
+    {
+      "source": "E:\\Lab\\experiment\\data\\processed\\improvement\\douyin_test_improvement400_structured_v2.csv",
+      "target": "E:\\Lab\\experiment\\data\\processed\\improvement\\douyin_test_improvement400_compact_object_act_v1.csv",
+      "rows": 400,
+      "nonempty_compact": 398,
+      "compact_sha256": "3124c72d92068d87abc9252ff939c6c7ba3b404937b252da378909a8e65a251b"
+    },
+    {
+      "source": "E:\\Lab\\experiment\\data\\processed\\improvement\\douyin_train_improvement1000_structured_v2.csv",
+      "target": "E:\\Lab\\experiment\\data\\processed\\improvement\\douyin_train_improvement1000_compact_object_act_v1.csv",
+      "rows": 1000,
+      "nonempty_compact": 997,
+      "compact_sha256": "fe7c732c18bde64a3c1ae1d13ec6c6be0a85c32f238c6840d406b745392f0c24"
+    },
+    {
+      "source": "E:\\Lab\\experiment\\data\\processed\\improvement\\douyin_train_improvement400_structured_v2.csv",
+      "target": "E:\\Lab\\experiment\\data\\processed\\improvement\\douyin_train_improvement400_compact_object_act_v1.csv",
+      "rows": 400,
+      "nonempty_compact": 399,
+      "compact_sha256": "7fb9340611a0cd4b0d6251f05cf9f08ac804e3ed28fe8ca561192b0b4ec0846a"
+    }
+  ]
+}

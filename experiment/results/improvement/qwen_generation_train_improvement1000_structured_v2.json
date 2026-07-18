@@ -1,0 +1,19 @@
+{
+  "model": "qwen3:8b",
+  "prompt_version": "structured_v2",
+  "split": "train",
+  "size": 1000,
+  "requested_rows": 1000,
+  "successful_rows": 997,
+  "failed_rows": 3,
+  "coverage": 0.997,
+  "label_like_outputs": 7,
+  "wall_seconds": 915.4791112999956,
+  "mean_generation_seconds": 0.9052440253762286,
+  "median_generation_seconds": 0.867668799997773,
+  "peak_gpu_memory_mb": 7335.30078125,
+  "mean_gpu_utilization": 92.1201234914398,
+  "input_file": "E:\\Lab\\experiment\\data\\processed\\improvement\\douyin_train_improvement1000.csv",
+  "output_file": "E:\\Lab\\experiment\\data\\processed\\improvement\\douyin_train_improvement1000_structured_v2.csv",
+  "checkpoint_file": "E:\\Lab\\experiment\\logs\\improvement\\qwen_generation_train_improvement1000_structured_v2.jsonl"
+}

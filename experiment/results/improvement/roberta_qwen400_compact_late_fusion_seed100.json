@@ -1,0 +1,258 @@
+{
+  "model": "hfl/chinese-roberta-wwm-ext",
+  "tag": "qwen400_compact_late_fusion",
+  "seed": 100,
+  "train_file": "E:\\Lab\\experiment\\data\\processed\\improvement\\douyin_train_improvement400_compact_object_act_v1.csv",
+  "test_file": "E:\\Lab\\experiment\\data\\processed\\improvement\\douyin_test_improvement400_compact_object_act_v1.csv",
+  "train_rows": 400,
+  "validation_rows": 80,
+  "test_rows": 400,
+  "validation_fraction": 0.2,
+  "selection_seed": 20260718,
+  "train_signature": "4f98fb9ae43fc4481aaa69a2ab7b673ad7e082380ed8a408cfd58e5881e348a4",
+  "test_signature": "031e35ea0ae315837198f3b7e01c811a2a5d2e905feb5cdd93687ff8ac0194a5",
+  "epochs": 3,
+  "batch_size": 8,
+  "gradient_accumulation_steps": 2,
+  "max_length": 128,
+  "validation_runs": {
+    "content": {
+      "condition": "content",
+      "seed": 100,
+      "train_rows": 320,
+      "target_rows": 80,
+      "elapsed_seconds": 7.292975300020771,
+      "peak_torch_memory_mb": 1975.75537109375,
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.6788427352905273
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.35087051391601565
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.15094990730285646
+        }
+      ],
+      "loss": 0.4047872543334961,
+      "accuracy": 0.8,
+      "precision": 0.8,
+      "recall": 0.8979591836734694,
+      "f1": 0.8461538461538461,
+      "precision_pos": 0.8,
+      "recall_pos": 0.8979591836734694,
+      "f1_pos": 0.8461538461538461,
+      "macro_precision": 0.8,
+      "macro_recall": 0.771560236998025,
+      "macro_f1": 0.7802197802197802,
+      "confusion_matrix": [
+        [
+          20,
+          11
+        ],
+        [
+          5,
+          44
+        ]
+      ]
+    },
+    "qwen": {
+      "condition": "qwen",
+      "seed": 100,
+      "train_rows": 320,
+      "target_rows": 80,
+      "elapsed_seconds": 7.750249300006544,
+      "peak_torch_memory_mb": 2010.8642578125,
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.7074058532714844
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.5078623771667481
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.32627248764038086
+        }
+      ],
+      "loss": 0.5620342254638672,
+      "accuracy": 0.775,
+      "precision": 0.7719298245614035,
+      "recall": 0.8979591836734694,
+      "f1": 0.8301886792452831,
+      "precision_pos": 0.7719298245614035,
+      "recall_pos": 0.8979591836734694,
+      "f1_pos": 0.8301886792452831,
+      "macro_precision": 0.7772692601067888,
+      "macro_recall": 0.739302172481896,
+      "macro_f1": 0.7484276729559749,
+      "confusion_matrix": [
+        [
+          18,
+          13
+        ],
+        [
+          5,
+          44
+        ]
+      ]
+    }
+  },
+  "selection": {
+    "alpha_content": 1.0,
+    "alpha_explanation": 0.0,
+    "threshold": 0.5800000000000002,
+    "validation_macro_f1": 0.8254740728310119,
+    "grid_alpha": [
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95,
+      1.0
+    ],
+    "grid_threshold": [
+      0.4,
+      0.41,
+      0.42,
+      0.43,
+      0.44,
+      0.45,
+      0.46,
+      0.47,
+      0.48,
+      0.49,
+      0.5,
+      0.51,
+      0.52,
+      0.53,
+      0.54,
+      0.55,
+      0.56,
+      0.57,
+      0.58,
+      0.59,
+      0.6
+    ]
+  },
+  "test_branch_runs": {
+    "content": {
+      "condition": "content",
+      "seed": 100,
+      "train_rows": 400,
+      "target_rows": 400,
+      "elapsed_seconds": 9.035836199996993,
+      "peak_torch_memory_mb": 2010.8642578125,
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.6634666442871093
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.3623732376098633
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.15915975570678711
+        }
+      ],
+      "loss": 0.3526061248779297,
+      "accuracy": 0.87,
+      "precision": 0.8745098039215686,
+      "recall": 0.9176954732510288,
+      "f1": 0.8955823293172691,
+      "precision_pos": 0.8745098039215686,
+      "recall_pos": 0.9176954732510288,
+      "f1_pos": 0.8955823293172691,
+      "macro_precision": 0.868289384719405,
+      "macro_recall": 0.8569369086000367,
+      "macro_f1": 0.8616984494268465,
+      "confusion_matrix": [
+        [
+          125,
+          32
+        ],
+        [
+          20,
+          223
+        ]
+      ]
+    },
+    "qwen": {
+      "condition": "qwen",
+      "seed": 100,
+      "train_rows": 400,
+      "target_rows": 400,
+      "elapsed_seconds": 10.007668699981878,
+      "peak_torch_memory_mb": 2010.8642578125,
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.6407896423339844
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.443866081237793
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.23463811874389648
+        }
+      ],
+      "loss": 0.3572011756896973,
+      "accuracy": 0.8625,
+      "precision": 0.8560606060606061,
+      "recall": 0.9300411522633745,
+      "f1": 0.8915187376725838,
+      "precision_pos": 0.8560606060606061,
+      "recall_pos": 0.9300411522633745,
+      "f1_pos": 0.8915187376725838,
+      "macro_precision": 0.865530303030303,
+      "macro_recall": 0.8440014678514325,
+      "macro_f1": 0.8519027135461895,
+      "confusion_matrix": [
+        [
+          119,
+          38
+        ],
+        [
+          17,
+          226
+        ]
+      ]
+    }
+  },
+  "test_fused_metrics": {
+    "accuracy": 0.8625,
+    "precision_pos": 0.8852459016393442,
+    "recall_pos": 0.8888888888888888,
+    "f1_pos": 0.8870636550308009,
+    "macro_precision": 0.8560844892812105,
+    "macro_recall": 0.8552724699221514,
+    "macro_f1": 0.8556724025952727
+  },
+  "test_evaluations_per_branch": 1,
+  "test_tuning_evaluations": 0,
+  "prediction_file": "E:\\Lab\\experiment\\results\\improvement\\predictions_roberta_qwen400_compact_late_fusion_seed100.csv"
+}

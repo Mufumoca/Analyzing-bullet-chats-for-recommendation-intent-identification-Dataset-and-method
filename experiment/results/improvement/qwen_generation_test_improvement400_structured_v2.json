@@ -1,0 +1,19 @@
+{
+  "model": "qwen3:8b",
+  "prompt_version": "structured_v2",
+  "split": "test",
+  "size": 400,
+  "requested_rows": 400,
+  "successful_rows": 398,
+  "failed_rows": 2,
+  "coverage": 0.995,
+  "label_like_outputs": 0,
+  "wall_seconds": 358.7864593999984,
+  "mean_generation_seconds": 0.8876423427134421,
+  "median_generation_seconds": 0.8519945000007283,
+  "peak_gpu_memory_mb": 7334.45703125,
+  "mean_gpu_utilization": 92.49030868628859,
+  "input_file": "E:\\Lab\\experiment\\data\\processed\\improvement\\douyin_test_improvement400.csv",
+  "output_file": "E:\\Lab\\experiment\\data\\processed\\improvement\\douyin_test_improvement400_structured_v2.csv",
+  "checkpoint_file": "E:\\Lab\\experiment\\logs\\improvement\\qwen_generation_test_improvement400_structured_v2.jsonl"
+}

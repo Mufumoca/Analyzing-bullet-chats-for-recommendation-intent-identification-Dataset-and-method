@@ -1,0 +1,8 @@
+{
+  "seed": 20260718,
+  "bootstrap_iterations": 5000,
+  "classical_rows": 15,
+  "paired_comparisons": 15,
+  "roberta_runs": 18,
+  "roberta_groups": 6
+}

@@ -1,0 +1,146 @@
+{
+  "status": "passed",
+  "checks": {
+    "qwen_generation_train": {
+      "sample_rows": 400,
+      "generated_rows": 400,
+      "successful_latest_records": 400
+    },
+    "qwen_generation_test": {
+      "sample_rows": 400,
+      "generated_rows": 400,
+      "successful_latest_records": 400
+    },
+    "qwen_direct": {
+      "rows": 400,
+      "coverage": 1.0,
+      "macro_f1": 0.7576548445728667
+    },
+    "roberta": {
+      "run_files": 18,
+      "seeds": [
+        100,
+        101,
+        102
+      ],
+      "test_evaluations_per_run": 1
+    },
+    "classical_full": {
+      "conditions": 4
+    },
+    "classical_main": {
+      "conditions": 4
+    },
+    "classical_qwen": {
+      "conditions": 7
+    },
+    "improvement_data_splits": {
+      "train_rows": [
+        400,
+        1000
+      ],
+      "test_rows": 400,
+      "train400_nested_in_train1000": true,
+      "train_test_overlap": 0,
+      "fixed_split_hashes_verified": true
+    },
+    "improvement_qwen_structured_v2": {
+      "train400": {
+        "rows": 400,
+        "successful_rows": 399,
+        "coverage": 0.9975
+      },
+      "train1000": {
+        "rows": 1000,
+        "successful_rows": 997,
+        "coverage": 0.997
+      },
+      "test400": {
+        "rows": 400,
+        "successful_rows": 398,
+        "coverage": 0.995
+      }
+    },
+    "improvement_classical_oof_fusion": {
+      "folds": 5,
+      "selection_seed": 20260718,
+      "conditions": {
+        "400": [
+          "old_late_fusion",
+          "structured_late_fusion"
+        ],
+        "1000": [
+          "structured_late_fusion"
+        ]
+      }
+    },
+    "improvement_roberta": {
+      "qwen400_compact_concat": {
+        "runs": 3,
+        "seeds": [
+          100,
+          101,
+          102
+        ],
+        "test_rows_per_run": 400,
+        "test_tuning_evaluations": null,
+        "test_evaluations_per_branch": null
+      },
+      "qwen400_compact_late_fusion": {
+        "runs": 3,
+        "seeds": [
+          100,
+          101,
+          102
+        ],
+        "test_rows_per_run": 400,
+        "test_tuning_evaluations": 0,
+        "test_evaluations_per_branch": 1
+      },
+      "qwen1000_compact_concat": {
+        "runs": 3,
+        "seeds": [
+          100,
+          101,
+          102
+        ],
+        "test_rows_per_run": 400,
+        "test_tuning_evaluations": null,
+        "test_evaluations_per_branch": null
+      },
+      "qwen1000_compact_late_fusion": {
+        "runs": 3,
+        "seeds": [
+          100,
+          101,
+          102
+        ],
+        "test_rows_per_run": 400,
+        "test_tuning_evaluations": 0,
+        "test_evaluations_per_branch": 1
+      }
+    },
+    "figures": {
+      "exports": 20,
+      "source_data_files": 5,
+      "editable_svg_text": true
+    },
+    "report": {
+      "pdf_bytes": 559012,
+      "latex_bytes": 49086,
+      "contact_sheet_bytes": 1718038,
+      "improvement_section_markers": 5,
+      "critical_latex_warnings": 0
+    },
+    "analysis_artifacts": [
+      "classical_summary.csv",
+      "paired_bootstrap.csv",
+      "roberta_runs.csv",
+      "roberta_summary.csv",
+      "roberta_seed_differences.csv",
+      "data_audit.json",
+      "environment.json",
+      "case_study_candidates.csv"
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "seed": 20260718,
+  "additional_train_rows": 600,
+  "nested_train_sets": true,
+  "source_train_qwen": "E:\\Lab\\experiment\\data\\processed\\douyin_train_qwen.csv",
+  "source_train_main": "E:\\Lab\\experiment\\data\\processed\\douyin_train_main.csv",
+  "source_test_qwen": "E:\\Lab\\experiment\\data\\processed\\douyin_test_qwen.csv",
+  "splits": {
+    "douyin_train_improvement400.csv": {
+      "rows": 400,
+      "positive": 243,
+      "negative": 157,
+      "row_id_sha256": "b2b07d3905ac16dd58de48761c531576ebd11dd2e153dca8ac93cdde17a85ba4",
+      "file_sha256": "b62a8a4f8f0292cb3daf8613c4591fb4f9271023a340d003195077bd3e93283b"
+    },
+    "douyin_train_improvement1000.csv": {
+      "rows": 1000,
+      "positive": 607,
+      "negative": 393,
+      "row_id_sha256": "87165092110301f979bae926e9972dc88d7e4b7e90ea0ad8d7c7a74ae9ef4e1c",
+      "file_sha256": "3465b4cbbec17b9ac246d72b041de5d9f392aa66d9301bb296c7b07d1a66ee02"
+    },
+    "douyin_test_improvement400.csv": {
+      "rows": 400,
+      "positive": 243,
+      "negative": 157,
+      "row_id_sha256": "9d10c6a9ecd861b831131f14e83974681b9ceb27f02a3bb32dab2b15c0e03cd9",
+      "file_sha256": "1881465df5591e85af2a64a0d6ef56ec8836f1e2a2e4c2c142e1ebae66ae3a53"
+    }
+  }
+}

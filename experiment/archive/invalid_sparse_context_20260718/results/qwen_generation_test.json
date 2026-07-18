@@ -1,0 +1,14 @@
+{
+  "model": "qwen3:8b",
+  "split": "test",
+  "requested_rows": 400,
+  "successful_rows": 400,
+  "failed_rows": 0,
+  "wall_seconds": 233.31307080000988,
+  "mean_generation_seconds": 0.5908767902500768,
+  "median_generation_seconds": 0.5580836500012083,
+  "total_generated_tokens": 7610,
+  "tokens_per_second": 32.61711816618753,
+  "peak_gpu_memory_mb": 6434.88671875,
+  "mean_gpu_utilization": 90.79139072847683
+}

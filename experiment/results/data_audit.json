@@ -1,0 +1,35 @@
+{
+  "train_rows": 21159,
+  "test_rows": 9069,
+  "shared_live_ids": 12,
+  "train_live_ids": 12,
+  "test_live_ids": 12,
+  "test_content_seen_in_train_rows": 1310,
+  "test_content_seen_in_train_fraction": 0.1444481199691256,
+  "test_exact_five_field_seen_in_train_rows": 53,
+  "test_exact_five_field_seen_in_train_fraction": 0.005844084243025692,
+  "full_train_context": {
+    "rows": 21159,
+    "rows_with_cross_split_context": 17571,
+    "fraction_with_cross_split_context": 0.8304267687508862,
+    "mean_cross_split_context_items": 1.4951084644831987
+  },
+  "full_test_context": {
+    "rows": 9069,
+    "rows_with_cross_split_context": 9038,
+    "fraction_with_cross_split_context": 0.9965817620465321,
+    "mean_cross_split_context_items": 3.4880361671628624
+  },
+  "qwen_train_context": {
+    "rows": 400,
+    "rows_with_cross_split_context": 324,
+    "fraction_with_cross_split_context": 0.81,
+    "mean_cross_split_context_items": 1.43
+  },
+  "qwen_test_context": {
+    "rows": 400,
+    "rows_with_cross_split_context": 398,
+    "fraction_with_cross_split_context": 0.995,
+    "mean_cross_split_context_items": 3.42
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "model": "qwen3:8b",
+  "test_rows": 400,
+  "valid_predictions": 400,
+  "failed_predictions": 0,
+  "wall_seconds": 83.03153029999521,
+  "mean_inference_seconds": 0.20735320899992074,
+  "total_generated_tokens": 2400,
+  "peak_gpu_memory_mb": 6561.80859375,
+  "mean_gpu_utilization": 85.01851851851852,
+  "accuracy": 0.7675,
+  "precision": 0.8048780487804879,
+  "recall": 0.8148148148148148,
+  "f1": 0.8098159509202454
+}

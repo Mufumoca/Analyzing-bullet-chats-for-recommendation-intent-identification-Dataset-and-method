@@ -1,0 +1,53 @@
+{
+  "model": "hfl/chinese-roberta-wwm-ext",
+  "suite": "main",
+  "condition": "content",
+  "seed": 101,
+  "train_rows": 2000,
+  "test_rows": 2000,
+  "epochs": 3,
+  "batch_size": 8,
+  "gradient_accumulation_steps": 2,
+  "effective_batch_size": 16,
+  "max_length": 128,
+  "trainable_parameters": 102269186,
+  "total_parameters": 102269186,
+  "elapsed_seconds": 48.456124499993166,
+  "peak_torch_memory_mb": 2048.75439453125,
+  "test_evaluations": 1,
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.4844954299926758
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.23636351013183593
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.1085164999961853
+    }
+  ],
+  "loss": 0.48372524976730347,
+  "accuracy": 0.8815,
+  "precision": 0.8836477987421384,
+  "recall": 0.9266281945589447,
+  "f1": 0.9046277665995975,
+  "precision_pos": 0.8836477987421384,
+  "recall_pos": 0.9266281945589447,
+  "f1_pos": 0.9046277665995975,
+  "macro_precision": 0.8806975257446956,
+  "macro_recall": 0.8692861430228015,
+  "macro_f1": 0.8740960615176205,
+  "confusion_matrix": [
+    [
+      639,
+      148
+    ],
+    [
+      89,
+      1124
+    ]
+  ]
+}

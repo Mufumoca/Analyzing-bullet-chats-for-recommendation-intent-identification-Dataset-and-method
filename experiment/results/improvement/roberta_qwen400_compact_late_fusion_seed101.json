@@ -1,0 +1,258 @@
+{
+  "model": "hfl/chinese-roberta-wwm-ext",
+  "tag": "qwen400_compact_late_fusion",
+  "seed": 101,
+  "train_file": "E:\\Lab\\experiment\\data\\processed\\improvement\\douyin_train_improvement400_compact_object_act_v1.csv",
+  "test_file": "E:\\Lab\\experiment\\data\\processed\\improvement\\douyin_test_improvement400_compact_object_act_v1.csv",
+  "train_rows": 400,
+  "validation_rows": 80,
+  "test_rows": 400,
+  "validation_fraction": 0.2,
+  "selection_seed": 20260718,
+  "train_signature": "4f98fb9ae43fc4481aaa69a2ab7b673ad7e082380ed8a408cfd58e5881e348a4",
+  "test_signature": "031e35ea0ae315837198f3b7e01c811a2a5d2e905feb5cdd93687ff8ac0194a5",
+  "epochs": 3,
+  "batch_size": 8,
+  "gradient_accumulation_steps": 2,
+  "max_length": 128,
+  "validation_runs": {
+    "content": {
+      "condition": "content",
+      "seed": 101,
+      "train_rows": 320,
+      "target_rows": 80,
+      "elapsed_seconds": 7.013204999995651,
+      "peak_torch_memory_mb": 2010.8642578125,
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.6692241668701172
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.3922633171081543
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.20060176849365235
+        }
+      ],
+      "loss": 0.4670997619628906,
+      "accuracy": 0.775,
+      "precision": 0.803921568627451,
+      "recall": 0.8367346938775511,
+      "f1": 0.82,
+      "precision_pos": 0.803921568627451,
+      "recall_pos": 0.8367346938775511,
+      "f1_pos": 0.82,
+      "macro_precision": 0.7640297498309669,
+      "macro_recall": 0.7570770243581304,
+      "macro_f1": 0.76,
+      "confusion_matrix": [
+        [
+          21,
+          10
+        ],
+        [
+          8,
+          41
+        ]
+      ]
+    },
+    "qwen": {
+      "condition": "qwen",
+      "seed": 101,
+      "train_rows": 320,
+      "target_rows": 80,
+      "elapsed_seconds": 7.717449699994177,
+      "peak_torch_memory_mb": 2010.8642578125,
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.6574457168579102
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.46504669189453124
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.2776337146759033
+        }
+      ],
+      "loss": 0.5867855072021484,
+      "accuracy": 0.7625,
+      "precision": 0.7777777777777778,
+      "recall": 0.8571428571428571,
+      "f1": 0.8155339805825242,
+      "precision_pos": 0.7777777777777778,
+      "recall_pos": 0.8571428571428571,
+      "f1_pos": 0.8155339805825242,
+      "macro_precision": 0.7542735042735043,
+      "macro_recall": 0.7350230414746544,
+      "macro_f1": 0.7411003236245954,
+      "confusion_matrix": [
+        [
+          19,
+          12
+        ],
+        [
+          7,
+          42
+        ]
+      ]
+    }
+  },
+  "selection": {
+    "alpha_content": 0.45,
+    "alpha_explanation": 0.55,
+    "threshold": 0.5800000000000002,
+    "validation_macro_f1": 0.7893350888742594,
+    "grid_alpha": [
+      0.0,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95,
+      1.0
+    ],
+    "grid_threshold": [
+      0.4,
+      0.41,
+      0.42,
+      0.43,
+      0.44,
+      0.45,
+      0.46,
+      0.47,
+      0.48,
+      0.49,
+      0.5,
+      0.51,
+      0.52,
+      0.53,
+      0.54,
+      0.55,
+      0.56,
+      0.57,
+      0.58,
+      0.59,
+      0.6
+    ]
+  },
+  "test_branch_runs": {
+    "content": {
+      "condition": "content",
+      "seed": 101,
+      "train_rows": 400,
+      "target_rows": 400,
+      "elapsed_seconds": 8.989298999978928,
+      "peak_torch_memory_mb": 2010.8642578125,
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.6495689392089844
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.3647542190551758
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.14932777404785155
+        }
+      ],
+      "loss": 0.3703630065917969,
+      "accuracy": 0.8425,
+      "precision": 0.8515625,
+      "recall": 0.897119341563786,
+      "f1": 0.87374749498998,
+      "precision_pos": 0.8515625,
+      "recall_pos": 0.897119341563786,
+      "f1_pos": 0.87374749498998,
+      "macro_precision": 0.8389756944444444,
+      "macro_recall": 0.8275405625016383,
+      "macro_f1": 0.8322225847042923,
+      "confusion_matrix": [
+        [
+          119,
+          38
+        ],
+        [
+          25,
+          218
+        ]
+      ]
+    },
+    "qwen": {
+      "condition": "qwen",
+      "seed": 101,
+      "train_rows": 400,
+      "target_rows": 400,
+      "elapsed_seconds": 9.98487159999786,
+      "peak_torch_memory_mb": 2010.8642578125,
+      "history": [
+        {
+          "epoch": 1,
+          "train_loss": 0.6904132080078125
+        },
+        {
+          "epoch": 2,
+          "train_loss": 0.45556198120117186
+        },
+        {
+          "epoch": 3,
+          "train_loss": 0.2662080383300781
+        }
+      ],
+      "loss": 0.35578414916992185,
+      "accuracy": 0.8625,
+      "precision": 0.873015873015873,
+      "recall": 0.9053497942386831,
+      "f1": 0.8888888888888888,
+      "precision_pos": 0.873015873015873,
+      "recall_pos": 0.9053497942386831,
+      "f1_pos": 0.8888888888888888,
+      "macro_precision": 0.8588052338052339,
+      "macro_recall": 0.8507640690938638,
+      "macro_f1": 0.8542805100182149,
+      "confusion_matrix": [
+        [
+          125,
+          32
+        ],
+        [
+          23,
+          220
+        ]
+      ]
+    }
+  },
+  "test_fused_metrics": {
+    "accuracy": 0.8525,
+    "precision_pos": 0.8709677419354839,
+    "recall_pos": 0.8888888888888888,
+    "f1_pos": 0.879837067209776,
+    "macro_precision": 0.8466680814940577,
+    "macro_recall": 0.8425336164189667,
+    "macro_f1": 0.8444492779414576
+  },
+  "test_evaluations_per_branch": 1,
+  "test_tuning_evaluations": 0,
+  "prediction_file": "E:\\Lab\\experiment\\results\\improvement\\predictions_roberta_qwen400_compact_late_fusion_seed101.csv"
+}

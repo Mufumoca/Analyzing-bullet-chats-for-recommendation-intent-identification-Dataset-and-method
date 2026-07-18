@@ -1,0 +1,58 @@
+{
+  "model": "hfl/chinese-roberta-wwm-ext",
+  "tag": "qwen1000_structured_concat",
+  "condition": "qwen",
+  "seed": 100,
+  "train_file": "E:\\Lab\\experiment\\data\\processed\\improvement\\douyin_train_improvement1000_structured_v2.csv",
+  "test_file": "E:\\Lab\\experiment\\data\\processed\\improvement\\douyin_test_improvement400_structured_v2.csv",
+  "train_rows": 1000,
+  "test_rows": 400,
+  "train_signature": "8db4ea51fee814623a51e183cdafb8e75e91791a52249c6e45e410d39eede525",
+  "test_signature": "02035d3c2477a07d64dc0dc5c4289b7889c2d672b20e5f2666b2d4b8d8b1a2a2",
+  "epochs": 3,
+  "batch_size": 8,
+  "gradient_accumulation_steps": 2,
+  "effective_batch_size": 16,
+  "max_length": 128,
+  "trainable_parameters": 102269186,
+  "total_parameters": 102269186,
+  "elapsed_seconds": 29.954005900013726,
+  "peak_torch_memory_mb": 2221.82421875,
+  "test_evaluations": 1,
+  "prediction_file": "E:\\Lab\\experiment\\results\\improvement\\predictions_roberta_qwen1000_structured_concat_seed100.csv",
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.5641431121826171
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.30280104064941404
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.14630039978027343
+    }
+  ],
+  "loss": 0.3505762195587158,
+  "accuracy": 0.8875,
+  "precision": 0.8837209302325582,
+  "recall": 0.9382716049382716,
+  "f1": 0.9101796407185628,
+  "precision_pos": 0.8837209302325582,
+  "recall_pos": 0.9382716049382716,
+  "f1_pos": 0.9101796407185628,
+  "macro_precision": 0.8890435637078284,
+  "macro_recall": 0.8735944011952504,
+  "macro_f1": 0.8798389842388801,
+  "confusion_matrix": [
+    [
+      127,
+      30
+    ],
+    [
+      15,
+      228
+    ]
+  ]
+}
