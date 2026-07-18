@@ -21,3 +21,11 @@ Copy-Item .\improvement_comparison.pdf .\提升数据与原论文逐项对比.pd
 ```
 
 `build_document.py` 读取 `experiment/results` 下的 CSV/JSON 证据，并生成 Word、Markdown 和 LaTeX 使用的 Table 5 裁剪图。原论文 PDF 位于 `E:\zotero\storage\7DATFQRR`。
+
+通俗讲解三联图由 Python 生成：
+
+```powershell
+& D:\Anaconda3\python.exe ..\..\src\make_plain_comparison_assets.py
+```
+
+输出位于 `experiment/figures/fig8_plain_comparison.*`，原始绘图数据为 `source_data_fig8.csv`。
