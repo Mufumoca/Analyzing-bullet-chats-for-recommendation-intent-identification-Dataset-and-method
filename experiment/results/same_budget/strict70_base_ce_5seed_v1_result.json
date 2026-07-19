@@ -1,0 +1,1025 @@
+{
+  "experiment": "recdy_same_budget_probability_ensemble_v1",
+  "protocol_preset": "base_ce",
+  "protocol_registry": "E:\\Lab\\experiment\\config\\same_budget_protocol_v1.json",
+  "protocol_registry_sha256": "deb0d65e3899b7b41c543aff75218f409876de41be345fe2baa91f5752c5b110",
+  "model_path": "hfl/chinese-roberta-wwm-ext",
+  "model_checkpoint": {
+    "file": "D:\\hf\\hub\\models--hfl--chinese-roberta-wwm-ext\\snapshots\\5c58d0b8ec1d9014354d691c538661bf00bfdb44\\pytorch_model.bin",
+    "sha256": "1ded5a5a1c7841dee6e47942f7b5bf2bcf6f73ff19197580f852f7f638f86b35"
+  },
+  "train_file": "E:\\Lab\\experiment\\data\\processed\\douyin_train_full.csv",
+  "test_file": "E:\\Lab\\experiment\\data\\processed\\douyin_test_full.csv",
+  "shot_per_class_train": 70,
+  "shot_per_class_validation": 70,
+  "split_seed": 20260718,
+  "member_seeds": [
+    100,
+    101,
+    102,
+    103,
+    104
+  ],
+  "train_rows": 140,
+  "validation_rows": 140,
+  "test_rows": 9069,
+  "train_signature": "f493253c6d9b2b97c430b860300fd4c0969288e416300b5061e23175d805ec7b",
+  "validation_signature": "0725f0801089f5c333bf827cda0fe21ab497f74f76b55379f3a4033999c78acd",
+  "test_input_signature": "5f978ef164062008d8999c61ff652bb696e509b49836f76ff32c8398bbc62218",
+  "view": "content",
+  "explanation_column": "official_background",
+  "input_role": "main_label_free_input",
+  "threshold": 0.5,
+  "test_tuning_evaluations": 0,
+  "batch_size": 8,
+  "gradient_accumulation_steps": 2,
+  "effective_batch_size": 16,
+  "max_length": 128,
+  "epochs": 15,
+  "patience": 4,
+  "learning_rate": 4e-05,
+  "rdrop_alpha": 0.0,
+  "label_smoothing": 0.0,
+  "test_labels_loaded_after_selection": true,
+  "train_row_ids": [
+    "douyin-train-000014",
+    "douyin-train-000065",
+    "douyin-train-000123",
+    "douyin-train-000165",
+    "douyin-train-000199",
+    "douyin-train-000799",
+    "douyin-train-000820",
+    "douyin-train-000857",
+    "douyin-train-000867",
+    "douyin-train-000894",
+    "douyin-train-000976",
+    "douyin-train-001798",
+    "douyin-train-001947",
+    "douyin-train-002048",
+    "douyin-train-002127",
+    "douyin-train-002353",
+    "douyin-train-002355",
+    "douyin-train-002406",
+    "douyin-train-002706",
+    "douyin-train-002778",
+    "douyin-train-002885",
+    "douyin-train-003060",
+    "douyin-train-003172",
+    "douyin-train-003228",
+    "douyin-train-003642",
+    "douyin-train-003692",
+    "douyin-train-003933",
+    "douyin-train-003999",
+    "douyin-train-004040",
+    "douyin-train-004156",
+    "douyin-train-004215",
+    "douyin-train-004232",
+    "douyin-train-004907",
+    "douyin-train-004933",
+    "douyin-train-005073",
+    "douyin-train-005079",
+    "douyin-train-005173",
+    "douyin-train-005386",
+    "douyin-train-005545",
+    "douyin-train-005711",
+    "douyin-train-005732",
+    "douyin-train-005776",
+    "douyin-train-006038",
+    "douyin-train-006142",
+    "douyin-train-006409",
+    "douyin-train-006548",
+    "douyin-train-006614",
+    "douyin-train-006641",
+    "douyin-train-006843",
+    "douyin-train-006897",
+    "douyin-train-006978",
+    "douyin-train-007092",
+    "douyin-train-007322",
+    "douyin-train-007391",
+    "douyin-train-007774",
+    "douyin-train-007782",
+    "douyin-train-008295",
+    "douyin-train-008397",
+    "douyin-train-008420",
+    "douyin-train-008546",
+    "douyin-train-008590",
+    "douyin-train-008714",
+    "douyin-train-008787",
+    "douyin-train-009354",
+    "douyin-train-009505",
+    "douyin-train-009576",
+    "douyin-train-009668",
+    "douyin-train-009792",
+    "douyin-train-009850",
+    "douyin-train-009932",
+    "douyin-train-010011",
+    "douyin-train-010030",
+    "douyin-train-010120",
+    "douyin-train-010178",
+    "douyin-train-010209",
+    "douyin-train-010329",
+    "douyin-train-010369",
+    "douyin-train-010385",
+    "douyin-train-010750",
+    "douyin-train-011054",
+    "douyin-train-011082",
+    "douyin-train-011158",
+    "douyin-train-012012",
+    "douyin-train-012161",
+    "douyin-train-012231",
+    "douyin-train-012253",
+    "douyin-train-013126",
+    "douyin-train-013789",
+    "douyin-train-013817",
+    "douyin-train-013981",
+    "douyin-train-014024",
+    "douyin-train-014121",
+    "douyin-train-014267",
+    "douyin-train-014383",
+    "douyin-train-014483",
+    "douyin-train-014550",
+    "douyin-train-014745",
+    "douyin-train-014809",
+    "douyin-train-014921",
+    "douyin-train-014948",
+    "douyin-train-015013",
+    "douyin-train-015195",
+    "douyin-train-015259",
+    "douyin-train-015403",
+    "douyin-train-015440",
+    "douyin-train-016258",
+    "douyin-train-016358",
+    "douyin-train-016551",
+    "douyin-train-016638",
+    "douyin-train-016773",
+    "douyin-train-016920",
+    "douyin-train-017044",
+    "douyin-train-017153",
+    "douyin-train-017342",
+    "douyin-train-017391",
+    "douyin-train-017561",
+    "douyin-train-017707",
+    "douyin-train-017808",
+    "douyin-train-017959",
+    "douyin-train-018054",
+    "douyin-train-018128",
+    "douyin-train-018520",
+    "douyin-train-018524",
+    "douyin-train-018658",
+    "douyin-train-018683",
+    "douyin-train-018737",
+    "douyin-train-018806",
+    "douyin-train-018961",
+    "douyin-train-019088",
+    "douyin-train-019364",
+    "douyin-train-019433",
+    "douyin-train-019531",
+    "douyin-train-019576",
+    "douyin-train-019727",
+    "douyin-train-019992",
+    "douyin-train-020215",
+    "douyin-train-020247",
+    "douyin-train-020286",
+    "douyin-train-020427",
+    "douyin-train-020682"
+  ],
+  "validation_row_ids": [
+    "douyin-train-000027",
+    "douyin-train-000042",
+    "douyin-train-000143",
+    "douyin-train-000309",
+    "douyin-train-000550",
+    "douyin-train-000610",
+    "douyin-train-000708",
+    "douyin-train-000870",
+    "douyin-train-000953",
+    "douyin-train-001281",
+    "douyin-train-001350",
+    "douyin-train-001436",
+    "douyin-train-001640",
+    "douyin-train-001987",
+    "douyin-train-002058",
+    "douyin-train-002115",
+    "douyin-train-002130",
+    "douyin-train-002532",
+    "douyin-train-002582",
+    "douyin-train-002643",
+    "douyin-train-002766",
+    "douyin-train-003121",
+    "douyin-train-003185",
+    "douyin-train-003348",
+    "douyin-train-003449",
+    "douyin-train-004022",
+    "douyin-train-004301",
+    "douyin-train-004379",
+    "douyin-train-004544",
+    "douyin-train-004563",
+    "douyin-train-004659",
+    "douyin-train-004668",
+    "douyin-train-004719",
+    "douyin-train-004860",
+    "douyin-train-005505",
+    "douyin-train-005533",
+    "douyin-train-005604",
+    "douyin-train-005606",
+    "douyin-train-005913",
+    "douyin-train-006026",
+    "douyin-train-006030",
+    "douyin-train-006134",
+    "douyin-train-006219",
+    "douyin-train-006293",
+    "douyin-train-006375",
+    "douyin-train-006378",
+    "douyin-train-006455",
+    "douyin-train-006494",
+    "douyin-train-007282",
+    "douyin-train-007309",
+    "douyin-train-007501",
+    "douyin-train-007503",
+    "douyin-train-007511",
+    "douyin-train-008307",
+    "douyin-train-008339",
+    "douyin-train-008583",
+    "douyin-train-008759",
+    "douyin-train-008769",
+    "douyin-train-009191",
+    "douyin-train-009352",
+    "douyin-train-009411",
+    "douyin-train-009445",
+    "douyin-train-009573",
+    "douyin-train-009590",
+    "douyin-train-009610",
+    "douyin-train-009678",
+    "douyin-train-009929",
+    "douyin-train-010182",
+    "douyin-train-010319",
+    "douyin-train-010465",
+    "douyin-train-010655",
+    "douyin-train-010834",
+    "douyin-train-010894",
+    "douyin-train-010921",
+    "douyin-train-010973",
+    "douyin-train-011206",
+    "douyin-train-011328",
+    "douyin-train-011580",
+    "douyin-train-011795",
+    "douyin-train-011960",
+    "douyin-train-011984",
+    "douyin-train-012141",
+    "douyin-train-012604",
+    "douyin-train-012613",
+    "douyin-train-012635",
+    "douyin-train-012659",
+    "douyin-train-012755",
+    "douyin-train-012768",
+    "douyin-train-013065",
+    "douyin-train-013123",
+    "douyin-train-013857",
+    "douyin-train-014049",
+    "douyin-train-014201",
+    "douyin-train-014256",
+    "douyin-train-014370",
+    "douyin-train-014515",
+    "douyin-train-014937",
+    "douyin-train-015123",
+    "douyin-train-015172",
+    "douyin-train-015249",
+    "douyin-train-015277",
+    "douyin-train-015459",
+    "douyin-train-015737",
+    "douyin-train-015787",
+    "douyin-train-015804",
+    "douyin-train-015906",
+    "douyin-train-016006",
+    "douyin-train-016329",
+    "douyin-train-016567",
+    "douyin-train-016571",
+    "douyin-train-016636",
+    "douyin-train-017063",
+    "douyin-train-017134",
+    "douyin-train-017259",
+    "douyin-train-017446",
+    "douyin-train-017457",
+    "douyin-train-017688",
+    "douyin-train-018155",
+    "douyin-train-018273",
+    "douyin-train-018281",
+    "douyin-train-018300",
+    "douyin-train-018453",
+    "douyin-train-018918",
+    "douyin-train-018987",
+    "douyin-train-019325",
+    "douyin-train-019507",
+    "douyin-train-019565",
+    "douyin-train-019632",
+    "douyin-train-019655",
+    "douyin-train-020209",
+    "douyin-train-020262",
+    "douyin-train-020454",
+    "douyin-train-020706",
+    "douyin-train-020766",
+    "douyin-train-020836",
+    "douyin-train-020901",
+    "douyin-train-020960",
+    "douyin-train-020994",
+    "douyin-train-020996",
+    "douyin-train-021012"
+  ],
+  "protocol_sha256": "edbc3527710cc650af2cd4e63bb8f8c609dc46ef13f5b6d804375c7eca100731",
+  "status": "completed",
+  "manifest": "E:\\Lab\\experiment\\results\\same_budget\\strict70_base_ce_5seed_v1_manifest.json",
+  "member_results": [
+    {
+      "model_path": "hfl/chinese-roberta-wwm-ext",
+      "view": "content",
+      "seed": 100,
+      "train_rows": 140,
+      "validation_rows": 140,
+      "test_rows": 9069,
+      "best_epoch": 4,
+      "epochs_run": 8,
+      "best_validation_macro_f1": 0.7642736874330323,
+      "validation_metrics": {
+        "macro_f1": 0.7642736874330323,
+        "macro_precision": 0.7643396611553378,
+        "macro_recall": 0.7642857142857142,
+        "f1_positive": 0.7659574468085106,
+        "precision_positive": 0.7605633802816901,
+        "recall_positive": 0.7714285714285715,
+        "accuracy": 0.7642857142857142,
+        "positive_rate": 0.5071428571428571,
+        "confusion_matrix": [
+          [
+            53,
+            17
+          ],
+          [
+            16,
+            54
+          ]
+        ]
+      },
+      "batch_size": 8,
+      "gradient_accumulation_steps": 2,
+      "effective_batch_size": 16,
+      "max_length": 128,
+      "learning_rate": 4e-05,
+      "rdrop_alpha": 0.0,
+      "label_smoothing": 0.0,
+      "model_load_audit": {
+        "initialization": "base_sequence_classifier",
+        "dapt_encoder_keys_loaded": 0
+      },
+      "elapsed_seconds": 53.2076226999925,
+      "peak_torch_memory_mb": 1973.41162109375,
+      "history": [
+        {
+          "epoch": 1,
+          "mean_loss": 0.7124845716688368,
+          "validation_macro_f1": 0.601909973711036
+        },
+        {
+          "epoch": 2,
+          "mean_loss": 0.5148027208116319,
+          "validation_macro_f1": 0.697779605263158
+        },
+        {
+          "epoch": 3,
+          "mean_loss": 0.2726917266845703,
+          "validation_macro_f1": 0.7499872442471555
+        },
+        {
+          "epoch": 4,
+          "mean_loss": 0.08890639411078559,
+          "validation_macro_f1": 0.7642736874330323
+        },
+        {
+          "epoch": 5,
+          "mean_loss": 0.04136504067314996,
+          "validation_macro_f1": 0.7202725549464624
+        },
+        {
+          "epoch": 6,
+          "mean_loss": 0.011842687924702963,
+          "validation_macro_f1": 0.7426470588235294
+        },
+        {
+          "epoch": 7,
+          "mean_loss": 0.015448643101586236,
+          "validation_macro_f1": 0.7353767560664113
+        },
+        {
+          "epoch": 8,
+          "mean_loss": 0.0030053522851732043,
+          "validation_macro_f1": 0.6949574600539531
+        }
+      ],
+      "fixed_threshold_validation": {
+        "macro_f1": 0.7642736874330323,
+        "macro_precision": 0.7643396611553378,
+        "macro_recall": 0.7642857142857142,
+        "f1_positive": 0.7659574468085106,
+        "precision_positive": 0.7605633802816901,
+        "recall_positive": 0.7714285714285715,
+        "accuracy": 0.7642857142857142,
+        "positive_rate": 0.5071428571428571,
+        "confusion_matrix": [
+          [
+            53,
+            17
+          ],
+          [
+            16,
+            54
+          ]
+        ]
+      }
+    },
+    {
+      "model_path": "hfl/chinese-roberta-wwm-ext",
+      "view": "content",
+      "seed": 101,
+      "train_rows": 140,
+      "validation_rows": 140,
+      "test_rows": 9069,
+      "best_epoch": 3,
+      "epochs_run": 7,
+      "best_validation_macro_f1": 0.762821500077006,
+      "validation_metrics": {
+        "macro_f1": 0.762821500077006,
+        "macro_precision": 0.7709771918811468,
+        "macro_recall": 0.7642857142857142,
+        "f1_positive": 0.7441860465116279,
+        "precision_positive": 0.8135593220338984,
+        "recall_positive": 0.6857142857142857,
+        "accuracy": 0.7642857142857142,
+        "positive_rate": 0.42142857142857143,
+        "confusion_matrix": [
+          [
+            59,
+            11
+          ],
+          [
+            22,
+            48
+          ]
+        ]
+      },
+      "batch_size": 8,
+      "gradient_accumulation_steps": 2,
+      "effective_batch_size": 16,
+      "max_length": 128,
+      "learning_rate": 4e-05,
+      "rdrop_alpha": 0.0,
+      "label_smoothing": 0.0,
+      "model_load_audit": {
+        "initialization": "base_sequence_classifier",
+        "dapt_encoder_keys_loaded": 0
+      },
+      "elapsed_seconds": 52.11845569999423,
+      "peak_torch_memory_mb": 1974.09912109375,
+      "history": [
+        {
+          "epoch": 1,
+          "mean_loss": 0.8004887898763021,
+          "validation_macro_f1": 0.631483870967742
+        },
+        {
+          "epoch": 2,
+          "mean_loss": 0.5850800408257378,
+          "validation_macro_f1": 0.719005712521229
+        },
+        {
+          "epoch": 3,
+          "mean_loss": 0.39086808098687065,
+          "validation_macro_f1": 0.762821500077006
+        },
+        {
+          "epoch": 4,
+          "mean_loss": 0.18298615349663627,
+          "validation_macro_f1": 0.7280719689225107
+        },
+        {
+          "epoch": 5,
+          "mean_loss": 0.048347420162624784,
+          "validation_macro_f1": 0.7571428571428571
+        },
+        {
+          "epoch": 6,
+          "mean_loss": 0.01576419671376546,
+          "validation_macro_f1": 0.7280719689225107
+        },
+        {
+          "epoch": 7,
+          "mean_loss": 0.005571179919772678,
+          "validation_macro_f1": 0.7276822276822277
+        }
+      ],
+      "fixed_threshold_validation": {
+        "macro_f1": 0.762821500077006,
+        "macro_precision": 0.7709771918811468,
+        "macro_recall": 0.7642857142857142,
+        "f1_positive": 0.7441860465116279,
+        "precision_positive": 0.8135593220338984,
+        "recall_positive": 0.6857142857142857,
+        "accuracy": 0.7642857142857142,
+        "positive_rate": 0.42142857142857143,
+        "confusion_matrix": [
+          [
+            59,
+            11
+          ],
+          [
+            22,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "model_path": "hfl/chinese-roberta-wwm-ext",
+      "view": "content",
+      "seed": 102,
+      "train_rows": 140,
+      "validation_rows": 140,
+      "test_rows": 9069,
+      "best_epoch": 3,
+      "epochs_run": 7,
+      "best_validation_macro_f1": 0.755345394736842,
+      "validation_metrics": {
+        "macro_f1": 0.755345394736842,
+        "macro_precision": 0.764928511354079,
+        "macro_recall": 0.7571428571428571,
+        "f1_positive": 0.734375,
+        "precision_positive": 0.8103448275862069,
+        "recall_positive": 0.6714285714285714,
+        "accuracy": 0.7571428571428571,
+        "positive_rate": 0.4142857142857143,
+        "confusion_matrix": [
+          [
+            59,
+            11
+          ],
+          [
+            23,
+            47
+          ]
+        ]
+      },
+      "batch_size": 8,
+      "gradient_accumulation_steps": 2,
+      "effective_batch_size": 16,
+      "max_length": 128,
+      "learning_rate": 4e-05,
+      "rdrop_alpha": 0.0,
+      "label_smoothing": 0.0,
+      "model_load_audit": {
+        "initialization": "base_sequence_classifier",
+        "dapt_encoder_keys_loaded": 0
+      },
+      "elapsed_seconds": 52.38259609998204,
+      "peak_torch_memory_mb": 1974.09912109375,
+      "history": [
+        {
+          "epoch": 1,
+          "mean_loss": 0.6714324951171875,
+          "validation_macro_f1": 0.6498392118830074
+        },
+        {
+          "epoch": 2,
+          "mean_loss": 0.5033467610677084,
+          "validation_macro_f1": 0.7202725549464624
+        },
+        {
+          "epoch": 3,
+          "mean_loss": 0.2508748372395833,
+          "validation_macro_f1": 0.755345394736842
+        },
+        {
+          "epoch": 4,
+          "mean_loss": 0.07851817872789171,
+          "validation_macro_f1": 0.740953947368421
+        },
+        {
+          "epoch": 5,
+          "mean_loss": 0.03428445922003852,
+          "validation_macro_f1": 0.7499872442471555
+        },
+        {
+          "epoch": 6,
+          "mean_loss": 0.007508913675944011,
+          "validation_macro_f1": 0.705323681913856
+        },
+        {
+          "epoch": 7,
+          "mean_loss": 0.0021784603595733643,
+          "validation_macro_f1": 0.7045957490607792
+        }
+      ],
+      "fixed_threshold_validation": {
+        "macro_f1": 0.755345394736842,
+        "macro_precision": 0.764928511354079,
+        "macro_recall": 0.7571428571428571,
+        "f1_positive": 0.734375,
+        "precision_positive": 0.8103448275862069,
+        "recall_positive": 0.6714285714285714,
+        "accuracy": 0.7571428571428571,
+        "positive_rate": 0.4142857142857143,
+        "confusion_matrix": [
+          [
+            59,
+            11
+          ],
+          [
+            23,
+            47
+          ]
+        ]
+      }
+    },
+    {
+      "model_path": "hfl/chinese-roberta-wwm-ext",
+      "view": "content",
+      "seed": 103,
+      "train_rows": 140,
+      "validation_rows": 140,
+      "test_rows": 9069,
+      "best_epoch": 5,
+      "epochs_run": 9,
+      "best_validation_macro_f1": 0.7713819146764646,
+      "validation_metrics": {
+        "macro_f1": 0.7713819146764646,
+        "macro_precision": 0.7716503267973855,
+        "macro_recall": 0.7714285714285714,
+        "f1_positive": 0.7681159420289855,
+        "precision_positive": 0.7794117647058824,
+        "recall_positive": 0.7571428571428571,
+        "accuracy": 0.7714285714285715,
+        "positive_rate": 0.4857142857142857,
+        "confusion_matrix": [
+          [
+            55,
+            15
+          ],
+          [
+            17,
+            53
+          ]
+        ]
+      },
+      "batch_size": 8,
+      "gradient_accumulation_steps": 2,
+      "effective_batch_size": 16,
+      "max_length": 128,
+      "learning_rate": 4e-05,
+      "rdrop_alpha": 0.0,
+      "label_smoothing": 0.0,
+      "model_load_audit": {
+        "initialization": "base_sequence_classifier",
+        "dapt_encoder_keys_loaded": 0
+      },
+      "elapsed_seconds": 60.75125600001775,
+      "peak_torch_memory_mb": 1974.09912109375,
+      "history": [
+        {
+          "epoch": 1,
+          "mean_loss": 0.7189831203884549,
+          "validation_macro_f1": 0.5415562139404335
+        },
+        {
+          "epoch": 2,
+          "mean_loss": 0.5635189480251737,
+          "validation_macro_f1": 0.6508349598785512
+        },
+        {
+          "epoch": 3,
+          "mean_loss": 0.3052910698784722,
+          "validation_macro_f1": 0.7697368421052632
+        },
+        {
+          "epoch": 4,
+          "mean_loss": 0.12418439653184679,
+          "validation_macro_f1": 0.7265625
+        },
+        {
+          "epoch": 5,
+          "mean_loss": 0.02300584316253662,
+          "validation_macro_f1": 0.7713819146764646
+        },
+        {
+          "epoch": 6,
+          "mean_loss": 0.008583423164155748,
+          "validation_macro_f1": 0.7493734335839599
+        },
+        {
+          "epoch": 7,
+          "mean_loss": 0.001937392685148451,
+          "validation_macro_f1": 0.740953947368421
+        },
+        {
+          "epoch": 8,
+          "mean_loss": 0.0012632575300004748,
+          "validation_macro_f1": 0.7249793217535153
+        },
+        {
+          "epoch": 9,
+          "mean_loss": 0.0008998778131273058,
+          "validation_macro_f1": 0.7249793217535153
+        }
+      ],
+      "fixed_threshold_validation": {
+        "macro_f1": 0.7713819146764646,
+        "macro_precision": 0.7716503267973855,
+        "macro_recall": 0.7714285714285714,
+        "f1_positive": 0.7681159420289855,
+        "precision_positive": 0.7794117647058824,
+        "recall_positive": 0.7571428571428571,
+        "accuracy": 0.7714285714285715,
+        "positive_rate": 0.4857142857142857,
+        "confusion_matrix": [
+          [
+            55,
+            15
+          ],
+          [
+            17,
+            53
+          ]
+        ]
+      }
+    },
+    {
+      "model_path": "hfl/chinese-roberta-wwm-ext",
+      "view": "content",
+      "seed": 104,
+      "train_rows": 140,
+      "validation_rows": 140,
+      "test_rows": 9069,
+      "best_epoch": 6,
+      "epochs_run": 10,
+      "best_validation_macro_f1": 0.7713819146764646,
+      "validation_metrics": {
+        "macro_f1": 0.7713819146764646,
+        "macro_precision": 0.7716503267973855,
+        "macro_recall": 0.7714285714285714,
+        "f1_positive": 0.7681159420289855,
+        "precision_positive": 0.7794117647058824,
+        "recall_positive": 0.7571428571428571,
+        "accuracy": 0.7714285714285715,
+        "positive_rate": 0.4857142857142857,
+        "confusion_matrix": [
+          [
+            55,
+            15
+          ],
+          [
+            17,
+            53
+          ]
+        ]
+      },
+      "batch_size": 8,
+      "gradient_accumulation_steps": 2,
+      "effective_batch_size": 16,
+      "max_length": 128,
+      "learning_rate": 4e-05,
+      "rdrop_alpha": 0.0,
+      "label_smoothing": 0.0,
+      "model_load_audit": {
+        "initialization": "base_sequence_classifier",
+        "dapt_encoder_keys_loaded": 0
+      },
+      "elapsed_seconds": 51.37592759999097,
+      "peak_torch_memory_mb": 1974.09912109375,
+      "history": [
+        {
+          "epoch": 1,
+          "mean_loss": 0.7246034410264757,
+          "validation_macro_f1": 0.5637292464878672
+        },
+        {
+          "epoch": 2,
+          "mean_loss": 0.49276309543185765,
+          "validation_macro_f1": 0.705323681913856
+        },
+        {
+          "epoch": 3,
+          "mean_loss": 0.25159337785508895,
+          "validation_macro_f1": 0.7276822276822277
+        },
+        {
+          "epoch": 4,
+          "mean_loss": 0.09714147779676649,
+          "validation_macro_f1": 0.703741935483871
+        },
+        {
+          "epoch": 5,
+          "mean_loss": 0.028073575761583116,
+          "validation_macro_f1": 0.7569444444444444
+        },
+        {
+          "epoch": 6,
+          "mean_loss": 0.01040898429022895,
+          "validation_macro_f1": 0.7713819146764646
+        },
+        {
+          "epoch": 7,
+          "mean_loss": 0.0045056939125061035,
+          "validation_macro_f1": 0.7713819146764646
+        },
+        {
+          "epoch": 8,
+          "mean_loss": 0.003006107277340359,
+          "validation_macro_f1": 0.7642736874330323
+        },
+        {
+          "epoch": 9,
+          "mean_loss": 0.0022462341520521375,
+          "validation_macro_f1": 0.7571428571428571
+        },
+        {
+          "epoch": 10,
+          "mean_loss": 0.0019830498430464002,
+          "validation_macro_f1": 0.7571428571428571
+        }
+      ],
+      "fixed_threshold_validation": {
+        "macro_f1": 0.7713819146764646,
+        "macro_precision": 0.7716503267973855,
+        "macro_recall": 0.7714285714285714,
+        "f1_positive": 0.7681159420289855,
+        "precision_positive": 0.7794117647058824,
+        "recall_positive": 0.7571428571428571,
+        "accuracy": 0.7714285714285715,
+        "positive_rate": 0.4857142857142857,
+        "confusion_matrix": [
+          [
+            55,
+            15
+          ],
+          [
+            17,
+            53
+          ]
+        ]
+      }
+    }
+  ],
+  "member_fixed_threshold_test_metrics": [
+    {
+      "seed": 100,
+      "macro_f1": 0.7876056990982196,
+      "macro_precision": 0.7848278694537422,
+      "macro_recall": 0.794360844909568,
+      "f1_positive": 0.822571482673736,
+      "precision_positive": 0.8583283935981031,
+      "recall_positive": 0.7896746046173423,
+      "accuracy": 0.7933620024258463,
+      "positive_rate": 0.5580549123387364,
+      "confusion_matrix": [
+        [
+          2851,
+          717
+        ],
+        [
+          1157,
+          4344
+        ]
+      ]
+    },
+    {
+      "seed": 101,
+      "macro_f1": 0.7547307753528351,
+      "macro_precision": 0.7585878102092072,
+      "macro_recall": 0.7708510550058978,
+      "f1_positive": 0.7793144918821407,
+      "precision_positive": 0.8684386866205048,
+      "recall_positive": 0.7067805853481185,
+      "accuracy": 0.7571948395633477,
+      "positive_rate": 0.4936597199250193,
+      "confusion_matrix": [
+        [
+          2979,
+          589
+        ],
+        [
+          1613,
+          3888
+        ]
+      ]
+    },
+    {
+      "seed": 102,
+      "macro_f1": 0.7677127214954452,
+      "macro_precision": 0.7697643858866156,
+      "macro_recall": 0.7825876848318651,
+      "f1_positive": 0.7933260502532525,
+      "precision_positive": 0.8743432574430823,
+      "recall_positive": 0.7260498091256136,
+      "accuracy": 0.7705369941559158,
+      "positive_rate": 0.503693902304554,
+      "confusion_matrix": [
+        [
+          2994,
+          574
+        ],
+        [
+          1507,
+          3994
+        ]
+      ]
+    },
+    {
+      "seed": 103,
+      "macro_f1": 0.7843278040045336,
+      "macro_precision": 0.781682875459371,
+      "macro_recall": 0.7917477346149049,
+      "f1_positive": 0.8187868416048678,
+      "precision_positive": 0.8582818417380905,
+      "recall_positive": 0.7827667696782403,
+      "accuracy": 0.789833498731944,
+      "positive_rate": 0.5532032197596207,
+      "confusion_matrix": [
+        [
+          2857,
+          711
+        ],
+        [
+          1195,
+          4306
+        ]
+      ]
+    },
+    {
+      "seed": 104,
+      "macro_f1": 0.7860668260712964,
+      "macro_precision": 0.7835770249681616,
+      "macro_recall": 0.7900843853909969,
+      "f1_positive": 0.825272574783338,
+      "precision_positive": 0.8466539196940727,
+      "recall_positive": 0.8049445555353572,
+      "accuracy": 0.7932517366854118,
+      "positive_rate": 0.5766898224721579,
+      "confusion_matrix": [
+        [
+          2766,
+          802
+        ],
+        [
+          1073,
+          4428
+        ]
+      ]
+    }
+  ],
+  "member_summary_test_macro_f1": {
+    "mean": 0.776088765204466,
+    "sd": 0.014373630926475051,
+    "min": 0.7547307753528351,
+    "max": 0.7876056990982196,
+    "n": 5
+  },
+  "ensemble_validation_metrics": {
+    "macro_f1": 0.7712418300653594,
+    "macro_precision": 0.7723177723177723,
+    "macro_recall": 0.7714285714285715,
+    "f1_positive": 0.7647058823529411,
+    "precision_positive": 0.7878787878787878,
+    "recall_positive": 0.7428571428571429,
+    "accuracy": 0.7714285714285715,
+    "positive_rate": 0.4714285714285714,
+    "confusion_matrix": [
+      [
+        56,
+        14
+      ],
+      [
+        18,
+        52
+      ]
+    ]
+  },
+  "ensemble_test_metrics": {
+    "macro_f1": 0.7914747234818493,
+    "macro_precision": 0.7886458739492443,
+    "macro_recall": 0.7983375474740426,
+    "f1_positive": 0.8257575757575758,
+    "precision_positive": 0.8618304012650722,
+    "recall_positive": 0.7925831666969642,
+    "accuracy": 0.7971110376006175,
+    "positive_rate": 0.5578343808578674,
+    "confusion_matrix": [
+      [
+        2869,
+        699
+      ],
+      [
+        1141,
+        4360
+      ]
+    ]
+  },
+  "prediction_file": "E:\\Lab\\experiment\\results\\same_budget\\strict70_base_ce_5seed_v1_predictions.csv",
+  "validation_prediction_file": "E:\\Lab\\experiment\\results\\same_budget\\strict70_base_ce_5seed_v1_validation_predictions.csv",
+  "test_scoring_note": "Test labels were joined only after all validation checkpoints and the fixed 0.5 decision rule were locked."
+}

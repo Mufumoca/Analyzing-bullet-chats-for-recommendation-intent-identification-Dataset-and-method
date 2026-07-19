@@ -1,0 +1,300 @@
+{
+  "paper_reference_f1": 0.7923,
+  "paper_metric_note": "Paper Table 5 reports F1 without specifying averaging; local values are Macro-F1.",
+  "protocol_verification": {
+    "passed": true,
+    "invariant_keys": [
+      "protocol_registry_sha256",
+      "train_signature",
+      "validation_signature",
+      "test_input_signature",
+      "shot_per_class_train",
+      "shot_per_class_validation",
+      "split_seed",
+      "member_seeds",
+      "train_rows",
+      "validation_rows",
+      "test_rows",
+      "view",
+      "threshold",
+      "test_tuning_evaluations"
+    ],
+    "train_signature": "f493253c6d9b2b97c430b860300fd4c0969288e416300b5061e23175d805ec7b",
+    "validation_signature": "0725f0801089f5c333bf827cda0fe21ab497f74f76b55379f3a4033999c78acd",
+    "member_seeds": [
+      100,
+      101,
+      102,
+      103,
+      104
+    ],
+    "test_rows": 9069
+  },
+  "summary": [
+    {
+      "preset": "base_ce",
+      "method": "Base RoBERTa + CE",
+      "dapt": 0,
+      "rdrop": 0,
+      "member_mean_macro_f1": 0.776088765204466,
+      "member_sd_macro_f1": 0.014373630926475051,
+      "ensemble_macro_f1": 0.7914747234818493,
+      "ensemble_macro_precision": 0.7886458739492443,
+      "ensemble_macro_recall": 0.7983375474740426,
+      "ensemble_accuracy": 0.7971110376006175,
+      "delta_member_mean_vs_paper_pp": -1.621123479553399,
+      "delta_ensemble_vs_paper_pp": -0.0825276518150675,
+      "delta_ensemble_vs_base_pp": 0.0,
+      "member_models": 5,
+      "human_train_labels": 140,
+      "human_validation_labels": 140,
+      "unlabeled_dapt_rows": 0,
+      "peak_torch_memory_mb": 1974.09912109375,
+      "summed_member_elapsed_seconds": 269.8358580999775
+    },
+    {
+      "preset": "dapt_ce",
+      "method": "DAPT RoBERTa + CE",
+      "dapt": 1,
+      "rdrop": 0,
+      "member_mean_macro_f1": 0.7923445220602666,
+      "member_sd_macro_f1": 0.01066621258548968,
+      "ensemble_macro_f1": 0.8045166413036474,
+      "ensemble_macro_precision": 0.8028609851286819,
+      "ensemble_macro_recall": 0.8065550199596812,
+      "ensemble_accuracy": 0.8122174440401367,
+      "delta_member_mean_vs_paper_pp": 0.0044522060266616315,
+      "delta_ensemble_vs_paper_pp": 1.2216641303647413,
+      "delta_ensemble_vs_base_pp": 1.3041917821798088,
+      "member_models": 5,
+      "human_train_labels": 140,
+      "human_validation_labels": 140,
+      "unlabeled_dapt_rows": 21159,
+      "peak_torch_memory_mb": 1974.09912109375,
+      "summed_member_elapsed_seconds": 149.18030929999804
+    },
+    {
+      "preset": "base_rdrop",
+      "method": "Base RoBERTa + R-Drop",
+      "dapt": 0,
+      "rdrop": 1,
+      "member_mean_macro_f1": 0.7776866661389443,
+      "member_sd_macro_f1": 0.011235909114091567,
+      "ensemble_macro_f1": 0.7937548269797595,
+      "ensemble_macro_precision": 0.7909722731430635,
+      "ensemble_macro_recall": 0.7988143767990004,
+      "ensemble_accuracy": 0.800198478332782,
+      "delta_member_mean_vs_paper_pp": -1.4613333861055677,
+      "delta_ensemble_vs_paper_pp": 0.1454826979759516,
+      "delta_ensemble_vs_base_pp": 0.22801034979101908,
+      "member_models": 5,
+      "human_train_labels": 140,
+      "human_validation_labels": 140,
+      "unlabeled_dapt_rows": 0,
+      "peak_torch_memory_mb": 2208.0400390625,
+      "summed_member_elapsed_seconds": 176.30590070000108
+    },
+    {
+      "preset": "dapt_rdrop",
+      "method": "DAPT RoBERTa + R-Drop",
+      "dapt": 1,
+      "rdrop": 1,
+      "member_mean_macro_f1": 0.8001009304127098,
+      "member_sd_macro_f1": 0.006221158378339027,
+      "ensemble_macro_f1": 0.8059756350933931,
+      "ensemble_macro_precision": 0.8072892685768175,
+      "ensemble_macro_recall": 0.8048007781707851,
+      "ensemble_accuracy": 0.8155254162531701,
+      "delta_member_mean_vs_paper_pp": 0.7800930412709794,
+      "delta_ensemble_vs_paper_pp": 1.367563509339309,
+      "delta_ensemble_vs_base_pp": 1.4500911611543765,
+      "member_models": 5,
+      "human_train_labels": 140,
+      "human_validation_labels": 140,
+      "unlabeled_dapt_rows": 21159,
+      "peak_torch_memory_mb": 2208.0400390625,
+      "summed_member_elapsed_seconds": 161.86221690000457
+    }
+  ],
+  "paired_initialization_statistics": {
+    "dapt_ce": {
+      "comparison": "dapt_ce minus base_ce",
+      "n_initializations": 5,
+      "mean_delta_pp": 1.6255756855800585,
+      "sd_delta_pp": 2.130819183431484,
+      "t_ci95_pp": [
+        -1.0201857811687631,
+        4.27133715232888
+      ],
+      "paired_t_statistic": 1.7058686930320264,
+      "paired_t_pvalue": 0.16322869572791032,
+      "all_seed_deltas_positive": false,
+      "exact_two_sided_sign_test_pvalue": 0.375
+    },
+    "base_rdrop": {
+      "comparison": "base_rdrop minus base_ce",
+      "n_initializations": 5,
+      "mean_delta_pp": 0.1597900934478247,
+      "sd_delta_pp": 2.013565251574353,
+      "t_ci95_pp": [
+        -2.3403813874661594,
+        2.659961574361809
+      ],
+      "paired_t_statistic": 0.17744719760187316,
+      "paired_t_pvalue": 0.8677804727446913,
+      "all_seed_deltas_positive": false,
+      "exact_two_sided_sign_test_pvalue": 1.0
+    },
+    "dapt_rdrop": {
+      "comparison": "dapt_rdrop minus base_ce",
+      "n_initializations": 5,
+      "mean_delta_pp": 2.401216520824403,
+      "sd_delta_pp": 1.425234064562237,
+      "t_ci95_pp": [
+        0.6315546938438508,
+        4.170878347804955
+      ],
+      "paired_t_statistic": 3.7672993529719547,
+      "paired_t_pvalue": 0.019650318657777024,
+      "all_seed_deltas_positive": true,
+      "exact_two_sided_sign_test_pvalue": 0.0625
+    }
+  },
+  "ensemble_bootstrap": {
+    "dapt_ce": {
+      "comparison": "dapt_ce minus base_ce ensemble",
+      "point_delta_pp": 1.3041917821798088,
+      "row_bootstrap": {
+        "unit": "row",
+        "iterations": 5000,
+        "seed": 20260719,
+        "baseline_ci95": [
+          0.782795680588659,
+          0.7997898294199408
+        ],
+        "improved_ci95": [
+          0.796028165727515,
+          0.8127190074354425
+        ],
+        "delta_ci95": [
+          0.0073639491673791885,
+          0.01872006909891604
+        ],
+        "probability_delta_le_zero": 0.0
+      },
+      "cluster_bootstrap": {
+        "unit": "live_id_cluster",
+        "clusters": 12,
+        "iterations": 5000,
+        "seed": 20260819,
+        "baseline_ci95": [
+          0.7573217104084475,
+          0.8209359443578214
+        ],
+        "improved_ci95": [
+          0.771776955615005,
+          0.8273939031000895
+        ],
+        "delta_ci95": [
+          -1.645177198411613e-05,
+          0.023200469394566048
+        ],
+        "probability_delta_le_zero": 0.0258
+      }
+    },
+    "base_rdrop": {
+      "comparison": "base_rdrop minus base_ce ensemble",
+      "point_delta_pp": 0.22801034979101908,
+      "row_bootstrap": {
+        "unit": "row",
+        "iterations": 5000,
+        "seed": 20260720,
+        "baseline_ci95": [
+          0.7831142379874557,
+          0.7996648550797885
+        ],
+        "improved_ci95": [
+          0.7854903093314828,
+          0.8021527408547254
+        ],
+        "delta_ci95": [
+          -0.0018136474874310027,
+          0.006294427114767857
+        ],
+        "probability_delta_le_zero": 0.1274
+      },
+      "cluster_bootstrap": {
+        "unit": "live_id_cluster",
+        "clusters": 12,
+        "iterations": 5000,
+        "seed": 20260820,
+        "baseline_ci95": [
+          0.7572872340821049,
+          0.8210524104649202
+        ],
+        "improved_ci95": [
+          0.7596195307038943,
+          0.8191124528157357
+        ],
+        "delta_ci95": [
+          -0.006834925643927117,
+          0.009438445539905438
+        ],
+        "probability_delta_le_zero": 0.3014
+      }
+    },
+    "dapt_rdrop": {
+      "comparison": "dapt_rdrop minus base_ce ensemble",
+      "point_delta_pp": 1.4500911611543765,
+      "row_bootstrap": {
+        "unit": "row",
+        "iterations": 5000,
+        "seed": 20260721,
+        "baseline_ci95": [
+          0.7830200946939215,
+          0.8000517081792454
+        ],
+        "improved_ci95": [
+          0.7979424234348338,
+          0.8142348713459311
+        ],
+        "delta_ci95": [
+          0.008496903943620428,
+          0.020603777738113595
+        ],
+        "probability_delta_le_zero": 0.0
+      },
+      "cluster_bootstrap": {
+        "unit": "live_id_cluster",
+        "clusters": 12,
+        "iterations": 5000,
+        "seed": 20260821,
+        "baseline_ci95": [
+          0.758443891569387,
+          0.8195603363480399
+        ],
+        "improved_ci95": [
+          0.776824272896388,
+          0.831538106809354
+        ],
+        "delta_ci95": [
+          0.007665114429443418,
+          0.024450294667756677
+        ],
+        "probability_delta_le_zero": 0.0
+      }
+    }
+  },
+  "exact_content_overlap_audit": {
+    "train_unique_content": 19090,
+    "test_rows_with_exact_train_content": 1310,
+    "test_fraction_with_exact_train_content": 0.1444481199691256,
+    "interpretation": "Published train/test partitions contain repeated surface strings; DAPT reads only train text, but the overlap limits claims of fully novel-text generalization."
+  },
+  "interpretation_limits": [
+    "Fixed-split member SD measures initialization/dropout variability, not data-resampling variability.",
+    "The five-member ensemble keeps the same human labels but uses approximately five times the fine-tuning and inference compute of one member.",
+    "Cross-paper deltas are descriptive because the original per-example predictions and F1 averaging convention are unavailable.",
+    "The public RecDY test set was observed in prior project experiments, so this is preregistered-style exploratory validation rather than formally blind confirmation."
+  ]
+}

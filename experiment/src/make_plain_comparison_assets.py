@@ -1,19 +1,22 @@
-"""Build a plain-language comparison figure for the improvement report.
+"""Build the plain-language strict-70 progress figure.
 
 Figure contract
 ---------------
-Core conclusion: under the closest single-run budget the local model remains
-slightly below SPT-RII; engineering ensembles exceed the reported point while
-using a larger cumulative label pool; internal gains are positive point
-estimates but not all intervals exclude zero.
-Archetype: quantitative grid with panel a as the primary evidence.
+Core conclusion: with one fixed 70-per-class labelled split, domain-adaptive
+pretraining plus R-Drop improves every matched initialization and raises the
+same-label five-member ensemble above the paper's reported 70-shot point.
+Archetype: quantitative grid; panel a is the hero cross-paper comparison.
 Backend: Python/matplotlib only.
-Export: editable SVG and PDF, plus PNG and 600-dpi TIFF previews.
+Export: editable SVG/PDF, 300-dpi PNG, and 600-dpi TIFF.
+Reviewer risks: paper F1 averaging is unspecified; fixed-split SD captures only
+initialization/dropout variation; the ensemble uses five times model compute;
+DAPT uses 21,159 unlabelled train-partition comments.
 """
 
 from __future__ import annotations
 
 import json
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 import matplotlib
@@ -22,24 +25,17 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from PIL import Image
 
 
-# Required editable-text settings for the selected Python figure workflow.
 plt.rcParams["font.family"] = "sans-serif"
-plt.rcParams["font.sans-serif"] = [
-    "Arial",
-    "DejaVu Sans",
-    "Liberation Sans",
-]
-plt.rcParams["svg.fonttype"] = "none"
-# Matplotlib does not reliably perform per-glyph fallback from Arial on this
-# Windows runtime, so prefer a CJK sans face for mixed Chinese/English labels.
 plt.rcParams["font.sans-serif"] = [
     "Microsoft YaHei",
     "Arial",
     "SimHei",
     "DejaVu Sans",
 ]
+plt.rcParams["svg.fonttype"] = "none"
 plt.rcParams["pdf.fonttype"] = 42
 plt.rcParams["axes.unicode_minus"] = False
 plt.rcParams.update(
@@ -56,182 +52,140 @@ plt.rcParams.update(
 
 
 ROOT = Path(__file__).resolve().parents[2]
+RESULTS = ROOT / "experiment" / "results" / "same_budget"
 FIGURES = ROOT / "experiment" / "figures"
-PAPER_RESULTS = ROOT / "experiment" / "results" / "paper_comparison"
-IMPROVEMENT_RESULTS = ROOT / "experiment" / "results" / "improvement"
 
 COLORS = {
     "paper": "#606060",
-    "local": "#484878",
-    "ensemble": "#42949E",
-    "fusion": "#C56A83",
-    "gain": "#2E8B57",
-    "interval": "#767676",
+    "base": "#484878",
+    "dapt": "#42949E",
+    "rdrop": "#C56A83",
+    "full": "#2E8B57",
     "grid": "#D8D8D8",
-    "note": "#F8EED7",
     "ink": "#272727",
+    "muted": "#66707A",
+    "band": "#E8F3ED",
 }
 
 
-def read_inputs() -> dict[str, object]:
-    comparison = pd.read_csv(
-        PAPER_RESULTS / "paper_vs_local_comparison.csv", encoding="utf-8-sig"
-    )
-    classical = pd.read_csv(
-        IMPROVEMENT_RESULTS / "classical_improvement_summary.csv",
-        encoding="utf-8-sig",
-    )
-    intervals = pd.read_csv(
-        IMPROVEMENT_RESULTS / "improvement_comparisons.csv", encoding="utf-8-sig"
-    )
-    roberta = pd.read_csv(
-        IMPROVEMENT_RESULTS / "roberta_improvement_summary.csv",
-        encoding="utf-8-sig",
-    )
-    gate = json.loads(
-        (IMPROVEMENT_RESULTS / "uncertainty_gate.json").read_text(encoding="utf-8")
-    )
-    return {
-        "comparison": comparison,
-        "classical": classical,
-        "intervals": intervals,
-        "roberta": roberta,
-        "gate": gate,
-    }
+def load_inputs() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, dict[str, object]]:
+    summary = pd.read_csv(RESULTS / "strict70_summary.csv", encoding="utf-8-sig")
+    members = pd.read_csv(RESULTS / "strict70_member_metrics.csv", encoding="utf-8-sig")
+    bootstrap = pd.read_csv(RESULTS / "strict70_bootstrap.csv", encoding="utf-8-sig")
+    analysis = json.loads((RESULTS / "strict70_analysis.json").read_text(encoding="utf-8"))
+    expected = {"base_ce", "dapt_ce", "base_rdrop", "dapt_rdrop"}
+    if set(summary["preset"]) != expected:
+        raise ValueError("Strict-70 summary does not contain the locked four-condition matrix")
+    if len(members) != 20:
+        raise ValueError("Expected five members for each of four conditions")
+    return summary, members, bootstrap, analysis
 
 
-def single_row(frame: pd.DataFrame, **filters: object) -> pd.Series:
-    selected = frame.copy()
-    for column, value in filters.items():
-        selected = selected[selected[column] == value]
-    if len(selected) != 1:
-        raise ValueError(f"Expected one row for {filters}, found {len(selected)}")
-    return selected.iloc[0]
-
-
-def build_source_data(inputs: dict[str, object]) -> pd.DataFrame:
-    comparison = inputs["comparison"]
-    classical = inputs["classical"]
-    intervals = inputs["intervals"]
-    roberta = inputs["roberta"]
-    gate = inputs["gate"]
-    assert isinstance(comparison, pd.DataFrame)
-    assert isinstance(classical, pd.DataFrame)
-    assert isinstance(intervals, pd.DataFrame)
-    assert isinstance(roberta, pd.DataFrame)
-    assert isinstance(gate, dict)
-
-    rows: list[dict[str, object]] = []
-    for shot in (50, 60, 70):
-        for role, label in (
-            ("reported_reference", "原论文 SPT-RII"),
-            ("clean_primary_mean", "本地独立运行"),
-        ):
-            row = single_row(comparison, shot_per_class=shot, role=role)
-            rows.append(
-                {
-                    "panel": "a",
-                    "condition": label,
-                    "shot_per_class": shot,
-                    "value_pp": 100 * float(row["macro_f1"]),
-                    "sd_pp": 100 * float(row["sd"]),
-                    "delta_pp": float(row["delta_vs_paper_pp"]),
-                    "ci_low_pp": np.nan,
-                    "ci_high_pp": np.nan,
-                    "budget_note": "每次训练/验证均按每类shot抽样",
-                }
-            )
-
-    for role, label, note in (
-        ("reported_reference", "论文 SPT-RII", "论文报告均值"),
-        ("clean_primary_mean", "本地独立运行", "每次训练140条"),
-        ("clean_primary_ensemble", "内容三模型集成", "训练并集420条"),
-        (
-            "clean_secondary_ensemble",
-            "内容+TF-IDF集成",
-            "训练并集420条",
-        ),
+def build_source_data(
+    summary: pd.DataFrame,
+    members: pd.DataFrame,
+    bootstrap: pd.DataFrame,
+    analysis: dict[str, object],
+) -> pd.DataFrame:
+    paper = float(analysis["paper_reference_f1"])
+    rows: list[dict[str, object]] = [
+        {
+            "panel": "a",
+            "condition": "论文 SPT-RII（报告均值）",
+            "role": "paper",
+            "value_pp": 100 * paper,
+            "sd_pp": 0.31,
+            "delta_vs_paper_pp": 0.0,
+            "seed": np.nan,
+            "ci_low_pp": np.nan,
+            "ci_high_pp": np.nan,
+        }
+    ]
+    for preset, condition, role in (
+        ("base_ce", "本地基线（固定 split 初始化均值）", "base_mean"),
+        ("dapt_rdrop", "DAPT+R-Drop（固定 split 初始化均值）", "full_mean"),
+        ("dapt_rdrop", "DAPT+R-Drop（同标签五模型集成）", "full_ensemble"),
     ):
-        row = single_row(comparison, shot_per_class=70, role=role)
+        record = summary[summary["preset"] == preset].iloc[0]
+        is_ensemble = role.endswith("ensemble")
+        value = float(record["ensemble_macro_f1"] if is_ensemble else record["member_mean_macro_f1"])
+        sd = np.nan if is_ensemble else 100 * float(record["member_sd_macro_f1"])
         rows.append(
             {
-                "panel": "b",
-                "condition": label,
-                "shot_per_class": 70,
-                "value_pp": 100 * float(row["macro_f1"]),
-                "sd_pp": (
-                    100 * float(row["sd"])
-                    if pd.notna(row["sd"])
-                    else np.nan
-                ),
-                "delta_pp": float(row["delta_vs_paper_pp"]),
+                "panel": "a",
+                "condition": condition,
+                "role": role,
+                "value_pp": 100 * value,
+                "sd_pp": sd,
+                "delta_vs_paper_pp": 100 * (value - paper),
+                "seed": np.nan,
                 "ci_low_pp": np.nan,
                 "ci_high_pp": np.nan,
-                "budget_note": note,
             }
         )
 
-    tfidf_content = single_row(classical, condition="content", size=1000)
-    tfidf_improved = single_row(
-        classical, condition="structured_late_fusion", size=1000
-    )
-    tfidf_interval = single_row(
-        intervals,
-        rows=400,
-        size=1000,
-        baseline="content",
-        comparison="structured_late_fusion",
-    )
-    roberta_base = single_row(roberta, tag="content1000")
-    roberta_improved = single_row(roberta, tag="qwen1000_compact_late_fusion")
-    gate_test = gate["test"]
-
-    internal = [
-        {
-            "condition": "TF-IDF OOF融合\n(1000训练)",
-            "delta_pp": 100
-            * (
-                float(tfidf_improved["macro_f1"])
-                - float(tfidf_content["macro_f1"])
-            ),
-            "ci_low_pp": 100 * float(tfidf_interval["ci95_low"]),
-            "ci_high_pp": 100 * float(tfidf_interval["ci95_high"]),
-            "budget_note": "95% CI跨0",
-        },
-        {
-            "condition": "RoBERTa紧凑融合\n(1000训练)",
-            "delta_pp": 100
-            * (
-                float(roberta_improved["macro_f1_mean"])
-                - float(roberta_base["macro_f1_mean"])
-            ),
-            "ci_low_pp": np.nan,
-            "ci_high_pp": np.nan,
-            "budget_note": "3个种子均为正；无正式CI",
-        },
-        {
-            "condition": "不确定性门控\n(1000/400)",
-            "delta_pp": 100
-            * float(gate_test["gate_vs_base"]["macro_f1_difference"]),
-            "ci_low_pp": 100
-            * float(gate_test["gate_vs_base"]["macro_f1_ci95_low"]),
-            "ci_high_pp": 100
-            * float(gate_test["gate_vs_base"]["macro_f1_ci95_high"]),
-            "budget_note": "95% CI跨0",
-        },
-    ]
-    for item in internal:
+    labels = {
+        "base_ce": "基础模型\nCE",
+        "dapt_ce": "DAPT\nCE",
+        "base_rdrop": "基础模型\nR-Drop",
+        "dapt_rdrop": "DAPT\nR-Drop",
+    }
+    for record in summary.itertuples(index=False):
         rows.append(
             {
-                "panel": "c",
-                "condition": item["condition"],
-                "shot_per_class": np.nan,
-                "value_pp": np.nan,
+                "panel": "b",
+                "condition": labels[record.preset],
+                "role": record.preset,
+                "value_pp": 100 * float(record.ensemble_macro_f1),
                 "sd_pp": np.nan,
-                "delta_pp": item["delta_pp"],
-                "ci_low_pp": item["ci_low_pp"],
-                "ci_high_pp": item["ci_high_pp"],
-                "budget_note": item["budget_note"],
+                "delta_vs_paper_pp": float(record.delta_ensemble_vs_paper_pp),
+                "seed": np.nan,
+                "ci_low_pp": np.nan,
+                "ci_high_pp": np.nan,
+            }
+        )
+
+    base = members[members["preset"] == "base_ce"].set_index("seed")
+    improved = members[members["preset"] == "dapt_rdrop"].set_index("seed")
+    for seed in sorted(base.index):
+        rows.extend(
+            [
+                {
+                    "panel": "c",
+                    "condition": "基础模型",
+                    "role": "base_member",
+                    "value_pp": 100 * float(base.loc[seed, "macro_f1"]),
+                    "sd_pp": np.nan,
+                    "delta_vs_paper_pp": 100 * (float(base.loc[seed, "macro_f1"]) - paper),
+                    "seed": int(seed),
+                    "ci_low_pp": np.nan,
+                    "ci_high_pp": np.nan,
+                },
+                {
+                    "panel": "c",
+                    "condition": "DAPT+R-Drop",
+                    "role": "full_member",
+                    "value_pp": 100 * float(improved.loc[seed, "macro_f1"]),
+                    "sd_pp": np.nan,
+                    "delta_vs_paper_pp": 100 * (float(improved.loc[seed, "macro_f1"]) - paper),
+                    "seed": int(seed),
+                    "ci_low_pp": np.nan,
+                    "ci_high_pp": np.nan,
+                },
+            ]
+        )
+    for record in bootstrap[bootstrap["comparison"] == "dapt_rdrop-base_ce"].itertuples(index=False):
+        rows.append(
+            {
+                "panel": "c_interval",
+                "condition": record.unit,
+                "role": "bootstrap_delta",
+                "value_pp": float(record.point_delta_pp),
+                "sd_pp": np.nan,
+                "delta_vs_paper_pp": np.nan,
+                "seed": np.nan,
+                "ci_low_pp": float(record.ci95_low_pp),
+                "ci_high_pp": float(record.ci95_high_pp),
             }
         )
     return pd.DataFrame(rows)
@@ -239,8 +193,8 @@ def build_source_data(inputs: dict[str, object]) -> pd.DataFrame:
 
 def add_panel_label(ax: plt.Axes, label: str) -> None:
     ax.text(
-        -0.12,
-        1.05,
+        -0.13,
+        1.04,
         label,
         transform=ax.transAxes,
         fontsize=10,
@@ -251,214 +205,219 @@ def add_panel_label(ax: plt.Axes, label: str) -> None:
 
 
 def draw_figure(source: pd.DataFrame) -> plt.Figure:
-    fig = plt.figure(figsize=(7.2, 4.15), constrained_layout=False)
+    fig = plt.figure(figsize=(7.2, 4.15))
     grid = fig.add_gridspec(
         1,
         3,
-        width_ratios=[1.05, 1.25, 1.18],
-        left=0.07,
+        width_ratios=[1.05, 1.08, 1.28],
+        left=0.075,
         right=0.985,
-        top=0.88,
-        bottom=0.20,
-        wspace=0.38,
+        top=0.865,
+        bottom=0.22,
+        wspace=0.43,
     )
 
-    # a: closest apples-to-apples comparison across shot counts.
+    # a: hero cross-paper comparison.
     ax = fig.add_subplot(grid[0, 0])
-    panel_a = source[source["panel"] == "a"]
-    shots = np.array([50, 60, 70])
-    for condition, color, marker in (
-        ("原论文 SPT-RII", COLORS["paper"], "o"),
-        ("本地独立运行", COLORS["local"], "s"),
-    ):
-        rows = panel_a[panel_a["condition"] == condition].set_index(
-            "shot_per_class"
-        ).loc[shots]
-        values = rows["value_pp"].to_numpy(float)
-        sds = rows["sd_pp"].to_numpy(float)
-        ax.errorbar(
-            shots,
-            values,
-            yerr=sds,
-            color=color,
-            marker=marker,
-            ms=5,
-            lw=1.6,
-            capsize=2.4,
-            label=condition,
-            zorder=3,
-        )
-    local_rows = panel_a[panel_a["condition"] == "本地独立运行"].set_index(
-        "shot_per_class"
-    ).loc[shots]
-    for shot, value, delta in zip(
-        shots,
-        local_rows["value_pp"],
-        local_rows["delta_pp"],
-    ):
-        ax.annotate(
-            f"{delta:.2f} pp",
-            (shot, value),
-            xytext=(0, -13),
-            textcoords="offset points",
-            ha="center",
-            fontsize=6.5,
-            color=COLORS["local"],
-        )
-    ax.set_xticks(shots)
-    ax.set_xlabel("每类训练样本数")
-    ax.set_ylabel("F1 / Macro-F1（%）")
-    ax.set_ylim(73.8, 81.2)
-    ax.grid(axis="y", color=COLORS["grid"], lw=0.55, zorder=0)
-    ax.legend(loc="lower right", fontsize=6.8, handlelength=1.4)
-    ax.set_title("同等单次样本预算\n本地仍略低于论文", fontsize=9, pad=9)
-    add_panel_label(ax, "a")
-
-    # b: engineering ensemble point and the cumulative label budget.
-    ax = fig.add_subplot(grid[0, 1])
-    panel_b = source[source["panel"] == "b"].reset_index(drop=True)
-    x = np.arange(len(panel_b))
-    values = panel_b["value_pp"].to_numpy(float)
-    colors = [
-        COLORS["paper"],
-        COLORS["local"],
-        COLORS["ensemble"],
-        COLORS["fusion"],
-    ]
-    hatches = ["//", "", "..", "xx"]
-    bars = ax.bar(
-        x,
-        values,
-        width=0.68,
-        color=colors,
-        edgecolor="#333333",
-        linewidth=0.65,
-        zorder=2,
-    )
-    for bar, hatch, value in zip(bars, hatches, values):
-        bar.set_hatch(hatch)
-        ax.text(
-            bar.get_x() + bar.get_width() / 2,
-            value + 0.18,
-            f"{value:.2f}",
-            ha="center",
-            va="bottom",
-            fontsize=7,
-            fontweight="bold",
-        )
-    labels = [
-        "论文\nSPT-RII",
-        "本地独立\n每次140条",
-        "内容集成\n并集420条",
-        "内容+TF-IDF\n并集420条",
-    ]
-    ax.set_xticks(x, labels)
-    ax.tick_params(axis="x", labelsize=6.6, pad=3)
-    ax.set_ylim(76.8, 83.4)
-    ax.set_ylabel("70-shot F1 / Macro-F1（%）")
-    ax.grid(axis="y", color=COLORS["grid"], lw=0.55, zorder=0)
-    ax.axhspan(82.35, 83.3, color=COLORS["note"], zorder=0)
-    ax.text(
-        2.5,
-        82.83,
-        "三模型重新抽样\n累计训练并集 = 420条",
-        ha="center",
-        va="center",
-        fontsize=6.6,
-        color=COLORS["ink"],
-    )
-    ax.set_title("工程集成点更高\n但累计使用了更多样本", fontsize=9, pad=9)
-    add_panel_label(ax, "b")
-
-    # c: effect-size view makes uncertainty explicit.
-    ax = fig.add_subplot(grid[0, 2])
-    panel_c = source[source["panel"] == "c"].reset_index(drop=True)
-    y = np.arange(len(panel_c))[::-1]
-    for yi, row in zip(y, panel_c.itertuples(index=False)):
-        if np.isfinite(row.ci_low_pp) and np.isfinite(row.ci_high_pp):
+    panel = source[source["panel"] == "a"].reset_index(drop=True)
+    y = np.arange(len(panel))[::-1]
+    color_map = {
+        "paper": COLORS["paper"],
+        "base_mean": COLORS["base"],
+        "full_mean": COLORS["dapt"],
+        "full_ensemble": COLORS["full"],
+    }
+    marker_map = {"paper": "o", "base_mean": "s", "full_mean": "D", "full_ensemble": "*"}
+    for yi, record in zip(y, panel.itertuples(index=False)):
+        color = color_map[record.role]
+        if np.isfinite(record.sd_pp):
             ax.plot(
-                [row.ci_low_pp, row.ci_high_pp],
+                [record.value_pp - record.sd_pp, record.value_pp + record.sd_pp],
                 [yi, yi],
-                color=COLORS["interval"],
-                lw=1.7,
-                zorder=2,
+                color=color,
+                lw=1.5,
             )
             ax.plot(
-                [row.ci_low_pp, row.ci_low_pp],
+                [record.value_pp - record.sd_pp, record.value_pp - record.sd_pp],
                 [yi - 0.06, yi + 0.06],
-                color=COLORS["interval"],
-                lw=1.1,
+                color=color,
+                lw=0.9,
             )
             ax.plot(
-                [row.ci_high_pp, row.ci_high_pp],
+                [record.value_pp + record.sd_pp, record.value_pp + record.sd_pp],
                 [yi - 0.06, yi + 0.06],
-                color=COLORS["interval"],
-                lw=1.1,
+                color=color,
+                lw=0.9,
             )
         ax.scatter(
-            row.delta_pp,
+            record.value_pp,
             yi,
-            s=40,
-            marker="D" if "RoBERTa" in row.condition else "o",
-            color=COLORS["gain"],
-            edgecolor="white",
-            linewidth=0.6,
+            color=color,
+            marker=marker_map[record.role],
+            s=58 if record.role == "full_ensemble" else 30,
             zorder=3,
         )
         ax.text(
-            5.85,
+            record.value_pp + 0.12,
             yi,
-            f"+{row.delta_pp:.2f} pp\n{row.budget_note}",
-            ha="right",
+            f"{record.value_pp:.2f}%",
+            ha="left",
             va="center",
-            fontsize=6.4,
-            color=COLORS["ink"],
+            fontsize=7,
+            fontweight="bold" if record.role == "full_ensemble" else "normal",
+            color=color,
         )
-    ax.axvline(0, color="#777777", ls="--", lw=0.9, zorder=1)
-    ax.set_yticks(y, panel_c["condition"])
-    ax.tick_params(axis="y", labelsize=6.7)
-    ax.set_xlim(-3.3, 6.2)
-    ax.set_xlabel("相对各自基线的提升（百分点）")
-    ax.grid(axis="x", color=COLORS["grid"], lw=0.55, zorder=0)
-    ax.set_title("内部改进点估计均为正\n但部分区间仍跨0", fontsize=9, pad=9)
+    ax.axvline(79.23, color=COLORS["paper"], lw=0.8, ls="--", alpha=0.75)
+    ax.set_yticks(
+        y,
+        ["论文报告\n均值±SD", "本地基线\n初始化均值±SD", "增强模型\n初始化均值±SD", "增强模型\n同标签集成点"],
+    )
+    ax.tick_params(axis="y", labelsize=6.5)
+    ax.set_xlim(75.5, 81.35)
+    ax.set_xlabel("70-shot F1 / Macro-F1（%）")
+    ax.grid(axis="x", color=COLORS["grid"], lw=0.55)
+    ax.set_title("同一 70/类标签下\n增强结果超过论文报告点", fontsize=9, pad=9)
+    add_panel_label(ax, "a")
+
+    # b: 2x2 ablation at ensemble level.
+    ax = fig.add_subplot(grid[0, 1])
+    panel = source[source["panel"] == "b"].set_index("role").loc[
+        ["base_ce", "dapt_ce", "base_rdrop", "dapt_rdrop"]
+    ]
+    x = np.arange(len(panel))
+    values = panel["value_pp"].to_numpy(float)
+    colors = [COLORS["base"], COLORS["dapt"], COLORS["rdrop"], COLORS["full"]]
+    bars = ax.bar(x, values, color=colors, width=0.68, edgecolor="#333333", linewidth=0.55, zorder=2)
+    for bar, value, delta in zip(bars, values, panel["delta_vs_paper_pp"].to_numpy(float)):
+        ax.text(
+            bar.get_x() + bar.get_width() / 2,
+            value + 0.10,
+            f"{value:.2f}\n({delta:+.2f})",
+            ha="center",
+            va="bottom",
+            fontsize=6.6,
+        )
+    ax.axhline(79.23, color=COLORS["paper"], lw=1.0, ls="--", zorder=3)
+    ax.text(3.46, 79.30, "论文 79.23", ha="right", va="bottom", fontsize=6.3, color=COLORS["paper"])
+    ax.set_xticks(x, panel["condition"].tolist())
+    ax.tick_params(axis="x", labelsize=6.3)
+    ax.set_ylim(78.7, 81.1)
+    ax.set_ylabel("五成员同标签集成 Macro-F1（%）")
+    ax.grid(axis="y", color=COLORS["grid"], lw=0.55, zorder=0)
+    ax.set_title("2×2 消融：主要增益来自 DAPT", fontsize=9, pad=9)
+    add_panel_label(ax, "b")
+
+    # c: paired initialization evidence and bootstrap intervals.
+    ax = fig.add_subplot(grid[0, 2])
+    panel = source[source["panel"] == "c"]
+    base = panel[panel["role"] == "base_member"].set_index("seed")
+    full = panel[panel["role"] == "full_member"].set_index("seed")
+    for seed in sorted(base.index):
+        values = [float(base.loc[seed, "value_pp"]), float(full.loc[seed, "value_pp"])]
+        ax.plot([0, 1], values, color="#AEB5BC", lw=1.0, zorder=1)
+        ax.scatter(0, values[0], color=COLORS["base"], s=22, zorder=2)
+        ax.scatter(1, values[1], color=COLORS["full"], s=22, zorder=2)
+    mean_base = float(base["value_pp"].mean())
+    mean_full = float(full["value_pp"].mean())
+    ax.plot([0, 1], [mean_base, mean_full], color=COLORS["ink"], lw=2.0, zorder=3)
+    ax.scatter([0, 1], [mean_base, mean_full], color=[COLORS["base"], COLORS["full"]], s=48, edgecolor="white", linewidth=0.7, zorder=4)
+    ax.axhline(79.23, color=COLORS["paper"], lw=0.8, ls="--", alpha=0.75)
+    ax.set_xticks([0, 1], ["基础模型", "DAPT+R-Drop"])
+    ax.set_xlim(-0.28, 1.38)
+    ax.set_ylim(74.6, 81.1)
+    ax.set_ylabel("单成员 Macro-F1（%）")
+    ax.grid(axis="y", color=COLORS["grid"], lw=0.55, zorder=0)
+    ax.text(
+        0.03,
+        0.965,
+        "五个配对差值全部为正\n平均 +2.40 pp\nt-CI95% [+0.63, +4.17] pp",
+        transform=ax.transAxes,
+        ha="left",
+        va="top",
+        fontsize=6.6,
+        bbox={"boxstyle": "round,pad=0.32", "facecolor": COLORS["band"], "edgecolor": "none"},
+    )
+    intervals = source[source["panel"] == "c_interval"].set_index("condition")
+    row_ci = intervals.loc["row"]
+    cluster_ci = intervals.loc["live_id_cluster"]
+    ax.text(
+        0.03,
+        0.05,
+        "集成相对基线：+1.45 pp\n"
+        f"逐行 bootstrap [{row_ci.ci_low_pp:.2f}, {row_ci.ci_high_pp:.2f}]\n"
+        f"直播间聚类 [{cluster_ci.ci_low_pp:.2f}, {cluster_ci.ci_high_pp:.2f}]",
+        transform=ax.transAxes,
+        ha="left",
+        va="bottom",
+        fontsize=6.2,
+        color=COLORS["ink"],
+    )
+    ax.set_title("同种子配对：提升不是单个幸运初始化", fontsize=9, pad=9)
     add_panel_label(ax, "c")
 
     fig.text(
         0.5,
-        0.045,
-        "注：a/b 的论文列为原文 F1；本地使用 Macro-F1。论文未明确 F1 averaging，因此属于近似口径比较。",
+        0.055,
+        "口径：固定同一 70/类训练集与 70/类验证集；5 个模型只改变初始化/Dropout。DAPT 额外使用训练分区 21,159 条无标签弹幕；集成不增加人工标签，但约需 5 倍模型计算。",
         ha="center",
         va="bottom",
         fontsize=6.5,
-        color="#5F6872",
+        color=COLORS["muted"],
+    )
+    fig.text(
+        0.5,
+        0.02,
+        "论文仅写 F1，未说明 averaging；本地使用 Macro-F1，因此跨论文差值为描述性比较。",
+        ha="center",
+        va="bottom",
+        fontsize=6.3,
+        color=COLORS["muted"],
     )
     return fig
 
 
-def export_assets(fig: plt.Figure, source: pd.DataFrame) -> None:
+def export_and_qa(fig: plt.Figure, source: pd.DataFrame) -> None:
     FIGURES.mkdir(parents=True, exist_ok=True)
-    source.to_csv(FIGURES / "source_data_fig8.csv", index=False, encoding="utf-8-sig")
+    source_path = FIGURES / "source_data_fig8.csv"
+    source.to_csv(source_path, index=False, encoding="utf-8-sig")
     base = FIGURES / "fig8_plain_comparison"
     fig.savefig(base.with_suffix(".svg"), bbox_inches="tight")
     fig.savefig(base.with_suffix(".pdf"), bbox_inches="tight")
     fig.savefig(base.with_suffix(".png"), dpi=300, bbox_inches="tight")
     fig.savefig(base.with_suffix(".tiff"), dpi=600, bbox_inches="tight")
     plt.close(fig)
+
+    image = Image.open(base.with_suffix(".png")).convert("RGB")
+    pixels = np.asarray(image)
+    nonwhite_fraction = float(np.mean(np.any(pixels < 248, axis=2)))
+    tree = ET.parse(base.with_suffix(".svg"))
+    text_nodes = tree.findall(".//{http://www.w3.org/2000/svg}text")
+    if image.width < 1800 or image.height < 900:
+        raise AssertionError(f"PNG preview is unexpectedly small: {image.size}")
+    if nonwhite_fraction < 0.08:
+        raise AssertionError("Figure preview is nearly blank")
+    if len(text_nodes) < 30:
+        raise AssertionError("SVG text is not preserved as editable text nodes")
+
     (FIGURES / "fig8_qa.txt").write_text(
         "\n".join(
             [
                 "Figure: fig8_plain_comparison",
                 "Backend: Python/matplotlib only",
-                "Archetype: quantitative grid; panel a is primary evidence",
-                "Core conclusion: fair-budget local runs remain below the paper; engineering ensembles use a larger cumulative label pool; internal gains require cautious uncertainty language.",
+                "Archetype: quantitative grid; panel a is hero evidence",
+                "Core conclusion: DAPT+R-Drop improves all five matched initializations and the same-label ensemble exceeds the paper-reported 70-shot point.",
                 "Final size: 7.2 x 4.15 inches before tight bounding-box export",
-                "Exports: editable SVG/PDF, 300-dpi PNG, 600-dpi TIFF",
-                "Panel a: full RecDY test n=9,069; paper/local mean and SD over three reported/independent runs",
-                "Panel b: 70-shot comparison; ensemble points have no SD; three-member training union is 420 rows",
-                "Panel c: TF-IDF and gate show paired bootstrap 95% CI; RoBERTa is a three-seed mean difference without formal CI",
-                "Metric caveat: the paper reports F1 without an explicit averaging definition; local values use Macro-F1",
+                "Panel a: paper reported mean+SD, local fixed-split initialization mean+SD, and same-label ensemble point",
+                "Panel b: locked 2x2 DAPT/R-Drop ablation; ensemble points have no SD",
+                "Panel c: five paired initialization runs; paired t-CI plus row and live_id-cluster bootstrap intervals",
+                "Statistics: n=5 initialization/dropout replicates on one fixed split; 5,000 bootstrap iterations; 12 live_id clusters",
+                "Metric: local Macro-F1; paper F1 averaging unspecified",
+                "Budget: each member sees the same 140 labelled train rows; DAPT reads 21,159 unlabelled train rows; ensemble uses five-model compute",
+                f"PNG dimensions: {image.width} x {image.height}",
+                f"PNG non-white fraction: {nonwhite_fraction:.4f}",
+                f"Editable SVG text nodes: {len(text_nodes)}",
                 "Source data: source_data_fig8.csv",
-                "Visual QA: Chinese glyphs render; labels and panels inspected at final report width; no raster manipulation",
+                "Image integrity: vector-native plotting; no raster manipulation",
             ]
         )
         + "\n",
@@ -467,12 +426,12 @@ def export_assets(fig: plt.Figure, source: pd.DataFrame) -> None:
 
 
 def main() -> None:
-    inputs = read_inputs()
-    source = build_source_data(inputs)
-    fig = draw_figure(source)
-    export_assets(fig, source)
+    summary, members, bootstrap, analysis = load_inputs()
+    source = build_source_data(summary, members, bootstrap, analysis)
+    figure = draw_figure(source)
+    export_and_qa(figure, source)
     print("Wrote fig8_plain_comparison.{svg,pdf,png,tiff}")
-    print("Wrote source_data_fig8.csv")
+    print("Wrote source_data_fig8.csv and fig8_qa.txt")
 
 
 if __name__ == "__main__":

@@ -20,6 +20,11 @@ __pycache__/
 
 # Temporary high-resolution report render staging directory
 experiment/report/qa/pages_final_new/
+experiment/report/improvement_comparison/qa_render/
+
+# Reproducible but oversized/local generated assets
+experiment/models/
+experiment/paper_reader/paper_text_current.txt
 
 # Operating-system metadata
 .DS_Store

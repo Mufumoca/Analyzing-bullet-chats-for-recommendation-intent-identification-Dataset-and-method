@@ -1,0 +1,20 @@
+Figure: fig9_qwen_gate_comparison
+Backend: Python/matplotlib only
+Archetype: asymmetric quantitative grid; panel a is hero evidence
+Core conclusion: selective evidence-constrained Qwen raises the local Macro-F1 point estimate from 80.60% to 80.94%, but both paired-bootstrap intervals for the +0.34 pp increment cross zero.
+Cross-paper descriptive comparison: 80.94% is +1.71 pp above Paper Table 5 SPT-RII 70-shot F1 (79.23%); paper F1 averaging is unspecified.
+Final size: 7.2 x 4.2 inches (approximately 183 x 107 mm) before tight bounding-box export
+Panel a: Paper Table 6 Qwen PEFT, Paper Table 5 SPT-RII, local no-LLM student, local selective-Qwen full method
+Panel b: 9,069 test rows; 1,594 routed; 1,567 consensus; 648 changed
+Panel c: 349 corrected, 299 harmed, net +50 correct rows
+Panel d: 5,000 paired row bootstrap and 5,000 live_id-cluster bootstrap resamples; 12 live_id clusters
+Metric: local Macro-F1; paper F1 averaging unspecified
+Split: fixed 140-row train, 140-row validation, and 9,069-row test; validation-only margin selection
+Baseline: same-label five-model DAPT+R-Drop ensemble
+LLM: qwen3:8b Q4_K_M; evidence-constrained selective verifier; no PEFT
+PNG dimensions: 2430 x 1253
+PNG non-white fraction: 0.1185
+Editable SVG text nodes: 69
+Source data: source_data_fig9.csv
+Image integrity: vector-native plotting; no raster manipulation
+Reviewer risk: the +0.34 pp interval crosses zero; cross-paper differences are descriptive; Table 6 is not a matched-budget comparison.

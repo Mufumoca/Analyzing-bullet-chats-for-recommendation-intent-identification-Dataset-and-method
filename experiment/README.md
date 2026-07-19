@@ -1,4 +1,4 @@
-# RTX 4060 上的 BC4RII 解释增强缩小复现实验
+# RTX 4060 上的 BC4RII 复现与严格同标签预算改进
 
 ## 目标
 
@@ -10,7 +10,19 @@
 4. Qwen3-8B 更适合直接分类还是作为解释生成器；
 5. 在原论文的 full-test shot 协议下，轻量替代方案和选择性 Qwen 路由能否取得竞争力。
 
-完整结论、方法、表格、案例和有效性威胁见 `report/report.pdf`。
+当前完整结论、方法、表格、对照图和有效性威胁见
+`report/improvement_comparison/提升数据与原论文逐项对比.pdf`。
+
+## 当前主结果：严格 70-shot/类 + 选择性大模型复核
+
+- 固定同一份每类 70 条训练和每类 70 条验证标签，五个成员只改变初始化与 Dropout；测试集固定为完整 RecDY 9,069 条。
+- DAPT+R-Drop 五初始化均值为 **80.01±0.62% Macro-F1**，同标签五模型集成为 **80.60%**；论文 Table 5 的 70-shot 报告点为 **79.23% F1**。
+- 冻结的 Qwen3-8B Q4_K_M 只复核低置信样本，并要求三视角共识、置信度和当前弹幕原文证据；完整系统达到 **80.94% Macro-F1**。
+- Qwen 相对本地 80.60% 学生的点估计提高 **+0.34 pp**；逐行 bootstrap 95% CI **[-0.26,+0.92] pp**、按直播间聚类 CI **[-0.37,+1.54] pp** 均跨 0，因此不称统计显著。
+- 完整系统相对论文 Table 5 的 79.23% 为描述性 **+1.71 pp**。论文 Table 6 的 Qwen3:8B PEFT 75.24% 使用 1,000 样本且模型角色不同，只作功能对照。
+- 相对本地同协议基线集成 79.15%，提升 **+1.45 pp**；逐行 bootstrap 95% CI 为 **[+0.85,+2.06] pp**，按 12 个直播间聚类为 **[+0.77,+2.45] pp**。
+- 人工标签预算没有增加，但 DAPT 额外读取训练分区 21,159 条无标签弹幕，五模型集成约需单模型 5 倍计算；Qwen 路由 1,594/9,069 条测试样本，每条调用 2--3 个视角。
+- 严格协议、Qwen 正式结果、Qwen 统计与校验入口分别为 `config/same_budget_protocol_v1.json`、`results/same_budget/strict70_qwen_gate_result.json`、`results/same_budget/strict70_qwen_gate_analysis.json` 和 `src/verify_same_budget_artifacts.py`。
 
 ## 已完成实验
 
@@ -21,7 +33,7 @@
 - Qwen3-8B 零样本直接分类：400/400 可解析；
 - 输入消融：仅弹幕、原始前 5 条、本地 Qwen 释义、仓库官方释义；
 - 5,000 次配对行 bootstrap、数据重合审计、跨划分上下文审计；
-- 7 张论文级主图，每张均含 SVG/PDF/PNG/TIFF 和 source-data CSV；
+- 9 张论文级主图，每张均含 SVG/PDF/PNG/TIFF 和 source-data CSV；
 - 完整中文 LaTeX 报告，经逐页渲染检查。
 
 ## 已完成的改进实验
@@ -53,6 +65,33 @@
 ## 推荐重跑顺序
 
 在 `E:\Lab` 目录执行：
+
+严格同标签预算主实验：
+
+```powershell
+$env:HF_HOME='D:\hf'
+$env:HF_HUB_OFFLINE='1'
+$env:TRANSFORMERS_OFFLINE='1'
+
+# 先做一次仅使用训练分区无标签文本的 DAPT
+D:\Anaconda3\python.exe experiment\src\adapt_roberta_mlm.py
+
+# 在新的工作副本运行；现有 manifest 已锁定且脚本不会覆盖。
+# 四个预注册条件必须全部报告，不能只选择最高条件。
+foreach ($preset in @('base_ce','dapt_ce','base_rdrop','dapt_rdrop')) {
+  D:\Anaconda3\python.exe experiment\src\run_same_budget.py --preset $preset
+}
+
+D:\Anaconda3\python.exe experiment\src\analyze_same_budget.py
+D:\Anaconda3\python.exe experiment\src\make_same_budget_report_assets.py
+D:\Anaconda3\python.exe experiment\src\make_plain_comparison_assets.py
+D:\Anaconda3\python.exe experiment\src\run_same_budget_qwen_gate.py --stage validation
+D:\Anaconda3\python.exe experiment\src\run_same_budget_qwen_gate.py --stage test
+D:\Anaconda3\python.exe experiment\src\analyze_same_budget_qwen_gate.py
+D:\Anaconda3\python.exe experiment\src\make_qwen_gate_figure.py
+D:\Anaconda3\python.exe experiment\src\make_qwen_gate_report_assets.py
+D:\Anaconda3\python.exe experiment\src\verify_same_budget_artifacts.py
+```
 
 ```powershell
 D:\Anaconda3\python.exe experiment\src\prepare_data.py
@@ -112,7 +151,7 @@ latexmk -xelatex -interaction=nonstopmode -halt-on-error report.tex
 - `data/processed/`: 固定抽样、真实上下文和本地释义；
 - `logs/`: Qwen 逐条 JSONL 断点日志，记录输入哈希、延迟和错误；
 - `results/`: 指标 JSON、逐行预测、bootstrap、环境和数据审计；
-- `figures/`: 七张主图的 SVG/PDF/PNG/TIFF 及源数据；
+- `figures/`: 九张主图的 SVG/PDF/PNG/TIFF 及源数据；
 - `report/`: LaTeX、BibTeX、PDF 和渲染 QA；
 - `paper_reader/`: 论文全文原文块、中文对照/待核对标记、稳定 source map 和 Table 5 裁剪图；
 - `archive/invalid_sparse_context_20260718/`: 首轮错误稀疏上下文结果，仅作审计留档，不得用于结论。
@@ -128,3 +167,4 @@ latexmk -xelatex -interaction=nonstopmode -halt-on-error report.tex
 - 论文对比中的官方释义分支只作 oracle-only 上限参考，不进入干净主结果；
 - 与论文均值±SD的直接比较必须使用本地独立运行均值；三种子概率集成是单个工程点，不能把 81.65% 写成独立重复均值；
 - 门控结果只在 200 条验证/400 条测试上完成，CI 跨 0；区间从 800 条拟合模型迁移到 1,000 条重训模型时还可能有概率校准漂移，不能写成已证实的普遍提升。
+- 严格选择性 Qwen 的完整测试点为 80.94%，但相对本地 80.60% 学生的两个 paired-bootstrap 区间均跨 0；必须写成“进一步提高点估计”，不能写成已证实的显著增益。

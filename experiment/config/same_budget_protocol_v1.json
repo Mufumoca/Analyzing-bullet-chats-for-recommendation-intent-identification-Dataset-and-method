@@ -1,0 +1,53 @@
+{
+  "protocol_id": "recdy_strict70_factorial_v1",
+  "paper_reference": {
+    "source": "Zhu et al., Artificial Intelligence 355 (2026), Table 5",
+    "reported_70_shot_f1": 0.7923,
+    "metric_note": "The paper labels the metric F1 without stating the averaging convention. Local scoring uses Macro-F1."
+  },
+  "shared": {
+    "train_file": "experiment/data/processed/douyin_train_full.csv",
+    "test_file": "experiment/data/processed/douyin_test_full.csv",
+    "view": "content",
+    "explanation_column": "official_background",
+    "shot": 70,
+    "split_seed": 20260718,
+    "member_seeds": [100, 101, 102, 103, 104],
+    "batch_size": 8,
+    "accumulation_steps": 2,
+    "max_length": 128,
+    "epochs": 15,
+    "patience": 4,
+    "learning_rate": 0.00004,
+    "threshold": 0.5,
+    "test_tuning_evaluations": 0
+  },
+  "presets": {
+    "base_ce": {
+      "tag": "strict70_base_ce_5seed_v1",
+      "model_path": "hfl/chinese-roberta-wwm-ext",
+      "rdrop_alpha": 0.0,
+      "label_smoothing": 0.0
+    },
+    "dapt_ce": {
+      "tag": "strict70_dapt_ce_5seed_v1",
+      "model_path": "experiment/models/roberta_recdy_mlm_v1",
+      "rdrop_alpha": 0.0,
+      "label_smoothing": 0.0
+    },
+    "base_rdrop": {
+      "tag": "strict70_base_rdrop_5seed_v1",
+      "model_path": "hfl/chinese-roberta-wwm-ext",
+      "rdrop_alpha": 0.5,
+      "label_smoothing": 0.05
+    },
+    "dapt_rdrop": {
+      "tag": "strict70_dapt_rdrop_5seed_v1",
+      "model_path": "experiment/models/roberta_recdy_mlm_v1",
+      "rdrop_alpha": 0.5,
+      "label_smoothing": 0.05
+    }
+  },
+  "selection_rule": "Report all four presets. Do not select a preset using test results. Each ensemble is an equal probability mean over five members and uses threshold 0.5.",
+  "test_history_note": "The public RecDY test set was observed in earlier project experiments; this is a preregistered-style exploratory validation, not a formally blind confirmation."
+}

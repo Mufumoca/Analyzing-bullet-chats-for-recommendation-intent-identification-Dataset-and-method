@@ -1,12 +1,16 @@
 Figure: fig8_plain_comparison
 Backend: Python/matplotlib only
-Archetype: quantitative grid; panel a is primary evidence
-Core conclusion: fair-budget local runs remain below the paper; engineering ensembles use a larger cumulative label pool; internal gains require cautious uncertainty language.
+Archetype: quantitative grid; panel a is hero evidence
+Core conclusion: DAPT+R-Drop improves all five matched initializations and the same-label ensemble exceeds the paper-reported 70-shot point.
 Final size: 7.2 x 4.15 inches before tight bounding-box export
-Exports: editable SVG/PDF, 300-dpi PNG, 600-dpi TIFF
-Panel a: full RecDY test n=9,069; paper/local mean and SD over three reported/independent runs
-Panel b: 70-shot comparison; ensemble points have no SD; three-member training union is 420 rows
-Panel c: TF-IDF and gate show paired bootstrap 95% CI; RoBERTa is a three-seed mean difference without formal CI
-Metric caveat: the paper reports F1 without an explicit averaging definition; local values use Macro-F1
+Panel a: paper reported mean+SD, local fixed-split initialization mean+SD, and same-label ensemble point
+Panel b: locked 2x2 DAPT/R-Drop ablation; ensemble points have no SD
+Panel c: five paired initialization runs; paired t-CI plus row and live_id-cluster bootstrap intervals
+Statistics: n=5 initialization/dropout replicates on one fixed split; 5,000 bootstrap iterations; 12 live_id clusters
+Metric: local Macro-F1; paper F1 averaging unspecified
+Budget: each member sees the same 140 labelled train rows; DAPT reads 21,159 unlabelled train rows; ensemble uses five-model compute
+PNG dimensions: 2278 x 1224
+PNG non-white fraction: 0.1293
+Editable SVG text nodes: 64
 Source data: source_data_fig8.csv
-Visual QA: Chinese glyphs render; labels and panels inspected at final report width; no raster manipulation
+Image integrity: vector-native plotting; no raster manipulation

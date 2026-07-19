@@ -1,0 +1,10 @@
+\begin{tabular}{lccrrrr}
+\toprule
+方法 & DAPT & R-Drop & 单成员均值$\pm$SD & 同标签集成 & 对论文 & 对基线\\
+\midrule
+基础 RoBERTa + CE & 否 & 否 & 77.61$\pm$1.44 & 79.15 & -0.08 & +0.00\\
+DAPT RoBERTa + CE & 是 & 否 & 79.23$\pm$1.07 & 80.45 & +1.22 & +1.30\\
+基础 RoBERTa + R-Drop & 否 & 是 & 77.77$\pm$1.12 & 79.38 & +0.15 & +0.23\\
+\rowcolor{LightGreen}DAPT RoBERTa + R-Drop & 是 & 是 & 80.01$\pm$0.62 & 80.60 & +1.37 & +1.45\\
+\bottomrule
+\end{tabular}

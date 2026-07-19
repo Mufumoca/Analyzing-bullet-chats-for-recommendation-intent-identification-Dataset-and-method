@@ -1,0 +1,44 @@
+{
+  "experiment": "recdy_content_domain_adaptive_mlm_v1",
+  "base_model": "hfl/chinese-roberta-wwm-ext",
+  "input_file": "E:\\Lab\\experiment\\data\\processed\\douyin_train_full.csv",
+  "input_columns": [
+    "row_id",
+    "content"
+  ],
+  "input_rows": 21159,
+  "input_content_sha256": "39f6ab8b93c28baffdb5618e0a27e4a163cd9a5127334b605c81d2ee04b743ab",
+  "test_data_used": false,
+  "labels_used": false,
+  "epochs": 1,
+  "batch_size": 16,
+  "gradient_accumulation_steps": 2,
+  "effective_batch_size": 32,
+  "max_length": 64,
+  "learning_rate": 5e-05,
+  "weight_decay": 0.01,
+  "warmup_ratio": 0.05,
+  "mlm_probability": 0.15,
+  "seed": 20260718,
+  "output_dir": "E:\\Lab\\experiment\\models\\roberta_recdy_mlm_v1",
+  "protocol_sha256": "5fb611c7dcecdf78869be5f8d06fe6c0f13fd2a2160bda62323e7e8e15d17d94",
+  "status": "completed",
+  "history": [
+    {
+      "epoch": 1,
+      "mean_mlm_loss": 1.9169772331203734,
+      "batches": 1323,
+      "optimizer_steps": 662
+    }
+  ],
+  "elapsed_seconds": 214.0790064999892,
+  "peak_torch_memory_mb": 2475.7451171875,
+  "cuda_device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "tied_word_embeddings": true,
+  "checkpoint_sha256": {
+    "config.json": "2e01df80240075879d64349f533c06d0637b647957d47d8f30d4171523bbe341",
+    "model.safetensors": "e0bc3c4f6557c07d669c5f0585b265e9f2318c500d176e21647cfe09e01b4f89",
+    "tokenizer.json": "10167c2814a900005d65208374474f9f439164336267db726136d02a57bea757",
+    "tokenizer_config.json": "8790d5fa25572f36544407ce58a7ccb8e1025c8fcfae22fdd956bd7c4f431df2"
+  }
+}

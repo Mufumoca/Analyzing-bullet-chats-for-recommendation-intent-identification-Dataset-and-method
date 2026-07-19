@@ -1,0 +1,5 @@
+﻿source,method,human_label_setting,llm_role,f1_percent,metric_note
+Paper Table 6,Qwen3:8B PEFT,"1,000 PEFT samples",standalone classifier,75.24,Paper F1 averaging unspecified
+Paper Table 5,SPT-RII 70-shot,70-shot; public code samples per class,full explanation generator,79.23,Paper F1 averaging unspecified
+Local strict70,DAPT+R-Drop ensemble,same 70/class train and validation rows,none at inference,80.59756350933931,Macro-F1
+Local strict70,DAPT+R-Drop + selective Qwen verifier,same 70/class train and validation rows,retrieval-grounded low-confidence verifier,80.93672649281241,Macro-F1

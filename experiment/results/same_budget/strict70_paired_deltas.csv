@@ -1,0 +1,16 @@
+﻿comparison,seed,delta_macro_f1_pp
+dapt_ce-base_ce,100,0.22443207167528456
+dapt_ce-base_ce,101,4.756684127095189
+dapt_ce-base_ce,102,2.3509724014110334
+dapt_ce-base_ce,103,-0.7966588774705241
+dapt_ce-base_ce,104,1.5924487051893088
+base_rdrop-base_ce,100,-1.3948121905633437
+base_rdrop-base_ce,101,2.7236260232434417
+base_rdrop-base_ce,102,1.1781321055898464
+base_rdrop-base_ce,103,-2.29191031544258
+base_rdrop-base_ce,104,0.5839148444117592
+dapt_rdrop-base_ce,100,1.3307104469114317
+dapt_rdrop-base_ce,101,4.896427657207303
+dapt_rdrop-base_ce,102,2.14515032165582
+dapt_rdrop-base_ce,103,1.8652623193230689
+dapt_rdrop-base_ce,104,1.7685318590243915

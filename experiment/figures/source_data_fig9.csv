@@ -1,0 +1,17 @@
+﻿panel,label,role,value,low,high,count,denominator,note
+a,"论文 Table 6
+Qwen3:8B PEFT",paper_qwen,75.24,,,,,"功能对照；1,000 样本"
+a,"论文 Table 5
+SPT-RII 70-shot",paper_spt,79.23,,,,,跨论文描述性对照
+a,"本地 DAPT+R-Drop
+同标签集成",student,80.59756350933931,,,,,同一测试集、无推理期 LLM
+a,"本地完整方法
++选择性 Qwen",full,80.93672649281241,,,,,同一测试集、同人工标签
+b,进入 Qwen,candidate_rows,17.576359025250856,,,1594.0,9069.0,占完整测试集比例
+b,形成有效共识,consensus_rows,17.27864152607785,,,1567.0,9069.0,占完整测试集比例
+b,最终改变预测,changed_rows,7.1452199801521665,,,648.0,9069.0,占完整测试集比例
+c,纠正基线错误,corrected_rows,349.0,,,349.0,9069.0,changed rows accounting
+c,破坏原正确项,harmed_rows,-299.0,,,299.0,9069.0,changed rows accounting
+c,净增加正确项,net_corrected_rows,50.0,,,50.0,9069.0,changed rows accounting
+d,逐行重采样,row,0.3391629834730958,-0.2593516095787432,0.9167140524328697,9069.0,5000.0,P(delta<=0)=0.135
+d,按直播间聚类,live_id_cluster,0.3391629834730958,-0.37282369932279014,1.5356781574154281,12.0,5000.0,P(delta<=0)=0.251

@@ -1,0 +1,105 @@
+{
+  "protocol_verification": {
+    "selection_hash_matches": true,
+    "protocol_hash": "050c441f0ffbefd2a7f7b4f723926b18d37f407c73550c204a813023094d952a",
+    "human_train_signature": "f493253c6d9b2b97c430b860300fd4c0969288e416300b5061e23175d805ec7b",
+    "human_validation_signature": "0725f0801089f5c333bf827cda0fe21ab497f74f76b55379f3a4033999c78acd",
+    "test_labels_loaded_after_selection": true
+  },
+  "paper_references": {
+    "spt_rii_table5_70_shot_f1": 0.7923,
+    "qwen3_8b_table6_peft_f1": 0.7524,
+    "metric_note": "Paper F1 averaging is unspecified; local scoring is Macro-F1, so cross-paper deltas are descriptive."
+  },
+  "selection": {
+    "mode": "replace_consensus",
+    "margin": 0.32,
+    "macro_f1": 0.7910555298234779,
+    "macro_precision": 0.8033185373071232,
+    "macro_recall": 0.7928571428571428,
+    "accuracy": 0.7928571428571428,
+    "replacement_count": 29,
+    "replacement_fraction": 0.20714285714285716,
+    "qwen_valid_count": 140
+  },
+  "base_metrics": {
+    "macro_f1": 0.8059756350933931,
+    "macro_precision": 0.8072892685768175,
+    "macro_recall": 0.8048007781707851,
+    "accuracy": 0.8155254162531701
+  },
+  "qwen_gate_metrics": {
+    "macro_f1": 0.809367264928124,
+    "macro_precision": 0.8161038768528835,
+    "macro_recall": 0.8048643876816526,
+    "accuracy": 0.8210387032748925
+  },
+  "delta_vs_local_base_pp": 0.3391629834730958,
+  "delta_vs_paper_spt_rii_pp": 1.7067264928124048,
+  "delta_vs_paper_qwen_peft_pp": 5.6967264928124095,
+  "routing": {
+    "candidate_rows": 1594,
+    "consensus_rows": 1567,
+    "changed_rows": 648,
+    "corrected_rows": 349,
+    "harmed_rows": 299,
+    "net_corrected_rows": 50
+  },
+  "paired_bootstrap": {
+    "row": {
+      "unit": "row",
+      "iterations": 5000,
+      "seed": 20260722,
+      "baseline_ci95": [
+        0.7975611572553959,
+        0.8142572130827791
+      ],
+      "improved_ci95": [
+        0.8007758562831987,
+        0.8177321227151091
+      ],
+      "delta_ci95": [
+        -0.002593516095787432,
+        0.009167140524328697
+      ],
+      "probability_delta_le_zero": 0.135
+    },
+    "live_id_cluster": {
+      "unit": "live_id_cluster",
+      "clusters": 12,
+      "iterations": 5000,
+      "seed": 20260822,
+      "baseline_ci95": [
+        0.7770643697741428,
+        0.8321538728126093
+      ],
+      "improved_ci95": [
+        0.7824267151168712,
+        0.8374334791618392
+      ],
+      "delta_ci95": [
+        -0.003728236993227901,
+        0.015356781574154281
+      ],
+      "probability_delta_le_zero": 0.251
+    }
+  },
+  "compute": {
+    "new_records": 68,
+    "http_attempts": 131,
+    "cache_hits": 3326,
+    "maximum_records": 4782,
+    "available_records": 3400,
+    "valid_votes": 3338,
+    "this_run_wall_seconds": 240.585474099993,
+    "this_run_new_inference_seconds": 113.23760739999125,
+    "historical_recorded_inference_seconds": 5899.5178749003535,
+    "peak_gpu_memory_mb": 0.0
+  },
+  "interpretation_limits": [
+    "The public test set had been observed in earlier project experiments.",
+    "The paper does not specify its F1 averaging convention.",
+    "The verifier uses 20-comment text context and six labeled retrieval demonstrations, while the local student uses content only.",
+    "Cross-paper performance differences are descriptive rather than a formal significance test against SPT-RII."
+  ]
+}

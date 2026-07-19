@@ -1,0 +1,11 @@
+% Local selective-Qwen delta: +0.34 pp; descriptive delta versus Paper Table 5: +1.71 pp.
+\begin{tabularx}{\textwidth}{p{1.55cm}p{2.75cm}p{2.35cm}Xrrrr}
+\toprule
+来源 & 方法 & 人工监督 & 大模型角色 & Acc. & Prec. & Rec. & F1 \\
+\midrule
+论文 Table~5 & SPT-RII 70-shot & 70-shot；等大验证集 & 逐条生成解释并输入提示模型 & $80.62\pm0.37$ & $79.96\pm0.32$ & $80.30\pm0.23$ & $79.23\pm0.31$ \\
+论文 Table~6 & Qwen3:8B PEFT & 1,000 样本 & 微调后的独立分类器 & 76.11 & 75.04 & 75.54 & 75.24 \\
+本地严格实验 & DAPT+R-Drop 集成 & 70/类训练与验证 & 推理期不用大模型 & 81.55 & 80.73 & 80.48 & 80.60\\
+\rowcolor{LightGreen}本地完整方法 & DAPT+R-Drop + 选择性 Qwen & 同一人工标签集 & 只复核低置信样本 & 82.10 & 81.61 & 80.49 & 80.94\\
+\bottomrule
+\end{tabularx}
